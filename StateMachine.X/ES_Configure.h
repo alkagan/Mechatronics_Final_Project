@@ -47,6 +47,7 @@ typedef enum {
     BATTERY_CONNECTED,
     BATTERY_DISCONNECTED,
     NUMBEROFEVENTS,
+    ORIENTATION_COMPLETED,
 } ES_EventTyp_t;
 
 static const char *EventNames[] = {
@@ -63,6 +64,7 @@ static const char *EventNames[] = {
 	"BATTERY_CONNECTED",
 	"BATTERY_DISCONNECTED",
 	"NUMBEROFEVENTS",
+	"ORIENTATION_COMPLETED",
 };
 
 

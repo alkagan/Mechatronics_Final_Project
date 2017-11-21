@@ -32,7 +32,8 @@
 #include "ES_Framework.h"
 #include "BOARD.h"
 #include "TopLevelHSM.h"
-#include "SubSearchingHSM.h" //#include all sub state machines called
+#include "SubSearchingHSM.h"
+#include "SubOrientationHSM.h" //#include all sub state machines called
 /*******************************************************************************
  * PRIVATE #DEFINES                                                            *
  ******************************************************************************/
@@ -44,12 +45,12 @@
 
 
 typedef enum {
-    InitPState,         // 0
-    OrientationState,   // 1
-    SearchingState,     // 2
-    EngagingState,      // 3
-    ApproachShipState,  // 4
-    TakeDownShipState,  // 5
+    InitPState, // 0
+    OrientationState, // 1
+    SearchingState, // 2
+    EngagingState, // 3
+    ApproachShipState, // 4
+    TakeDownShipState, // 5
 } HSM_State_t;
 
 static const char *StateNames[] = {
@@ -147,7 +148,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // initial state
                 // Initialize all sub-state machines
                 InitSubSearchingHSM();
-                
+                InitSubOrientationHSM();
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
                 makeTransition = TRUE;
@@ -160,16 +161,38 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            
-            //ThisEvent = RunTemplateSubHSM(ThisEvent); //reintroduce into code
+
+            ThisEvent = RunSubOrientationHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
+                    break;
+
+                case ORIENTATION_COMPLETED:
+                    nextState = SearchingState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
                 default:
                     break;
             }
             break;
-            
-            
+
+        case SearchingState: // in the first state, replace this with correct names
+            // run sub-state machine for this state
+            //NOTE: the SubState Machine runs and responds to events before anything in the this
+            //state machine does
+
+            ThisEvent = RunSubSearchingHSM(ThisEvent);
+            switch (ThisEvent.EventType) {
+                case ES_NO_EVENT:
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
         default: // all unhandled states fall into here
             break;
     } // end switch on Current State
