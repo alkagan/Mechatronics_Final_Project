@@ -67,9 +67,6 @@ static const char *EventNames[] = {
 	"ORIENTATION_COMPLETED",
 };
 
-
-
-
 /****************************************************************************/
 // This are the name of the Event checking function header file.
 #define EVENT_CHECK_HEADER "DroidEventChecker.h"
