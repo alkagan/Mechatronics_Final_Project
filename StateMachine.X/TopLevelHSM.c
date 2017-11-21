@@ -27,7 +27,7 @@
 /*******************************************************************************
  * MODULE #INCLUDE                                                             *
  ******************************************************************************/
-
+#include <stdio.h>
 #include "ES_Configure.h"
 #include "ES_Framework.h"
 #include "BOARD.h"
@@ -149,6 +149,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // Initialize all sub-state machines
                 InitSubSearchingHSM();
                 InitSubOrientationHSM();
+                printf("gets here");
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
                 makeTransition = TRUE;
