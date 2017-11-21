@@ -51,7 +51,7 @@
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitTemplateHSM(uint8_t Priority);
+uint8_t InitTopLevelHSM(uint8_t Priority);
 
 
 /**
@@ -63,7 +63,7 @@ uint8_t InitTemplateHSM(uint8_t Priority);
  *        be posted to. Remember to rename to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t PostTemplateHSM(ES_Event ThisEvent);
+uint8_t PostTopLevelHSM(ES_Event ThisEvent);
 
 
 

@@ -146,7 +146,8 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // transition from the initial pseudo-state into the actual
                 // initial state
                 // Initialize all sub-state machines
-                InitTemplateSubHSM();
+                InitSubSearchingHSM();
+                
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
                 makeTransition = TRUE;
@@ -159,7 +160,8 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            ThisEvent = RunTemplateSubHSM(ThisEvent);
+            
+            //ThisEvent = RunTemplateSubHSM(ThisEvent); //reintroduce into code
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                 default:

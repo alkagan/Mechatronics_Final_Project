@@ -51,7 +51,7 @@
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitTemplateSubHSM(void);
+uint8_t InitSubSearchingHSM(void);
 
 /**
  * @Function RunTemplateSubHSM(ES_Event ThisEvent)
@@ -68,7 +68,7 @@ uint8_t InitTemplateSubHSM(void);
  *       not consumed as these need to pass pack to the higher level state machine.
  * @author J. Edward Carryer, 2011.10.23 19:25
  * @author Gabriel H Elkaim, 2011.10.23 19:25 */
-ES_Event RunTemplateSubHSM(ES_Event ThisEvent);
+ES_Event RunSubSearchingHSM(ES_Event ThisEvent);
 
 #endif /* SUB_HSM_Template_H */
 
