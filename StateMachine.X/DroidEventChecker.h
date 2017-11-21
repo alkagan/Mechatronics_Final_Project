@@ -19,8 +19,8 @@
  * Modified on September 12, 2016, 7:59 PM
  */
 
-#ifndef TEMPLATEEVENTCHECKER_H
-#define	TEMPLATEEVENTCHECKER_H
+#ifndef DROIDEVENTCHECKER_H
+#define	DROIDEVENTCHECKER_H
 
 /*******************************************************************************
  * PUBLIC #INCLUDES                                                            *
@@ -61,5 +61,5 @@ uint8_t TemplateCheckBattery(void);
 
 
 
-#endif	/* TEMPLATEEVENTCHECKER_H */
+#endif	/* DROIDEVENTCHECKER_H */
 
