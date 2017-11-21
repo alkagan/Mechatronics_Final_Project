@@ -30,8 +30,8 @@
 #include "ES_Configure.h"
 #include "ES_Framework.h"
 #include "BOARD.h"
-#include "TemplateHSM.h"
-#include "TemplateSubHSM.h"
+#include "TopLevelHSM.h"
+#include "SubSearchingHSM.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
