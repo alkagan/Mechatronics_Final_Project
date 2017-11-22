@@ -30,6 +30,7 @@
  ******************************************************************************/
 
 #define BATTERY_DISCONNECT_THRESHOLD 175
+#define TIMER_0_TICKS 500
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -59,8 +60,7 @@ static uint8_t MyPriority;
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitTemplateService(uint8_t Priority)
-{
+uint8_t InitTemplateService(uint8_t Priority) {
     ES_Event ThisEvent;
 
     MyPriority = Priority;
@@ -71,6 +71,8 @@ uint8_t InitTemplateService(uint8_t Priority)
 
     // post the initial transition event
     ThisEvent.EventType = ES_INIT;
+    ES_Timer_InitTimer(BATTERY_TIMER, TIMER_0_TICKS);
+
     if (ES_PostToService(MyPriority, ThisEvent) == TRUE) {
         return TRUE;
     } else {
@@ -87,8 +89,7 @@ uint8_t InitTemplateService(uint8_t Priority)
  *        be posted to. Remember to rename to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t PostTemplateService(ES_Event ThisEvent)
-{
+uint8_t PostTemplateService(ES_Event ThisEvent) {
     return ES_PostToService(MyPriority, ThisEvent);
 }
 
@@ -101,8 +102,7 @@ uint8_t PostTemplateService(ES_Event ThisEvent)
  * @note Remember to rename to something appropriate.
  *       Returns ES_NO_EVENT if the event have been "consumed." 
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-ES_Event RunTemplateService(ES_Event ThisEvent)
-{
+ES_Event RunTemplateService(ES_Event ThisEvent) {
     ES_Event ReturnEvent;
     ReturnEvent.EventType = ES_NO_EVENT; // assume no errors
 
@@ -114,35 +114,43 @@ ES_Event RunTemplateService(ES_Event ThisEvent)
     uint16_t batVoltage = AD_ReadADPin(BAT_VOLTAGE); // read the battery voltage
 
     switch (ThisEvent.EventType) {
-    case ES_INIT:
-        // No hardware initialization or single time setups, those
-        // go in the init function above.
-        //
-        // This section is used to reset service for some reason
-        break;
+        case ES_INIT:
+            printf("gets to ES_INIT in TemplateService.c\r\n");
+            // No hardware initialization or single time setups, those
+            // go in the init function above.
+            //
+            // This section is used to reset service for some reason
+            break;
+        case ES_TIMERACTIVE:
+            printf("timer is active\r\n");
+            break;
+        case ES_TIMERSTOPPED:
+            printf("timer is stopped\r\n");
+            break;
 
-    case ES_TIMEOUT:
-        if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
-            curEvent = BATTERY_CONNECTED;
-        } else {
-            curEvent = BATTERY_DISCONNECTED;
-        }
-        if (curEvent != lastEvent) { // check for change from last time
-            ReturnEvent.EventType = curEvent;
-            ReturnEvent.EventParam = batVoltage;
-            lastEvent = curEvent; // update history
+        case ES_TIMEOUT:
+            printf("gets to ES_TIMEOUT in TemplateService.c\r\n");
+            if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
+                curEvent = BATTERY_CONNECTED;
+            } else {
+                curEvent = BATTERY_DISCONNECTED;
+            }
+            if (curEvent != lastEvent) { // check for change from last time
+                ReturnEvent.EventType = curEvent;
+                ReturnEvent.EventParam = batVoltage;
+                lastEvent = curEvent; // update history
 #ifndef SIMPLESERVICE_TEST           // keep this as is for test harness
-            PostGenericService(ReturnEvent);
+                PostTopLevelHSM(ReturnEvent);
 #else
-            PostTemplateService(ReturnEvent);
+                PostTemplateService(ReturnEvent);
 #endif   
-        }
-        break;
+            }
+            break;
 #ifdef SIMPLESERVICE_TEST     // keep this as is for test harness      
-    default:
-        printf("\r\nEvent: %s\tParam: 0x%X",
-                EventNames[ThisEvent.EventType], ThisEvent.EventParam);
-        break;
+        default:
+            printf("\r\nEvent: %s\tParam: 0x%X",
+                    EventNames[ThisEvent.EventType], ThisEvent.EventParam);
+            break;
 #endif
     }
 

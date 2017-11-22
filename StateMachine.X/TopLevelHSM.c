@@ -147,9 +147,10 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // transition from the initial pseudo-state into the actual
                 // initial state
                 // Initialize all sub-state machines
+                printf("gets here");
                 InitSubSearchingHSM();
                 InitSubOrientationHSM();
-                printf("gets here");
+                
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
                 makeTransition = TRUE;
