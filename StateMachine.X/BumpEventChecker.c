@@ -27,7 +27,7 @@
  ******************************************************************************/
 
 #include "ES_Configure.h"
-#include "DroidEventChecker.h"
+#include "BumpEventChecker.h"
 #include "ES_Events.h"
 #include "serial.h"
 #include "AD.h"
@@ -82,7 +82,7 @@ static ES_Event storedEvent;
  * @note Use this code as a template for your other event checkers, and modify as necessary.
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
-uint8_t TemplateCheckBattery(void) {
+uint8_t CheckForBumpEvent(void) {
     static ES_EventTyp_t lastEvent = BATTERY_DISCONNECTED;
     ES_EventTyp_t curEvent;
     ES_Event thisEvent;

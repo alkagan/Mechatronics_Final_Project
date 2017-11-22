@@ -70,11 +70,11 @@ static const char *EventNames[] = {
 
 /****************************************************************************/
 // This are the name of the Event checking function header file.
-#define EVENT_CHECK_HEADER "DroidEventChecker.h" 
+#define EVENT_CHECK_HEADER "BumpEventChecker.h" 
 
 /****************************************************************************/
 // This is the list of event checking functions
-#define EVENT_CHECK_LIST  TemplateCheckBattery
+#define EVENT_CHECK_LIST  CheckForBumpEvent
 
 /****************************************************************************/
 // These are the definitions for the post functions to be executed when the
