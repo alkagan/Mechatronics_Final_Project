@@ -22,7 +22,7 @@
 #include "AD.h"
 #include "ES_Configure.h"
 #include "ES_Framework.h"
-#include "TemplateService.h"
+#include "BumpEventService.h"
 #include <stdio.h>
 
 /*******************************************************************************
@@ -60,7 +60,7 @@ static uint8_t MyPriority;
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitTemplateService(uint8_t Priority) {
+uint8_t InitBumpEventService(uint8_t Priority) {
     ES_Event ThisEvent;
 
     MyPriority = Priority;
@@ -89,7 +89,7 @@ uint8_t InitTemplateService(uint8_t Priority) {
  *        be posted to. Remember to rename to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t PostTemplateService(ES_Event ThisEvent) {
+uint8_t PostBumpEventService(ES_Event ThisEvent) {
     return ES_PostToService(MyPriority, ThisEvent);
 }
 
@@ -102,7 +102,7 @@ uint8_t PostTemplateService(ES_Event ThisEvent) {
  * @note Remember to rename to something appropriate.
  *       Returns ES_NO_EVENT if the event have been "consumed." 
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-ES_Event RunTemplateService(ES_Event ThisEvent) {
+ES_Event RunBumpEventService(ES_Event ThisEvent) {
     ES_Event ReturnEvent;
     ReturnEvent.EventType = ES_NO_EVENT; // assume no errors
 

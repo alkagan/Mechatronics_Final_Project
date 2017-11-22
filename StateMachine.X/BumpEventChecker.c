@@ -17,7 +17,7 @@
  * ES_Configure file in the project, and will conditionally compile main if the macro
  * EVENTCHECKER_TEST is defined (either in the project or in the file). This will allow
  * you to check you event detectors in their own project, and then leave them untouched
- * for your project unless you need to alter their post functions.
+ * for your project unless you need to alter their post func                                   tions.
  *
  * Created on September 27, 2013, 8:37 AM
  */
