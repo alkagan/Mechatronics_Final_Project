@@ -115,7 +115,6 @@ ES_Event RunTemplateService(ES_Event ThisEvent) {
 
     switch (ThisEvent.EventType) {
         case ES_INIT:
-            printf("gets to ES_INIT in TemplateService.c\r\n");
             // No hardware initialization or single time setups, those
             // go in the init function above.
             //
@@ -123,12 +122,11 @@ ES_Event RunTemplateService(ES_Event ThisEvent) {
             break;
         case ES_TIMERACTIVE:
             printf("timer is active\r\n");
-            break;
-        case ES_TIMERSTOPPED:
-            printf("timer is stopped\r\n");
-            break;
-
+            break;          
         case ES_TIMEOUT:
+            printf("timer timeout reached\r\n");
+            break;
+        case BATTERY_DISCONNECTED:
             printf("gets to ES_TIMEOUT in TemplateService.c\r\n");
             if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
                 curEvent = BATTERY_CONNECTED;

@@ -88,7 +88,7 @@ uint8_t TemplateCheckBattery(void) {
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
     uint16_t batVoltage = AD_ReadADPin(BAT_VOLTAGE); // read the battery voltage
-
+    
     if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
         curEvent = BATTERY_CONNECTED;
     } else {
@@ -158,7 +158,7 @@ void main(void) {
 }
 
 void PrintEvent(void) {
-    printf("\r\nFunc: %s\tEvent: %s\tParam: 0x%X", eventName,
+    printf("\r\nFunc: %s\tEvent: %s\tParam: %d", eventName,
             EventNames[storedEvent.EventType], storedEvent.EventParam);
 }
 #endif
