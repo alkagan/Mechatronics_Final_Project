@@ -35,7 +35,8 @@
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-#define BATTERY_DISCONNECT_THRESHOLD 175
+#define BUMP_PRESSED    0x7F
+#define BUMP_RELEASED   0x80
 
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
@@ -83,17 +84,17 @@ static ES_Event storedEvent;
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForBumpEvent(void) {
-    static ES_EventTyp_t lastEvent = BATTERY_DISCONNECTED;
+    static ES_EventTyp_t lastEvent = BUMP_RELEASED;
     ES_EventTyp_t curEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
     uint16_t batVoltage = AD_ReadADPin(BAT_VOLTAGE); // read the battery voltage
     
-    if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
-        curEvent = BATTERY_CONNECTED;
-    } else {
-        curEvent = BATTERY_DISCONNECTED;
-    }
+//    if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
+//        curEvent = BATTERY_CONNECTED;
+//    } else {
+//        curEvent = BATTERY_DISCONNECTED;
+//    }
     if (curEvent != lastEvent) { // check for change from last time
         thisEvent.EventType = curEvent;
         thisEvent.EventParam = batVoltage;
