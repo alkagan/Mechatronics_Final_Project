@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/production/MotorTestHarness.X.production.elf">                 
+  <executable name="dist/default/production/StateMachine.X.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>126464</length>                 
-<<<<<<< HEAD
-      <used>37520</used>                     
-      <free>88944</free>                     
-=======
-      <used>33204</used>                     
-      <free>93260</free>                     
->>>>>>> 9204850bdb6bbc12c0ea0b974fe0d67676d35d33
+      <used>44136</used>                     
+      <free>82328</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
       <length>16384</length>                 
-      <used>1928</used>                     
-      <free>14456</free>                     
+      <used>3448</used>                     
+      <free>12936</free>                     
     </memory>                              
   </executable>                            
 </project>                                 
