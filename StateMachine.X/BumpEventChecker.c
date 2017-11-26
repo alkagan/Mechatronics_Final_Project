@@ -31,6 +31,8 @@
 #include "ES_Events.h"
 #include "serial.h"
 #include "AD.h"
+#include <stdbool.h> // for I/O pins
+#include "IO_Ports.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -69,6 +71,9 @@ static ES_Event storedEvent;
  * PUBLIC FUNCTIONS                                                            *
  ******************************************************************************/
 
+IO_PortsSetPortInputs(PORTV, PIN3);
+IO_PortsSetPortInputs(PORTV, PIN4);
+
 /**
  * @Function TemplateCheckBattery(void)
  * @param none
@@ -84,24 +89,33 @@ static ES_Event storedEvent;
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForBumpEvent(void) {
-    static ES_EventTyp_t lastEvent = BUMP_RELEASED;
-    ES_EventTyp_t curEvent;
+    static ES_EventTyp_t last_bump_event = BUMP_RELEASED;
+    ES_EventTyp_t current_bump_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    uint16_t batVoltage = AD_ReadADPin(BAT_VOLTAGE); // read the battery voltage
+    bool left_bumper = IO_PortsReadPort((PORTV) & PIN3);
+    bool right_bumper = IO_PortsReadPort((PORTV) & PIN4);
+
+    if(left_bumper != 0 || right_bumper != 0){
+        current_bump_event = BUMP_PRESSED;
+    } else {
+        current_bump_event = BUMP_RELEASED;
+    }
     
-//    if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
-//        curEvent = BATTERY_CONNECTED;
-//    } else {
-//        curEvent = BATTERY_DISCONNECTED;
-//    }
-    if (curEvent != lastEvent) { // check for change from last time
-        thisEvent.EventType = curEvent;
-        thisEvent.EventParam = batVoltage;
+    if (current_bump_event != last_bump_event) { // check for change from last time
+        thisEvent.EventType = current_bump_event;
+
+        // differentiating which parameter gets passed to service routine
+        if(left_bumper != 0){
+            thisEvent.EventParam = left_bumper;
+        } else {
+            thisEvent.EventParam = right_bumper;
+        }
+
         returnVal = TRUE;
-        lastEvent = curEvent; // update history
+        last_bump_event = current_bump_event; // update history
 #ifndef EVENTCHECKER_TEST           // keep this as is for test harness
-        PostGenericService(thisEvent);
+        PostTopLevelHSM(thisEvent); // ensures continuous checking for bump events
 #else
         SaveEvent(thisEvent);
 #endif   
