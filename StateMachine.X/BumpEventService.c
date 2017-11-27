@@ -29,8 +29,7 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define BATTERY_DISCONNECT_THRESHOLD 175
-#define TIMER_0_TICKS 500
+#define TIMER_0_TICKS 5
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -109,9 +108,13 @@ ES_Event RunBumpEventService(ES_Event ThisEvent) {
     /********************************************
      in here you write your service code
      *******************************************/
-    static ES_EventTyp_t lastEvent = BATTERY_DISCONNECTED;
-    ES_EventTyp_t curEvent;
-    uint16_t batVoltage = AD_ReadADPin(BAT_VOLTAGE); // read the battery voltage
+    static ES_EventTyp_t last_bump_event = BUMP_RELEASED;
+    ES_EventTyp_t current_bump_event;
+    uint8_t left_bumper = IO_PortsReadPort((PORTV) & PIN3);
+    uint8_t right_bumper = IO_PortsReadPort((PORTV) & PIN4);
+
+    static uint8_t prevBumperValue = 0; 
+    static int i = 0;
 
     switch (ThisEvent.EventType) {
         case ES_INIT:
@@ -124,23 +127,29 @@ ES_Event RunBumpEventService(ES_Event ThisEvent) {
             printf("timer is active\r\n");
             break;          
         case ES_TIMEOUT:
-            printf("timer timeout reached\r\n");
-            break;
-        case BATTERY_DISCONNECTED:
-            printf("gets to ES_TIMEOUT in TemplateService.c\r\n");
-            if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
-                curEvent = BATTERY_CONNECTED;
-            } else {
-                curEvent = BATTERY_DISCONNECTED;
-            }
-            if (curEvent != lastEvent) { // check for change from last time
-                ReturnEvent.EventType = curEvent;
-                ReturnEvent.EventParam = batVoltage;
-                lastEvent = curEvent; // update history
+        	ES_Timer_InitTimer(BUMPER_TIMER, TIMER_0_TICKS);
+            //printf("gets to ES_TIMEOUT in BumpEventService.c\r\n");
+           	if(left_bumper != 0 || right_bumper != 0){
+        		current_bump_event = BUMP_PRESSED;
+			} else {
+			    current_bump_event = BUMP_RELEASED;
+			}
+            
+			if (current_bump_event != last_bump_event) { // check for change from last time
+		        thisEvent.EventType = current_bump_event;
+
+			    // differentiating which parameter gets passed to service routine
+		        if(left_bumper != 0 && right_bumper == 0){
+		            thisEvent.EventParam = left_bumper;
+		        } else if (left_bumper == 0 && right_bumper != 0){
+		            thisEvent.EventParam = right_bumper;
+		        }
+
+	        	last_bump_event = current_bump_event; // update history
 #ifndef SIMPLESERVICE_TEST           // keep this as is for test harness
                 PostTopLevelHSM(ReturnEvent);
 #else
-                PostTemplateService(ReturnEvent);
+                PostBumpEventService(ReturnEvent);
 #endif   
             }
             break;
