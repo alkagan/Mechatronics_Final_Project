@@ -32,18 +32,19 @@
 #include "BOARD.h"
 #include "TopLevelHSM.h"
 #include "SubOrientationHSM.h"
+#include "PWM.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 typedef enum {
     InitSubOrientationState,
-    SubRotateState,
+    RotateSearchBeaconState,
 } SubOrientationHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSubOrientationState",
-	"SubRotateState",
+	"RotateSearchBeaconState",
 };
 
 
@@ -121,13 +122,13 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent)
             // initial state
 
             // now put the machine into the actual initial state
-            nextState = SubRotateState;
+            nextState = RotateSearchBeaconState;
             makeTransition = TRUE;
             ThisEvent.EventType = ES_NO_EVENT;
         }
         break;
 
-    case SubRotateState: // in the first state, replace this with correct names
+    case RotateSearchBeaconState: // in the first state, replace this with correct names
         switch (ThisEvent.EventType) {
         case ES_NO_EVENT:
         default: // all unhandled events pass the event back up to the next level
