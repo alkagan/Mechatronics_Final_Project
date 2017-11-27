@@ -23,6 +23,7 @@
 #include "ES_Configure.h"
 #include "ES_Framework.h"
 #include "BumpEventService.h"
+#include "IO_Ports.h"
 #include <stdio.h>
 
 /*******************************************************************************
@@ -70,7 +71,7 @@ uint8_t InitBumpEventService(uint8_t Priority) {
 
     // post the initial transition event
     ThisEvent.EventType = ES_INIT;
-    ES_Timer_InitTimer(BATTERY_TIMER, TIMER_0_TICKS);
+    ES_Timer_InitTimer(BUMPER_TIMER, TIMER_0_TICKS);
 
     if (ES_PostToService(MyPriority, ThisEvent) == TRUE) {
         return TRUE;
@@ -136,13 +137,13 @@ ES_Event RunBumpEventService(ES_Event ThisEvent) {
 			}
             
 			if (current_bump_event != last_bump_event) { // check for change from last time
-		        thisEvent.EventType = current_bump_event;
+		        ReturnEvent.EventType = current_bump_event;
 
 			    // differentiating which parameter gets passed to service routine
 		        if(left_bumper != 0 && right_bumper == 0){
-		            thisEvent.EventParam = left_bumper;
+		            ReturnEvent.EventParam = left_bumper;
 		        } else if (left_bumper == 0 && right_bumper != 0){
-		            thisEvent.EventParam = right_bumper;
+		            ReturnEvent.EventParam = right_bumper;
 		        }
 
 	        	last_bump_event = current_bump_event; // update history

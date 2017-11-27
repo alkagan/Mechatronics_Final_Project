@@ -109,7 +109,7 @@ static const char *EventNames[] = {
 // definitions for the response functions to make it easire to check that
 // the timer number matches where the timer event will be routed
 
-#define BATTERY_TIMER 0
+#define BUMPER_TIMER 0
 
 /****************************************************************************/
 // The maximum number of services sets an upper bound on the number of 
