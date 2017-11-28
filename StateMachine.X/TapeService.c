@@ -22,14 +22,14 @@
 #include "AD.h"
 #include "ES_Configure.h"
 #include "ES_Framework.h"
-#include "TemplateService.h"
+#include "TapeService.h"
 #include <stdio.h>
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define BATTERY_DISCONNECT_THRESHOLD 175
+
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -59,7 +59,7 @@ static uint8_t MyPriority;
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitTemplateService(uint8_t Priority)
+uint8_t InitTapeService(uint8_t Priority)
 {
     ES_Event ThisEvent;
 
@@ -87,7 +87,7 @@ uint8_t InitTemplateService(uint8_t Priority)
  *        be posted to. Remember to rename to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t PostTemplateService(ES_Event ThisEvent)
+uint8_t PostTapeService(ES_Event ThisEvent)
 {
     return ES_PostToService(MyPriority, ThisEvent);
 }
@@ -101,7 +101,7 @@ uint8_t PostTemplateService(ES_Event ThisEvent)
  * @note Remember to rename to something appropriate.
  *       Returns ES_NO_EVENT if the event have been "consumed." 
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-ES_Event RunTemplateService(ES_Event ThisEvent)
+ES_Event RunTapeService(ES_Event ThisEvent)
 {
     ES_Event ReturnEvent;
     ReturnEvent.EventType = ES_NO_EVENT; // assume no errors
@@ -122,19 +122,19 @@ ES_Event RunTemplateService(ES_Event ThisEvent)
         break;
 
     case ES_TIMEOUT:
-        if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
-            curEvent = BATTERY_CONNECTED;
-        } else {
-            curEvent = BATTERY_DISCONNECTED;
-        }
+//        if (batVoltage > BATTERY_DISCONNECT_THRESHOLD) { // is battery connected?
+//            curEvent = BATTERY_CONNECTED;
+//        } else {
+//            curEvent = BATTERY_DISCONNECTED;
+//        }
         if (curEvent != lastEvent) { // check for change from last time
             ReturnEvent.EventType = curEvent;
             ReturnEvent.EventParam = batVoltage;
             lastEvent = curEvent; // update history
 #ifndef SIMPLESERVICE_TEST           // keep this as is for test harness
-            PostGenericService(ReturnEvent);
+            PostTopLevelHSM(ReturnEvent);
 #else
-            PostTemplateService(ReturnEvent);
+            PostTapeService(ReturnEvent);
 #endif   
         }
         break;
