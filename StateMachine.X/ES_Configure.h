@@ -49,6 +49,8 @@ typedef enum {
     ORIENTATION_COMPLETED,
     BUMP_PRESSED,
     BUMP_RELEASED,
+    TAPE_DETECTED,
+    TAPE_NOT_DETECTED,
     NUMBEROFEVENTS,
 
 } ES_EventTyp_t;
@@ -69,16 +71,18 @@ static const char *EventNames[] = {
 	"ORIENTATION_COMPLETED",
 	"BUMP_PRESSED",
 	"BUMP_RELEASED",
+	"TAPE_DETECTED",
+	"TAPE_NOT_DETECTED",
 	"NUMBEROFEVENTS",
 };
 
 /****************************************************************************/
 // This are the name of the Event checking function header file.
-#define EVENT_CHECK_HEADER "BumpEventChecker.h" 
+#define EVENT_CHECK_HEADER "BumpEventChecker.h", "TapeEventChecker.h"
 
 /****************************************************************************/
 // This is the list of event checking functions
-#define EVENT_CHECK_LIST  CheckForBumpEvent
+#define EVENT_CHECK_LIST  "CheckForBumpEvent", "CheckTape"
 
 /****************************************************************************/
 // These are the definitions for the post functions to be executed when the

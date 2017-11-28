@@ -150,7 +150,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 printf("gets here");
                 InitSubSearchingHSM();
                 InitSubOrientationHSM();
-                
+
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
                 makeTransition = TRUE;
@@ -186,6 +186,51 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             //state machine does
 
             ThisEvent = RunSubSearchingHSM(ThisEvent);
+            switch (ThisEvent.EventType) {
+                case ES_NO_EVENT:
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case EngagingState: // in the first state, replace this with correct names
+            // run sub-state machine for this state
+            //NOTE: the SubState Machine runs and responds to events before anything in the this
+            //state machine does
+
+            //ThisEvent = RunSubEngagingHSM(ThisEvent);
+            switch (ThisEvent.EventType) {
+                case ES_NO_EVENT:
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case ApproachShipState: // in the first state, replace this with correct names
+            // run sub-state machine for this state
+            //NOTE: the SubState Machine runs and responds to events before anything in the this
+            //state machine does
+
+            //ThisEvent = RunSubApproachingHSM(ThisEvent);
+            switch (ThisEvent.EventType) {
+                case ES_NO_EVENT:
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case TakeDownShipState: // in the first state, replace this with correct names
+            // run sub-state machine for this state
+            //NOTE: the SubState Machine runs and responds to events before anything in the this
+            //state machine does
+
+            //ThisEvent = RunSubTakeDownShipHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;

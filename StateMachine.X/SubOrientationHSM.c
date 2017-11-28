@@ -32,7 +32,7 @@
 #include "BOARD.h"
 #include "TopLevelHSM.h"
 #include "SubOrientationHSM.h"
-#include "PWM.h"
+#include "pwm.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -40,14 +40,24 @@
 typedef enum {
     InitSubOrientationState,
     RotateSearchBeaconState,
+    FrontTapeSensorDetectedState,
+    CornerTapeSensorDetectedState,
 } SubOrientationHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSubOrientationState",
 	"RotateSearchBeaconState",
+	"FrontTapeSensorDetectedState",
+	"CornerTapeSensorDetectedState",
 };
 
+#define MAX_SPEED    1000
+#define NORMAL_SPEED 500
+#define SNAIL_PACE   200
+#define NOT_MOVING   0
+#define REVERSE      1
 
+#define REVERSE_1_SECOND 1000
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -55,6 +65,43 @@ static const char *StateNames[] = {
 /* Prototypes for private functions for this machine. They should be functions
    relevant to the behavior of this state machine */
 
+void onwards_NOS(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, MAX_SPEED);
+    PWM_SetDutyCycle(PWM_PORTY12, MAX_SPEED);
+}
+
+void onwards(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
+    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
+}
+
+void snails_pace(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, SNAIL_PACE);
+    PWM_SetDutyCycle(PWM_PORTY12, SNAIL_PACE);
+}
+
+void stop_everything(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, NOT_MOVING);
+    PWM_SetDutyCycle(PWM_PORTY12, NOT_MOVING);
+}
+
+void reverse(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
+    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
+    
+}
+
+void rotate_clockwise(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
+    //pin direction
+    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
+}
+
+void rotate_counter_clockwise(void){
+    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
+    //pin direction
+    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
+}
 /*******************************************************************************
  * PRIVATE MODULE VARIABLES                                                            *
  ******************************************************************************/
@@ -63,7 +110,7 @@ static const char *StateNames[] = {
 
 static SubOrientationHSMState_t CurrentState = InitSubOrientationState; // <- change name to match ENUM
 static uint8_t MyPriority;
-
+static uint8_t tape_sensor_parameter;
 
 /*******************************************************************************
  * PUBLIC FUNCTIONS                                                            *
@@ -79,8 +126,7 @@ static uint8_t MyPriority;
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitSubOrientationHSM(void)
-{
+uint8_t InitSubOrientationHSM(void) {
     ES_Event returnEvent;
 
     CurrentState = InitSubOrientationState;
@@ -106,38 +152,48 @@ uint8_t InitSubOrientationHSM(void)
  *       not consumed as these need to pass pack to the higher level state machine.
  * @author J. Edward Carryer, 2011.10.23 19:25
  * @author Gabriel H Elkaim, 2011.10.23 19:25 */
-ES_Event RunSubOrientationHSM(ES_Event ThisEvent)
-{
+ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
     uint8_t makeTransition = FALSE; // use to flag transition
     SubOrientationHSMState_t nextState; // <- change type to correct enum
 
     ES_Tattle(); // trace call stack
 
     switch (CurrentState) {
-    case InitSubOrientationState: // If current state is initial Psedudo State
-        if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
-        {
-            // this is where you would put any actions associated with the
-            // transition from the initial pseudo-state into the actual
-            // initial state
+        case InitSubOrientationState: // If current state is initial Psedudo State
+            if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
+            {
+                // this is where you would put any actions associated with the
+                // transition from the initial pseudo-state into the actual
+                // initial state
 
-            // now put the machine into the actual initial state
-            nextState = RotateSearchBeaconState;
-            makeTransition = TRUE;
-            ThisEvent.EventType = ES_NO_EVENT;
-        }
-        break;
-
-    case RotateSearchBeaconState: // in the first state, replace this with correct names
-        switch (ThisEvent.EventType) {
-        case ES_NO_EVENT:
-        default: // all unhandled events pass the event back up to the next level
+                // now put the machine into the actual initial state
+                nextState = RotateSearchBeaconState;
+                makeTransition = TRUE;
+                ThisEvent.EventType = ES_NO_EVENT;
+            }
             break;
-        }
-        break;
-        
-    default: // all unhandled states fall into here
-        break;
+
+        case RotateSearchBeaconState: // in the first state, replace this with correct names
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    break;
+                    
+                case TAPE_DETECTED:
+                    tape_sensor_parameter = ThisEvent.EventParam;
+                    //if(tape_sensor_parameter == )
+                    
+                    break;
+                case ES_NO_EVENT:
+                default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+            
+            
+
+        default: // all unhandled states fall into here
+            break;
     } // end switch on Current State
 
     if (makeTransition == TRUE) { // making a state transition, send EXIT and ENTRY
