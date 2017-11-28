@@ -114,7 +114,7 @@ uint8_t CheckTape(void) {
         returnVal = TRUE;
         lastEvent = curEvent; // update history
 #ifndef EVENTCHECKER_TEST           // keep this as is for test harness
-        PostGenericService(thisEvent);
+        PostTopLevelHSM(thisEvent);
 #else
         SaveEvent(thisEvent);
 #endif   
