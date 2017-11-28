@@ -15,7 +15,11 @@
 
 #define REVERSE_1_SECOND 1000
 
+/* Digital I/O is X, Y, Z Ports, will use the X port for our
+ * switches and direction signal
+*/
 
+IO_PortsSetPortInputs(PORTX, PIN3); // this probably won't compile
 
 void onwards_NOS(void){
     PWM_SetDutyCycle(PWM_PORTZ06, MAX_SPEED);
