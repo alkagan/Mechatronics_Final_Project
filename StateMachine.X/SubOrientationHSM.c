@@ -33,6 +33,7 @@
 #include "TopLevelHSM.h"
 #include "SubOrientationHSM.h"
 #include "pwm.h"
+#include "motors_drivers.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -65,43 +66,6 @@ static const char *StateNames[] = {
 /* Prototypes for private functions for this machine. They should be functions
    relevant to the behavior of this state machine */
 
-void onwards_NOS(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, MAX_SPEED);
-    PWM_SetDutyCycle(PWM_PORTY12, MAX_SPEED);
-}
-
-void onwards(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
-    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
-}
-
-void snails_pace(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, SNAIL_PACE);
-    PWM_SetDutyCycle(PWM_PORTY12, SNAIL_PACE);
-}
-
-void stop_everything(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, NOT_MOVING);
-    PWM_SetDutyCycle(PWM_PORTY12, NOT_MOVING);
-}
-
-void reverse(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
-    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
-    
-}
-
-void rotate_clockwise(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
-    //pin direction
-    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
-}
-
-void rotate_counter_clockwise(void){
-    PWM_SetDutyCycle(PWM_PORTZ06, NORMAL_SPEED);
-    //pin direction
-    PWM_SetDutyCycle(PWM_PORTY12, NORMAL_SPEED);
-}
 /*******************************************************************************
  * PRIVATE MODULE VARIABLES                                                            *
  ******************************************************************************/
