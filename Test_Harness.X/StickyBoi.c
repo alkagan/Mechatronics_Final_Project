@@ -34,6 +34,8 @@ int main(void) {
     while (1) {
         IO_PortsClearPortBits(PORTX, PIN3);
         delay(magicnumber);
+
+        // Accounts for noise
         uint16_t tapeOne = AD_ReadADPin(AD_PORTW6);
         uint16_t tapeTwo = AD_ReadADPin(AD_PORTW5);
         uint16_t tapeThree = AD_ReadADPin(AD_PORTW4);
@@ -44,6 +46,8 @@ int main(void) {
 
         IO_PortsSetPortBits(PORTX, PIN3);
         delay(magicnumber);
+
+        // Takes real value of each sensor
         tapeOne = AD_ReadADPin(AD_PORTW6) - AvgValueLow;
         tapeTwo = AD_ReadADPin(AD_PORTW5) - AvgValueLow;
         tapeThree = AD_ReadADPin(AD_PORTW4) - AvgValueLow;

@@ -22,7 +22,6 @@
  * 10/23/11 18:20 jec      began conversion from SMTemplate.c (02/20/07 rev)
  */
 
-
 /*******************************************************************************
  * MODULE #INCLUDE                                                             *
  ******************************************************************************/
@@ -51,14 +50,6 @@ static const char *StateNames[] = {
 	"FrontTapeSensorDetectedState",
 	"CornerTapeSensorDetectedState",
 };
-
-#define MAX_SPEED    1000
-#define NORMAL_SPEED 500
-#define SNAIL_PACE   200
-#define NOT_MOVING   0
-#define REVERSE      1
-
-#define REVERSE_1_SECOND 1000
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
