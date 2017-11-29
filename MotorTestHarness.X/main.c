@@ -61,38 +61,51 @@ int main(void) {
         uint16_t left_switch_input  = AD_ReadADPin(AD_PORTW8);
         uint16_t right_switch_input = AD_ReadADPin(AD_PORTW5);
         
+        
+        
         printf("The value of AD_PORTW8 aka left switch is %d\r\n", left_switch_input);
         printf("The value of AD_PORTW5 aka right switch is %d\r\n", right_switch_input);
         delay(time_delay);
         
         bool port_5_output = IO_PortsReadPort(PORTX) & PIN5;
         bool port_6_output = IO_PortsReadPort(PORTX) & PIN6;
+        bool direction_left = 0;
+        bool direction_right = 0;
         
-        /*
-        IO_PortsWritePort(PORTX, PIN5);
+        if (left_switch_input > 800){
+            direction_left = 1;
+        }
+        
+        if (right_switch_input > 800){
+            direction_right = 1;
+        }
+        
+        if(direction_left){
+            IO_PortsWritePort(PORTX, PIN5);
+        }
+        
+        if(direction_right){
+            IO_PortsWritePort(PORTX, PIN6);
+        }
+        
         printf("The value of PORTX PIN5 is %d\r\n", IO_PortsReadPort(PORTX) & PIN5);
         printf("The value of PORTX PIN6 is %d\r\n", IO_PortsReadPort(PORTX) & PIN6);
+        
+        /*
         delay(time_delay);
         IO_PortsClearPortBits(PORTX, PIN5);
         IO_PortsClearPortBits(PORTX, PIN6);
         IO_PortsWritePort(PORTX, PIN6);
-        printf("The value of PORTX PIN5 is %d\r\n", IO_PortsReadPort(PORTX) & PIN5);
-        printf("The value of PORTX PIN6 is %d\r\n", IO_PortsReadPort(PORTX) & PIN6);
+       
         delay(time_delay);
-        */
         
-        
-        /*
         //IO_PortsSetPortBits(PORTX, PIN6);
-        //printf("The value of PORTX PIN5 is %d\r\n", port_5_output);
-        printf("The value of PORTX PIN6 is %d\r\n", port_6_output);
         delay(time_delay);
         IO_PortsWritePort(PIN5, 0);
         IO_PortsTogglePortBits(PORTX, PIN6);
-        //printf("The value of PORTX PIN5 is %d\r\n", port_5_output);
-        printf("The value of PORTX PIN6 is %d\r\n", port_6_output);
         delay(time_delay);
         */
+        
         //printf("The value of PORTV PIN3 is %d\r\n", port_3_input);
         //printf("The value of PORTV PIN4 is %d\r\n", port_4_input);
         //printf("The value of PORTV PIN5 is %d\r\n", port_5_output);
