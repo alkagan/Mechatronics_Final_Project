@@ -23,4 +23,8 @@ void rotate_clockwise(void);
 
 void rotate_counter_clockwise(void);
 
+void tape_realign_left_detected(void);
+
+void tape_realign_right_detected(void);
+
 #endif /* MOTORS_DRIVERS_H */

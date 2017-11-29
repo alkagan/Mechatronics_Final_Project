@@ -17,6 +17,7 @@
 #define SNAIL_PACE   200
 #define NOT_MOVING   0
 #define REVERSE      1
+#define LITTLE_MORE  650
 
 #define REVERSE_1_SECOND 1000
 
@@ -73,4 +74,14 @@ void rotate_counter_clockwise(void){
     IO_PortsSetPortOutputs(PORTX, DIRECTION_PIN_LEFT);
     PWM_SetDutyCycle(PORT_LEFT, NORMAL_SPEED);
     PWM_SetDutyCycle(PORT_RIGHT, NORMAL_SPEED);
+}
+
+void tape_realign_left_detected(void){
+    PWM_SetDutyCycle(PORT_LEFT, LITTLE_MORE);
+    PWM_SetDutyCycle(PORT_RIGHT, NORMAL_SPEED);
+}
+
+void tape_realign_right_detected(void){
+    PWM_SetDutyCycle(PORT_LEFT, NORMAL_SPEED);
+    PWM_SetDutyCycle(PORT_RIGHT, LITTLE_MORE);
 }
