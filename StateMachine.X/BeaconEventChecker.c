@@ -38,6 +38,9 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
+#define BEACON_DETECTED_THRESHOLD     300
+#define BEACON_NOT_DETECTED_THRESHOLD 800
+
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
  ******************************************************************************/
@@ -84,29 +87,25 @@ static ES_Event storedEvent;
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForBeaconEvent(void) {
-    static ES_EventTyp_t last_bump_event = BUMP_RELEASED;
-    ES_EventTyp_t current_bump_event;
+    static ES_EventTyp_t last_beacon_event = BEACON_NOT_DETECTED;
+    ES_EventTyp_t current_beacon_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
-    if(left_bumper != 0 || right_bumper != 0){
-        current_bump_event = BUMP_PRESSED;
-    } else {
-        current_bump_event = BUMP_RELEASED;
+    AD_AddPins(AD_PORTV8);
+    uint16_t beacon_reading = AD_ReadPort(AD_PORTV8);
+
+    if (beacon_reading > BEACON_NOT_DETECTED_THRESHOLD){
+        current_beacon_event = BEACON_NOT_DETECTED;
+    } else if (beacon_reading < BEACON_DETECTED_THRESHOLD){
+        current_beacon_event = BEACON_DETECTED;
     }
-    
-    if (current_bump_event != last_bump_event) { // check for change from last time
-        thisEvent.EventType = current_bump_event;
 
-        // differentiating which parameter gets passed to service routine
-        if(left_bumper != 0){
-            thisEvent.EventParam = left_bumper;
-        } else {
-            thisEvent.EventParam = right_bumper;
-        }
-
+    if (current_beacon_event != last_beacon_event) { // check for change from last time
+        thisEvent.EventType = current_beacon_event;
+        thisEvent.EventParam = beacon_reading;
         returnVal = TRUE;
-        last_bump_event = current_bump_event; // update history
+        last_beacon_event = current_beacon_event; // update history
 #ifndef EVENTCHECKER_TEST           // keep this as is for test harness
         PostTopLevelHSM(thisEvent); // ensures continuous checking for bump events
 #else
