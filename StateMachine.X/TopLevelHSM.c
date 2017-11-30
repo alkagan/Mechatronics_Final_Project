@@ -43,7 +43,6 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-
 typedef enum {
     InitPState, // 0
     OrientationState, // 1
@@ -169,11 +168,11 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
 
-                case TAPE_DETEECTED:
-                    nextState = SearchingState;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
+//                case TAPE_DETEECTED:
+//                    nextState = SearchingState;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
 
                 default:
                     break;
