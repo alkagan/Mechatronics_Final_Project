@@ -82,10 +82,10 @@ int main(void) {
         // Checking 0 or 1 and sending appropriate direction value
         if(direction_left){
             IO_PortsWritePort(PORTX, PIN11);
-        }
-        
-        if(direction_right){
+        } else if(direction_right){
             IO_PortsWritePort(PORTX, PIN12);
+        } else {
+            IO_PortsWritePort(PORTX, (PIN11 | PIN12));
         }
         //////////////////////////////////////////////////////////
         
