@@ -46,13 +46,13 @@ typedef enum {
     /* User-defined events start here */
     BATTERY_CONNECTED,
     BATTERY_DISCONNECTED,
-    ORIENTATION_COMPLETED,
     BUMP_PRESSED,
     BUMP_RELEASED,
     TAPE_DETECTED,
     TAPE_NOT_DETECTED,
+	BEACON_DETECTED,
+	BEACON_NOT_DETECTED,
     NUMBEROFEVENTS,
-
 } ES_EventTyp_t;
 
 static const char *EventNames[] = {
@@ -105,7 +105,6 @@ static const char *EventNames[] = {
 #define TIMER13_RESP_FUNC TIMER_UNUSED
 #define TIMER14_RESP_FUNC TIMER_UNUSED
 #define TIMER15_RESP_FUNC TIMER_UNUSED
-
 
 /****************************************************************************/
 // Give the timer numbers symbolc names to make it easier to move them

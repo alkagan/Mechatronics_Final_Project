@@ -169,7 +169,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
 
-                case ORIENTATION_COMPLETED:
+                case TAPE_DETEECTED:
                     nextState = SearchingState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;

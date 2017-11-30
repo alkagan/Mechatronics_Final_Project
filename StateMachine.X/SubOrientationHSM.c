@@ -135,6 +135,10 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     rotate_clockwise();
                     break;
                     
+				 case BEACON_DETECTED:
+					
+					break;
+
                 case TAPE_DETECTED:
                     tape_sensor_parameter = ThisEvent.EventParam;
                     //if(tape_sensor_parameter == )
