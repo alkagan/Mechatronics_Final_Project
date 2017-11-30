@@ -17,6 +17,7 @@
 #define SNAIL_PACE   200
 #define NOT_MOVING   0
 #define REVERSE      1
+#define LITTLE_MORE  650
 
 #define REVERSE_1_SECOND 1000
 
@@ -70,7 +71,23 @@ void rotate_clockwise(void){
 // Setting left direction pins to HIGH which makes left motor reverse
 // while right one remains forward
 void rotate_counter_clockwise(void){
+<<<<<<< HEAD
     IO_PortsSetPortOutputs(PORTX, LEFT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+=======
+    IO_PortsSetPortOutputs(PORTX, DIRECTION_PIN_LEFT);
+    PWM_SetDutyCycle(PORT_LEFT, NORMAL_SPEED);
+    PWM_SetDutyCycle(PORT_RIGHT, NORMAL_SPEED);
+}
+
+void tape_realign_left_detected(void){
+    PWM_SetDutyCycle(PORT_LEFT, LITTLE_MORE);
+    PWM_SetDutyCycle(PORT_RIGHT, NORMAL_SPEED);
+}
+
+void tape_realign_right_detected(void){
+    PWM_SetDutyCycle(PORT_LEFT, NORMAL_SPEED);
+    PWM_SetDutyCycle(PORT_RIGHT, LITTLE_MORE);
+>>>>>>> 7b148e0cb699a59f7b85227003aab73fa87e5f10
 }

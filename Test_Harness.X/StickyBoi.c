@@ -27,7 +27,7 @@ int main(void) {
     BOARD_Init();
     AD_Init();
     TIMERS_Init();
-    AD_AddPins(AD_PORTW3 | AD_PORTW4 | AD_PORTW5 | AD_PORTW6);
+    AD_AddPins(AD_PORTV3 | AD_PORTV4 | AD_PORTV5 | AD_PORTV6);
     IO_PortsSetPortOutputs(PORTX, PIN3);
     SERIAL_Init();
 
@@ -36,10 +36,10 @@ int main(void) {
         delay(magicnumber);
 
         // Accounts for noise
-        uint16_t tapeOne = AD_ReadADPin(AD_PORTW6);
-        uint16_t tapeTwo = AD_ReadADPin(AD_PORTW5);
-        uint16_t tapeThree = AD_ReadADPin(AD_PORTW4);
-        uint16_t tapeFour = AD_ReadADPin(AD_PORTW3);
+        uint16_t tapeOne = AD_ReadADPin(AD_PORTV3);
+        uint16_t tapeTwo = AD_ReadADPin(AD_PORTV4);
+        uint16_t tapeThree = AD_ReadADPin(AD_PORTV5);
+        uint16_t tapeFour = AD_ReadADPin(AD_PORTV6);
         uint16_t AvgValueLow = (AvgValueLow + tapeOne + tapeTwo + tapeThree + tapeFour) / 5;
 
         delay(magicnumber);
@@ -48,10 +48,10 @@ int main(void) {
         delay(magicnumber);
 
         // Takes real value of each sensor
-        tapeOne = AD_ReadADPin(AD_PORTW6) - AvgValueLow;
-        tapeTwo = AD_ReadADPin(AD_PORTW5) - AvgValueLow;
-        tapeThree = AD_ReadADPin(AD_PORTW4) - AvgValueLow;
-        tapeFour = AD_ReadADPin(AD_PORTW3) - AvgValueLow;
+        tapeOne = AD_ReadADPin(AD_PORTV3) - AvgValueLow;
+        tapeTwo = AD_ReadADPin(AD_PORTV4) - AvgValueLow;
+        tapeThree = AD_ReadADPin(AD_PORTV5) - AvgValueLow;
+        tapeFour = AD_ReadADPin(AD_PORTV6) - AvgValueLow;
         uint16_t AvgValueHigh = (tapeOne + tapeTwo + tapeThree + tapeFour) / 4;
         printf("tapeOne is %i%,\r\n tapeTwo is %i%\r\n tapeThree is %i%,"
                 "\r\n tapeFour is %i%\r\n", tapeOne, tapeTwo, tapeThree, tapeFour);
