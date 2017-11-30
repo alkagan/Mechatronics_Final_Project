@@ -58,9 +58,9 @@ int main(void) {
         uint16_t left_switch_input  = AD_ReadADPin(AD_PORTW8);
         uint16_t right_switch_input = AD_ReadADPin(AD_PORTW5);
         
-        printf("Left switch: %d\r\n", left_switch_input);
-        printf("Right switch: %d\r\n", right_switch_input);
-        delay(time_delay);
+        //printf("Left switch: %d\r\n", left_switch_input);
+        //printf("Right switch: %d\r\n", right_switch_input);
+        //delay(time_delay);
         
 //        bool port_5_output = IO_PortsReadPort(PORTX) & PIN11;
 //        bool port_6_output = IO_PortsReadPort(PORTX) & PIN12;
@@ -89,8 +89,8 @@ int main(void) {
         }
         //////////////////////////////////////////////////////////
         
-        printf("Direction left:  %d\r\n", IO_PortsReadPort(PORTX) & PIN11);
-        printf("Direction right: %d\r\n", IO_PortsReadPort(PORTX) & PIN12);
+        //printf("Direction left:  %d\r\n", IO_PortsReadPort(PORTX) & PIN11);
+        //printf("Direction right: %d\r\n", IO_PortsReadPort(PORTX) & PIN12);
         
         /*
         IO_PortsClearPortBits(PORTX, PIN5);
