@@ -33,6 +33,7 @@
 #include "TopLevelHSM.h"
 #include "SubOrientationHSM.h"
 #include "pwm.h"
+#include "pin_configuration.h"
 
 
 /*******************************************************************************
@@ -134,10 +135,12 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     printf("gets to locatebeacon\r\n");
                     rotate_clockwise();
+                    //ThisEvent.EventType = ES_NO_EVENT;
                     break;
                     
                 //printf("after es_entry\r\n");    
                 case BEACON_DETECTED:
+                    stop_everything();
                     reverse();					
 					break;
 

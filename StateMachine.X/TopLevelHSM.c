@@ -146,7 +146,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // transition from the initial pseudo-state into the actual
                 // initial state
                 // Initialize all sub-state machines
-                InitSubSearchingHSM();
+//                InitSubSearchingHSM();
                 InitSubOrientationHSM();
 
                 // now put the machine into the actual initial state

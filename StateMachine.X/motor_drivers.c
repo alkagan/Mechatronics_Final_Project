@@ -64,10 +64,7 @@ void rotate_clockwise(void){
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
-    uint16_t left_duty = PWM_GetDutyCycle(LEFT_MOTOR);
-    uint16_t right_duty = PWM_GetDutyCycle(RIGHT_MOTOR);
-    printf("left_duty: %d\r\n", left_duty);
-    printf("right_duty: %d\r\n", right_duty);
+    
 }
 
 // Setting left direction pins to HIGH which makes left motor reverse
