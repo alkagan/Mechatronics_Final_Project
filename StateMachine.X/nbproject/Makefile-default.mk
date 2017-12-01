@@ -123,266 +123,266 @@ ${OBJECTDIR}/_ext/331920610/AD.o: C:/CMPE118/src/AD.c  nbproject/Makefile-${CND_
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/AD.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/AD.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/AD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/AD.o.d" -o ${OBJECTDIR}/_ext/331920610/AD.o C:/CMPE118/src/AD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/AD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/AD.o.d" -o ${OBJECTDIR}/_ext/331920610/AD.o C:/CMPE118/src/AD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/BOARD.o: C:/CMPE118/src/BOARD.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/BOARD.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/BOARD.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/BOARD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/BOARD.o.d" -o ${OBJECTDIR}/_ext/331920610/BOARD.o C:/CMPE118/src/BOARD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/BOARD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/BOARD.o.d" -o ${OBJECTDIR}/_ext/331920610/BOARD.o C:/CMPE118/src/BOARD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/IO_Ports.o: C:/CMPE118/src/IO_Ports.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/IO_Ports.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/IO_Ports.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" -o ${OBJECTDIR}/_ext/331920610/IO_Ports.o C:/CMPE118/src/IO_Ports.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" -o ${OBJECTDIR}/_ext/331920610/IO_Ports.o C:/CMPE118/src/IO_Ports.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/LED.o: C:/CMPE118/src/LED.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/LED.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/LED.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/LED.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/LED.o.d" -o ${OBJECTDIR}/_ext/331920610/LED.o C:/CMPE118/src/LED.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/LED.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/LED.o.d" -o ${OBJECTDIR}/_ext/331920610/LED.o C:/CMPE118/src/LED.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/pwm.o: C:/CMPE118/src/pwm.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/pwm.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/pwm.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/pwm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/pwm.o.d" -o ${OBJECTDIR}/_ext/331920610/pwm.o C:/CMPE118/src/pwm.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/pwm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/pwm.o.d" -o ${OBJECTDIR}/_ext/331920610/pwm.o C:/CMPE118/src/pwm.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/serial.o: C:/CMPE118/src/serial.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/serial.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/serial.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/serial.o.d" -o ${OBJECTDIR}/_ext/331920610/serial.o C:/CMPE118/src/serial.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/serial.o.d" -o ${OBJECTDIR}/_ext/331920610/serial.o C:/CMPE118/src/serial.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/timers.o: C:/CMPE118/src/timers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/timers.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/timers.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/timers.o.d" -o ${OBJECTDIR}/_ext/331920610/timers.o C:/CMPE118/src/timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/timers.o.d" -o ${OBJECTDIR}/_ext/331920610/timers.o C:/CMPE118/src/timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Framework.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Framework.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Framework.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Framework.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Framework.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_PostList.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_PostList.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_PostList.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_PostList.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_PostList.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Queue.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Queue.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Queue.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Queue.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Timers.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Timers.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Timers.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Timers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Timers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Main.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Main.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Main.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Main.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/motor_drivers.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/motor_drivers.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/motor_drivers.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" -o ${OBJECTDIR}/_ext/580189257/motor_drivers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" -o ${OBJECTDIR}/_ext/580189257/motor_drivers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 else
 ${OBJECTDIR}/_ext/331920610/AD.o: C:/CMPE118/src/AD.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/AD.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/AD.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/AD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/AD.o.d" -o ${OBJECTDIR}/_ext/331920610/AD.o C:/CMPE118/src/AD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/AD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/AD.o.d" -o ${OBJECTDIR}/_ext/331920610/AD.o C:/CMPE118/src/AD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/BOARD.o: C:/CMPE118/src/BOARD.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/BOARD.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/BOARD.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/BOARD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/BOARD.o.d" -o ${OBJECTDIR}/_ext/331920610/BOARD.o C:/CMPE118/src/BOARD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/BOARD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/BOARD.o.d" -o ${OBJECTDIR}/_ext/331920610/BOARD.o C:/CMPE118/src/BOARD.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/IO_Ports.o: C:/CMPE118/src/IO_Ports.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/IO_Ports.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/IO_Ports.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" -o ${OBJECTDIR}/_ext/331920610/IO_Ports.o C:/CMPE118/src/IO_Ports.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/IO_Ports.o.d" -o ${OBJECTDIR}/_ext/331920610/IO_Ports.o C:/CMPE118/src/IO_Ports.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/LED.o: C:/CMPE118/src/LED.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/LED.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/LED.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/LED.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/LED.o.d" -o ${OBJECTDIR}/_ext/331920610/LED.o C:/CMPE118/src/LED.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/LED.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/LED.o.d" -o ${OBJECTDIR}/_ext/331920610/LED.o C:/CMPE118/src/LED.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/pwm.o: C:/CMPE118/src/pwm.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/pwm.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/pwm.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/pwm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/pwm.o.d" -o ${OBJECTDIR}/_ext/331920610/pwm.o C:/CMPE118/src/pwm.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/pwm.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/pwm.o.d" -o ${OBJECTDIR}/_ext/331920610/pwm.o C:/CMPE118/src/pwm.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/serial.o: C:/CMPE118/src/serial.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/serial.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/serial.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/serial.o.d" -o ${OBJECTDIR}/_ext/331920610/serial.o C:/CMPE118/src/serial.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/serial.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/serial.o.d" -o ${OBJECTDIR}/_ext/331920610/serial.o C:/CMPE118/src/serial.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/331920610/timers.o: C:/CMPE118/src/timers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/331920610" 
 	@${RM} ${OBJECTDIR}/_ext/331920610/timers.o.d 
 	@${RM} ${OBJECTDIR}/_ext/331920610/timers.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/timers.o.d" -o ${OBJECTDIR}/_ext/331920610/timers.o C:/CMPE118/src/timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/331920610/timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/331920610/timers.o.d" -o ${OBJECTDIR}/_ext/331920610/timers.o C:/CMPE118/src/timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_CheckEvents.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Framework.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Framework.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Framework.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Framework.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Framework.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Framework.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_KeyboardInput.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_PostList.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_PostList.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_PostList.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_PostList.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_PostList.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_PostList.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Queue.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Queue.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Queue.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Queue.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Queue.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_TattleTale.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_TattleTale.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Timers.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Timers.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Timers.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Timers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Timers.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Timers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/ES_Main.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/ES_Main.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Main.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/ES_Main.o.d" -o ${OBJECTDIR}/_ext/580189257/ES_Main.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TopLevelHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/TopLevelHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubSearchingHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o.d" -o ${OBJECTDIR}/_ext/580189257/SubOrientationHSM.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BeaconEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/BumpEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/BumpEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/TapeEventChecker.o.d" -o ${OBJECTDIR}/_ext/580189257/TapeEventChecker.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/580189257/motor_drivers.o: C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/580189257" 
 	@${RM} ${OBJECTDIR}/_ext/580189257/motor_drivers.o.d 
 	@${RM} ${OBJECTDIR}/_ext/580189257/motor_drivers.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -DEVENT_CHECKER_HEADER -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" -o ${OBJECTDIR}/_ext/580189257/motor_drivers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"." -I"C:/CMPE118/include" -MMD -MF "${OBJECTDIR}/_ext/580189257/motor_drivers.o.d" -o ${OBJECTDIR}/_ext/580189257/motor_drivers.o C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 endif
 

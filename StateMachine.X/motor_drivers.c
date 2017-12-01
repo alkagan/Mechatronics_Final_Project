@@ -26,8 +26,6 @@
  * switches and direction signal
 */
 
-//IO_PortsSetPortInputs(PORTX, PIN3); // this probably won't compile
-
 void onwards_NOS(void){
     PWM_SetDutyCycle(LEFT_MOTOR, MAX_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, MAX_SPEED);
@@ -44,14 +42,15 @@ void snails_pace(void){
 }
 
 void stop_everything(void){
+    printf("stopeverything\r\n");
     PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
     PWM_SetDutyCycle(RIGHT_MOTOR, NOT_MOVING);
 }
 
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
-    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
-    IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
+    printf("reverse\r\n");
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }

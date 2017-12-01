@@ -177,7 +177,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 default:
                     break;
             }
-            break;
+            break;  //orientation state
 
         case SearchingState: // in the first state, replace this with correct names
             // run sub-state machine for this state
@@ -192,7 +192,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 default:
                     break;
             }
-            break;
+            break;  //searching state
 
         case EngagingState: // in the first state, replace this with correct names
             // run sub-state machine for this state
@@ -207,7 +207,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 default:
                     break;
             }
-            break;
+            break;  // engaging state
 
         case ApproachShipState: // in the first state, replace this with correct names
             // run sub-state machine for this state
@@ -222,7 +222,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 default:
                     break;
             }
-            break;
+            break;  // approach ship state
 
         case TakeDownShipState: // in the first state, replace this with correct names
             // run sub-state machine for this state
@@ -237,11 +237,12 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 default:
                     break;
             }
-            break;
+            break;  //Take Down Ship State
 
         default: // all unhandled states fall into here
             break;
     } // end switch on Current State
+    printf("running top level sm: the event is %d \r\n", ThisEvent.EventType);
 
     if (makeTransition == TRUE) { // making a state transition, send EXIT and ENTRY
         // recursively call the current state with an exit event

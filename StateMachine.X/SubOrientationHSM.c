@@ -140,8 +140,10 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     
                 //printf("after es_entry\r\n");    
                 case BEACON_DETECTED:
-                    stop_everything();
-                    reverse();					
+                    printf("gets to beacondetected\r\n");
+                    //stop_everything();
+                    reverse();
+                    ThisEvent.EventType = ES_NO_EVENT;
 					break;
 
                 case TAPE_DETECTED:

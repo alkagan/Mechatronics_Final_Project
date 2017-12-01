@@ -33,6 +33,7 @@
 #include "AD.h"
 #include <stdbool.h> // for I/O pins
 #include "IO_Ports.h"
+#include "pin_configuration.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -92,15 +93,18 @@ uint8_t CheckForBeaconEvent(void) {
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
-    uint16_t beacon_reading = AD_ReadADPin(AD_PORTV8);
+    uint16_t beacon_reading = AD_ReadADPin(BEACON_DETECTOR);
 
     if (beacon_reading > BEACON_NOT_DETECTED_THRESHOLD){
         current_beacon_event = BEACON_NOT_DETECTED;
+        //printf("BeaconEventChecker: BEACON DETECTED NONE\r\n");
     } else if (beacon_reading < BEACON_DETECTED_THRESHOLD){
         current_beacon_event = BEACON_DETECTED;
+        printf("BeaconEventChecker: BEACON DETECTED\r\n");
     }
 
     if (current_beacon_event != last_beacon_event) { // check for change from last time
+        printf("BeaconEventChecker: BEACON EVENT\r\n");
         thisEvent.EventType = current_beacon_event;
         thisEvent.EventParam = beacon_reading;
         returnVal = TRUE;
