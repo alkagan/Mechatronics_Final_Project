@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/production/StateMachine.X.production.elf">                 
+  <executable name="dist/default/production/MotorTestHarness.X.production.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>126464</length>                 
-      <used>47796</used>                     
-      <free>78668</free>                     
+      <used>33088</used>                     
+      <free>93376</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
       <length>16384</length>                 
-      <used>3872</used>                     
-      <free>12512</free>                     
+      <used>1860</used>                     
+      <free>14524</free>                     
     </memory>                              
   </executable>                            
 </project>                                 

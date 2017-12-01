@@ -92,7 +92,6 @@ uint8_t CheckForBeaconEvent(void) {
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
-    AD_AddPins(AD_PORTV8);
     uint16_t beacon_reading = AD_ReadADPin(AD_PORTV8);
 
     if (beacon_reading > BEACON_NOT_DETECTED_THRESHOLD){
