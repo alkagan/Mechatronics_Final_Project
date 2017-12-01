@@ -33,6 +33,7 @@
 #include "AD.h"
 #include <stdbool.h> // for I/O pins
 #include "IO_Ports.h"
+#include "pin_configuration.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -90,8 +91,7 @@ uint8_t CheckForBumpEvent(void) {
     ES_EventTyp_t current_bump_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    IO_PortsSetPortInputs(PORTV, PIN3);
-    IO_PortsSetPortInputs(PORTV, PIN4);
+    
     bool left_bumper = IO_PortsReadPort((PORTV) & PIN3);
     bool right_bumper = IO_PortsReadPort((PORTV) & PIN4);
 

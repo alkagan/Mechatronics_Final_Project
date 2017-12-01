@@ -140,7 +140,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
 					break;
 
                 case TAPE_DETECTED:
-
+                    
                     //tape_sensor_parameter = ThisEvent.EventParam;
                     //if(tape_sensor_parameter == )
                     

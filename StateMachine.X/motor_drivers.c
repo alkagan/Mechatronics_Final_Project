@@ -9,7 +9,7 @@
  *
  * Created on November 28, 10:25 AM
  */
-
+#include "pin_configuration.h"
 #include "motor_drivers.h"
 
 #define MAX_SPEED    1000
@@ -20,11 +20,6 @@
 #define LITTLE_MORE  650
 
 #define REVERSE_1_SECOND 1000
-
-#define LEFT_MOTOR              PWM_PORTZ06
-#define RIGHT_MOTOR             PWM_PORTY12
-#define LEFT_MOTOR_DIRECTION    PIN3
-#define RIGHT_MOTOR_DIRECTION   PIN4
 
 /* Digital I/O is X, Y, Z Ports, will use the X port for our
  * switches and direction signal
@@ -54,8 +49,8 @@ void stop_everything(void){
 
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
-    IO_PortsSetPortOutputs(PORTX, LEFT_MOTOR_DIRECTION);
-    IO_PortsSetPortOutputs(PORTX, RIGHT_MOTOR_DIRECTION);
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
+    IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
@@ -63,7 +58,7 @@ void reverse(void){
 // Setting right direction pins to HIGH which makes right motor reverse
 // while left one remains forward
 void rotate_clockwise(void){
-    IO_PortsSetPortOutputs(PORTX, RIGHT_MOTOR_DIRECTION);
+    IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
@@ -71,7 +66,7 @@ void rotate_clockwise(void){
 // Setting left direction pins to HIGH which makes left motor reverse
 // while right one remains forward
 void rotate_counter_clockwise(void){
-    IO_PortsSetPortOutputs(PORTX, LEFT_MOTOR_DIRECTION);
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
