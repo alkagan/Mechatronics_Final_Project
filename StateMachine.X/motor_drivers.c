@@ -11,6 +11,7 @@
  */
 #include "pin_configuration.h"
 #include "motor_drivers.h"
+#include <stdio.h>
 
 #define MAX_SPEED    1000
 #define NORMAL_SPEED 500
@@ -58,9 +59,15 @@ void reverse(void){
 // Setting right direction pins to HIGH which makes right motor reverse
 // while left one remains forward
 void rotate_clockwise(void){
+    printf("rotate_clockwise\r\n");
+    PWM_SetFrequency(PWM_1KHZ);
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+    uint16_t left_duty = PWM_GetDutyCycle(LEFT_MOTOR);
+    uint16_t right_duty = PWM_GetDutyCycle(RIGHT_MOTOR);
+    printf("left_duty: %d\r\n", left_duty);
+    printf("right_duty: %d\r\n", right_duty);
 }
 
 // Setting left direction pins to HIGH which makes left motor reverse

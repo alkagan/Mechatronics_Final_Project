@@ -52,7 +52,10 @@ int main(void) {
         PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
         PWM_SetDutyCycle(PWM_PORTY12, (DUTY_CYCLE + 50));
         //RC_SetPulseTime(RC_PORTZ08, RCValue);
-        
+        uint16_t left_duty = PWM_GetDutyCycle(PWM_PORTZ06);
+        uint16_t right_duty = PWM_GetDutyCycle(PWM_PORTY12);
+        printf("left_duty: %d\r\n", left_duty);
+        printf("right_duty: %d\r\n", right_duty);
         //IO_PortsWritePort(PORTX, 0);
                 
         // Switch Code

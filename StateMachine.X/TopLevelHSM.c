@@ -146,7 +146,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // transition from the initial pseudo-state into the actual
                 // initial state
                 // Initialize all sub-state machines
-                printf("gets here");
                 InitSubSearchingHSM();
                 InitSubOrientationHSM();
 
@@ -162,8 +161,9 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-
+            printf("before suborient\r\n");
             ThisEvent = RunSubOrientationHSM(ThisEvent);
+            printf("after suborient\r\n");
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;

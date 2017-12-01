@@ -132,9 +132,11 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateBeaconState: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    printf("gets to locatebeacon\r\n");
                     rotate_clockwise();
                     break;
                     
+                //printf("after es_entry\r\n");    
                 case BEACON_DETECTED:
                     reverse();					
 					break;
@@ -147,9 +149,12 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     break;
 
                 case ES_NO_EVENT:
+                    break;
+                        
                 default: // all unhandled events pass the event back up to the next level
                     break;
             }
+            printf("after default\r\n");
             break;
             
             
