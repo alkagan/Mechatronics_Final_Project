@@ -146,12 +146,13 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
 					break;
 
-                case TAPE_DETECTED:
-                    
-                    //tape_sensor_parameter = ThisEvent.EventParam;
-                    //if(tape_sensor_parameter == )
-                    
-                    break;
+//                case TAPE_DETECTED:
+//                    stop_everything();                    
+//                    printf("tape detected\r\n");
+//                    //tape_sensor_parameter = ThisEvent.EventParam;
+//                    //if(tape_sensor_parameter == )
+//                    
+//                    break;
 
                 case ES_NO_EVENT:
                     break;

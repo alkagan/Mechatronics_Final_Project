@@ -17,6 +17,8 @@ void onwards(void);
 
 void snails_pace(void);
 
+void stop_everything(void);
+
 void reverse(void);
 
 void rotate_clockwise(void);

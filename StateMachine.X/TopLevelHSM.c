@@ -242,7 +242,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
         default: // all unhandled states fall into here
             break;
     } // end switch on Current State
-    printf("running top level sm: the event is %d \r\n", ThisEvent.EventType);
+    //printf("running top level sm: the event is %d \r\n", ThisEvent.EventType);
 
     if (makeTransition == TRUE) { // making a state transition, send EXIT and ENTRY
         // recursively call the current state with an exit event

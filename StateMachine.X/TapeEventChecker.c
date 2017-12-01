@@ -31,6 +31,7 @@
 #include "ES_Events.h"
 #include "serial.h"
 #include "AD.h"
+#include "pin_configuration.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -86,16 +87,16 @@ uint8_t CheckTape(void) {
     ES_EventTyp_t curEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    uint16_t tape_sensor_top = AD_ReadADPin(AD_PORTV3); 
-    uint16_t tape_sensor_left = AD_ReadADPin(AD_PORTV4);
-    uint16_t tape_sensor_right = AD_ReadADPin(AD_PORTV5);
-    uint16_t tape_sensor_corner = AD_ReadADPin(AD_PORTV6);
+    uint16_t tape_sensor_top = AD_ReadADPin(TAPE_TOP); 
+    uint16_t tape_sensor_left = AD_ReadADPin(TAPE_LEFT);
+    uint16_t tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);
+    uint16_t tape_sensor_corner = AD_ReadADPin(TAPE_CORNER);
     
     if (tape_sensor_top > TAPE_SENSOR_THRESHOLD ||
         tape_sensor_left > TAPE_SENSOR_THRESHOLD ||
         tape_sensor_right > TAPE_SENSOR_THRESHOLD ||
         tape_sensor_corner > TAPE_SENSOR_THRESHOLD
-        ) { // is battery connected?
+        ) { 
         curEvent = TAPE_DETECTED;
     } else {
         curEvent = TAPE_NOT_DETECTED;
