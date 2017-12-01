@@ -39,12 +39,13 @@ int main(void) {
     
     //IO_PortsSetPortInputs(PORTX, PIN8);
     //IO_PortsSetPortInputs(PORTX, PIN9);
-    AD_AddPins(AD_PORTW8 | AD_PORTW5);
+    AD_AddPins(AD_PORTW8 | AD_PORTW5 | AD_PORTW6);
     
     IO_PortsSetPortOutputs(PORTX, (PIN11 | PIN12));
     
     static bool direction_left = 0;
     static bool direction_right = 0;
+    static int i = 0;
         
     while(1){
         PWM_SetDutyCycle(PWM_PORTZ06, DUTY_CYCLE);
@@ -58,9 +59,34 @@ int main(void) {
         uint16_t left_switch_input  = AD_ReadADPin(AD_PORTW8);
         uint16_t right_switch_input = AD_ReadADPin(AD_PORTW5);
         
+        
+        
         //printf("Left switch: %d\r\n", left_switch_input);
         //printf("Right switch: %d\r\n", right_switch_input);
         //delay(time_delay);
+        
+        //////////////////////////////////////////////////////////
+        //Esteban's attempt at this Beacon shit
+        for( i = 0; i < 10000; i++);
+        uint16_t beacon_reading = AD_ReadADPin(AD_PORTW6);
+        for( i = 0; i < 10000; i++);
+        if( beacon_reading < 800) {
+            printf("Beacon reading: %d\r\n\n", beacon_reading);
+        } 
+//        if( beacon_reading < 800) {
+//            printf("a");
+//        } else if( beacon_reading > 800) {
+//            printf("b");
+//        }
+        
+//        if( beacon_reading > 500) {
+//            //beacon event detected
+//        } else if ( beacon_reading < 200) {
+//            //no beacon event detected
+//        }
+        
+        
+        //////////////////////////////////////////////////////////
         
 //        bool port_5_output = IO_PortsReadPort(PORTX) & PIN11;
 //        bool port_6_output = IO_PortsReadPort(PORTX) & PIN12;
