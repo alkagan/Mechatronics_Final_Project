@@ -12,6 +12,7 @@
       <itemPath>C:/CMPE118/include/serial.h</itemPath>
       <itemPath>C:/CMPE118/include/timers.h</itemPath>
       <itemPath>C:/CMPE118/include/RC_Servo.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/MotorTestHarness.X/pin_configuration.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -39,6 +40,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>C:\CMPE118</Elem>
+    <Elem>C:\Users\alkagan\Mechatronics_Final_Project\MotorTestHarness.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
