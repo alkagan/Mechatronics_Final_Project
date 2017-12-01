@@ -40,14 +40,14 @@
  ******************************************************************************/
 typedef enum {
     InitSubOrientationState,
-    RotateSearchBeaconState,
+    LocateBeaconState,
     FrontTapeSensorDetectedState,
     CornerTapeSensorDetectedState,
 } SubOrientationHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSubOrientationState",
-	"RotateSearchBeaconState",
+	"LocateBeaconState",
 	"FrontTapeSensorDetectedState",
 	"CornerTapeSensorDetectedState",
 };
@@ -123,28 +123,29 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                 // initial state
 
                 // now put the machine into the actual initial state
-                nextState = RotateSearchBeaconState;
+                nextState = LocateBeaconState;
                 makeTransition = TRUE;
                 ThisEvent.EventType = ES_NO_EVENT;
             }
             break;
 
-        case RotateSearchBeaconState: // in the first state, replace this with correct names
+        case LocateBeaconState: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     rotate_clockwise();
                     break;
                     
-                case BEACON_DETECTED:					
+                case BEACON_DETECTED:
+                    reverse();					
 					break;
-/*
+
                 case TAPE_DETECTED:
 
-                    tape_sensor_parameter = ThisEvent.EventParam;
+                    //tape_sensor_parameter = ThisEvent.EventParam;
                     //if(tape_sensor_parameter == )
                     
                     break;
-*/
+
                 case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
                     break;
