@@ -27,16 +27,19 @@
 */
 
 void onwards_NOS(void){
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, MAX_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, MAX_SPEED);
 }
 
 void onwards(void){
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
 
 void snails_pace(void){
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
     PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
@@ -50,7 +53,7 @@ void stop_everything(void){
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
     printf("reverse\r\n");
-    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
+    IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
@@ -59,7 +62,7 @@ void reverse(void){
 // while left one remains forward
 void rotate_clockwise(void){
     printf("rotate_clockwise\r\n");
-    PWM_SetFrequency(PWM_1KHZ);
+    //PWM_SetFrequency(PWM_1KHZ);
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
