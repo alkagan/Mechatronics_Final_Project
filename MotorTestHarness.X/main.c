@@ -40,7 +40,7 @@ int main(void) {
 
     //IO_PortsSetPortInputs(PORTX, PIN8);
     //IO_PortsSetPortInputs(PORTX, PIN9);
-    AD_AddPins(AD_PORTW8 | AD_PORTW5 | AD_PORTW6);
+    AD_AddPins(TAPE_TOP | TAPE_LEFT | TAPE_RIGHT | TAPE_CORNER);
 
     IO_PortsSetPortOutputs(PORTX, (PIN11 | PIN12));
 

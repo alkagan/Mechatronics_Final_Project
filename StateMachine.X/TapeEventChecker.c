@@ -36,7 +36,15 @@
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-#define TAPE_SENSOR_THRESHOLD 500 //arbitrary for now 
+#define THRESHOLD_CORNER_NOT_DETECTED   540
+#define THRESHOLD_TOP_NOT_DETECTED      1200
+#define THRESHOLD_LEFT_NOT_DETECTED     1350
+#define THRESHOLD_RIGHT_NOT_DETECTED    1400
+
+#define THRESHOLD_CORNER_DETECTED       480     
+#define THRESHOLD_TOP_DETECTED          1100
+#define THRESHOLD_LEFT_DETECTED         1000
+#define THRESHOLD_RIGHT_DETECTED        1000
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
  ******************************************************************************/
@@ -87,29 +95,35 @@ uint8_t CheckTape(void) {
     ES_EventTyp_t curEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
+    
     uint16_t tape_sensor_top = AD_ReadADPin(TAPE_TOP); 
     uint16_t tape_sensor_left = AD_ReadADPin(TAPE_LEFT);
     uint16_t tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);
     uint16_t tape_sensor_corner = AD_ReadADPin(TAPE_CORNER);
     
-    if (tape_sensor_top > TAPE_SENSOR_THRESHOLD ||
-        tape_sensor_left > TAPE_SENSOR_THRESHOLD ||
-        tape_sensor_right > TAPE_SENSOR_THRESHOLD ||
-        tape_sensor_corner > TAPE_SENSOR_THRESHOLD
+    if (tape_sensor_top < THRESHOLD_TOP_DETECTED ||
+        tape_sensor_left < THRESHOLD_LEFT_DETECTED ||
+        tape_sensor_right < THRESHOLD_RIGHT_DETECTED ||
+        tape_sensor_corner < THRESHOLD_CORNER_DETECTED
         ) { 
         curEvent = TAPE_DETECTED;
-    } else {
+    } else if (tape_sensor_top > THRESHOLD_TOP_NOT_DETECTED ||
+        tape_sensor_left > THRESHOLD_LEFT_NOT_DETECTED ||
+        tape_sensor_right > THRESHOLD_RIGHT_NOT_DETECTED ||
+        tape_sensor_corner > THRESHOLD_CORNER_NOT_DETECTED
+        ){
         curEvent = TAPE_NOT_DETECTED;
     }
+    
     if (curEvent != lastEvent) { // check for change from last time
         thisEvent.EventType = curEvent;
-        if (tape_sensor_top > TAPE_SENSOR_THRESHOLD){
+        if (tape_sensor_top < THRESHOLD_TOP_DETECTED){
             thisEvent.EventParam = tape_sensor_top;
-        } else if (tape_sensor_left > TAPE_SENSOR_THRESHOLD){
+        } else if (tape_sensor_left < THRESHOLD_LEFT_DETECTED){
             thisEvent.EventParam = tape_sensor_left;
-        } else if (tape_sensor_right > TAPE_SENSOR_THRESHOLD){
+        } else if (tape_sensor_right < THRESHOLD_RIGHT_DETECTED){
             thisEvent.EventParam = tape_sensor_right;
-        } else if (tape_sensor_corner > TAPE_SENSOR_THRESHOLD){
+        } else if (tape_sensor_corner < THRESHOLD_CORNER_DETECTED){
             thisEvent.EventParam = tape_sensor_corner;
         }    
         returnVal = TRUE;
