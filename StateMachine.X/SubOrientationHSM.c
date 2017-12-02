@@ -34,7 +34,7 @@
 #include "SubOrientationHSM.h"
 #include "pwm.h"
 #include "pin_configuration.h"
-
+#include "TapeService.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -42,15 +42,15 @@
 typedef enum {
     InitSubOrientationState,
     LocateBeaconState,
-    FrontTapeSensorDetectedState,
-    CornerTapeSensorDetectedState,
+    LocateCornerTape,
+    LocateFrontTape,
 } SubOrientationHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSubOrientationState",
 	"LocateBeaconState",
-	"FrontTapeSensorDetectedState",
-	"CornerTapeSensorDetectedState",
+	"LocateCornerTape",
+	"LocateFrontTape",
 };
 
 /*******************************************************************************
@@ -65,7 +65,7 @@ static const char *StateNames[] = {
 /* You will need MyPriority and the state variable; you may need others as well.
  * The type of state variable should match that of enum in header file. */
 
-static SubOrientationHSMState_t CurrentState = InitSubOrientationState; // <- change name to match ENUM
+static SubOrientationHSMState_t CurrentState = InitSubOrientationState;
 static uint8_t MyPriority;
 static uint8_t tape_sensor_parameter;
 
@@ -137,34 +137,59 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     rotate_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
-                //printf("after es_entry\r\n");    
+
+                    //printf("after es_entry\r\n");    
                 case BEACON_DETECTED:
                     printf("gets to beacondetected\r\n");
-                    //stop_everything();
-                    reverse();
-                    //if()
+                    nextState = LocateCornerTape;
+                    makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
-					break;
-
-                case TAPE_DETECTED:
-                    stop_everything();                    
-                    printf("tape detected\r\n");
-                    //tape_sensor_parameter = ThisEvent.EventParam;
-                    //if(tape_sensor_parameter == )
-                    
                     break;
 
                 case ES_NO_EVENT:
-                    break;
-                        
                 default: // all unhandled events pass the event back up to the next level
                     break;
             }
-            printf("after default\r\n");
+
             break;
-            
-            
+
+        case LocateCornerTape:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    reverse();
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case TAPE_DETECTED:
+                    printf("tape detected\r\n");
+                    nextState = LocateFrontTape;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                default:
+                    break;
+            }
+            break;
+
+        case LocateFrontTape:
+            switch (ThisEvent.EventType){
+                case ES_ENTRY:
+                    rotate_counter_clockwise();
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                case TAPE_DETECTED:
+                    printf("tape detected");
+//                    if(ThisEvent.EventParam == tape_sensor_top){
+//                        stop_everything();
+//                    }
+                    
+                    break;
+                
+                default:
+                    break;
+            }
+            break;
 
         default: // all unhandled states fall into here
             break;
