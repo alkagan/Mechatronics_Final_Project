@@ -27,14 +27,20 @@
 #define RIGHT_MOTOR             PWM_PORTY12 //PWM signal
 #define LEFT_MOTOR_DIRECTION    PIN11       //Port X output pin
 #define RIGHT_MOTOR_DIRECTION   PIN12       //Port X output pin
+#define LAUNCHER_MOTOR          PWM_PORTY10         //PWM signal
 
 // Tape Sensor Pin Configuration
 #define TAPE_CORNER             AD_PORTV3   //uint16_t value
 #define TAPE_TOP                AD_PORTV4   //uint16_t value
 #define TAPE_RIGHT              AD_PORTV5   //uint16_t value
 #define TAPE_LEFT               AD_PORTV6   //uint16_t value
+#define TAPE_TOGGLE             PIN3        //Port X output pin
 
 // Track Wire Pin Configuration
 #define TRACK_WIRE              AD_PORTW7   //uint16_t value
+
+// RC Servo Pins
+#define INDEXER                 RC_PORTY06  //Servo 
+#define PUSHER                  RC_PORTY07  //Servo
 
 #endif

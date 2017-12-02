@@ -100,7 +100,24 @@ uint8_t CheckTape(void) {
     uint16_t tape_sensor_left = AD_ReadADPin(TAPE_LEFT);
     uint16_t tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);
     uint16_t tape_sensor_corner = AD_ReadADPin(TAPE_CORNER);
+    uint16_t AvgValueLow = (AvgValueLow + tape_sensor_top + tape_sensor_left +
+                            tape_sensor_right + tape_sensor_corner ) / 5;
     
+    printf("top: %d\r\n", tape_sensor_top);
+    printf("left: %d\r\n", tape_sensor_left);
+    printf("right: %d\r\n", tape_sensor_right);
+    printf("corner: %d\r\n", tape_sensor_corner);
+    
+    uint16_t atop = (10 * (AD_ReadADPin(TAPE_TOP) - AvgValueLow)) - 2000;
+    uint16_t aleft = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
+    uint16_t aright = (10 * (AD_ReadADPin(TAPE_RIGHT) - AvgValueLow)) - 2000;
+    uint16_t acorner = (10 * (AD_ReadADPin(TAPE_CORNER) - AvgValueLow)) - 2000;
+    
+    printf("atop: %d\r\n", atop);
+    printf("aleft: %d\r\n", aleft);
+    printf("aright: %d\r\n", aright);
+    printf("acorner: %d\r\n", acorner);
+        
     if (tape_sensor_top < THRESHOLD_TOP_DETECTED ||
         tape_sensor_left < THRESHOLD_LEFT_DETECTED ||
         tape_sensor_right < THRESHOLD_RIGHT_DETECTED ||

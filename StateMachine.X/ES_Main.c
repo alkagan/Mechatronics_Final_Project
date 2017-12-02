@@ -12,7 +12,8 @@ void set_AD_pins(void){
 }
 
 void set_IO_pins(void){
-    IO_PortsSetPortOutputs(PORTX,(LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    IO_PortsSetPortOutputs(PORTX,(LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION
+                                  | TAPE_TOGGLE));
     printf("I/O pins set\r\n");
 }
 

@@ -135,7 +135,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     printf("gets to locatebeacon\r\n");
                     rotate_clockwise();
-                    //ThisEvent.EventType = ES_NO_EVENT;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
                     
                 //printf("after es_entry\r\n");    
@@ -143,16 +143,17 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     printf("gets to beacondetected\r\n");
                     //stop_everything();
                     reverse();
+                    //if()
                     ThisEvent.EventType = ES_NO_EVENT;
 					break;
 
-//                case TAPE_DETECTED:
-//                    stop_everything();                    
-//                    printf("tape detected\r\n");
-//                    //tape_sensor_parameter = ThisEvent.EventParam;
-//                    //if(tape_sensor_parameter == )
-//                    
-//                    break;
+                case TAPE_DETECTED:
+                    stop_everything();                    
+                    printf("tape detected\r\n");
+                    //tape_sensor_parameter = ThisEvent.EventParam;
+                    //if(tape_sensor_parameter == )
+                    
+                    break;
 
                 case ES_NO_EVENT:
                     break;
