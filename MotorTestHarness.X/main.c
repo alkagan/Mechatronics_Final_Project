@@ -180,9 +180,9 @@ int main(void) {
 
         // Accounts for noise
         uint16_t corner = AD_ReadADPin(AD_PORTV3);
-        uint16_t tapeRight = AD_ReadADPin(AD_PORTV4);
-        uint16_t tapeLeft = AD_ReadADPin(AD_PORTV5);
-        uint16_t tapeCenter = AD_ReadADPin(AD_PORTV6);
+        uint16_t tapeRight = AD_ReadADPin(AD_PORTV6);
+        uint16_t tapeLeft = AD_ReadADPin(AD_PORTV4);
+        uint16_t tapeCenter = AD_ReadADPin(AD_PORTV5);
         uint16_t AvgValueLow = (AvgValueLow + corner + tapeRight + tapeLeft + tapeCenter) / 5;
 
         delay(magicnumber);
@@ -191,10 +191,10 @@ int main(void) {
         delay(magicnumber);
 
         // Takes real value of each sensor
-        uint16_t acorner = (10 * (AD_ReadADPin(AD_PORTV3) - AvgValueLow)) - 2000;
-        uint16_t atapeRight = (10 * (AD_ReadADPin(AD_PORTV4) - AvgValueLow)) - 2000;
-        uint16_t atapeLeft = (10 * (AD_ReadADPin(AD_PORTV5) - AvgValueLow)) - 2000;
-        uint16_t atapeCenter = (10 * (AD_ReadADPin(AD_PORTV6) - AvgValueLow)) - 2000;
+        uint16_t acorner = ((AD_ReadADPin(AD_PORTV3) - AvgValueLow));
+        uint16_t atapeRight = ((AD_ReadADPin(AD_PORTV6) - AvgValueLow));
+        uint16_t atapeLeft = ((AD_ReadADPin(AD_PORTV4) - AvgValueLow));
+        uint16_t atapeCenter = ((AD_ReadADPin(AD_PORTV5) - AvgValueLow));
         printf("corner is %i\r\n tapeRight is %i\r\n tapeLeft is %i\r\n tapeCenter"
                 " is %i\r\n AvgValueLow is %i\r\n corner is %i\r\n atapeRight is %i\r\n atapeLeft is %i\r\n atapeCenter"
                 " is %i\r\n____________________,\r\n", corner, tapeRight, tapeLeft,
