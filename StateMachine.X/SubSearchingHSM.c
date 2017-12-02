@@ -32,18 +32,26 @@
 #include "BOARD.h"
 #include "TopLevelHSM.h"
 #include "SubSearchingHSM.h"
+#include "pin_configuration.h"
+#include "motor_drivers.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 typedef enum {
     InitPSubState,
-    SubFirstState,
+    SubDriveAround,
+    SubAdjustToTheLeft,
+    SubAdjustToTheRight,
+    SubCornerResponse,
 } TemplateSubHSMState_t;
 
 static const char *StateNames[] = {
 	"InitPSubState",
-	"SubFirstState",
+	"SubDriveAround",
+	"SubAdjustToTheLeft",
+	"SubAdjustToTheRight",
+	"SubCornerResponse",
 };
 
 
@@ -78,8 +86,7 @@ static uint8_t MyPriority;
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
-uint8_t InitSubSearchingHSM(void)
-{
+uint8_t InitSubSearchingHSM(void) {
     ES_Event returnEvent;
 
     CurrentState = InitPSubState;
@@ -105,38 +112,111 @@ uint8_t InitSubSearchingHSM(void)
  *       not consumed as these need to pass pack to the higher level state machine.
  * @author J. Edward Carryer, 2011.10.23 19:25
  * @author Gabriel H Elkaim, 2011.10.23 19:25 */
-ES_Event RunSubSearchingHSM(ES_Event ThisEvent)
-{
+ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
     uint8_t makeTransition = FALSE; // use to flag transition
     TemplateSubHSMState_t nextState; // <- change type to correct enum
 
     ES_Tattle(); // trace call stack
 
     switch (CurrentState) {
-    case InitPSubState: // If current state is initial Psedudo State
-        if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
-        {
-            // this is where you would put any actions associated with the
-            // transition from the initial pseudo-state into the actual
-            // initial state
+        case InitPSubState: // If current state is initial Psedudo State
+            if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
+            {
+                // this is where you would put any actions associated with the
+                // transition from the initial pseudo-state into the actual
+                // initial state
 
-            // now put the machine into the actual initial state
-            nextState = SubFirstState;
-            makeTransition = TRUE;
-            ThisEvent.EventType = ES_NO_EVENT;
-        }
-        break;
-
-    case SubFirstState: // in the first state, replace this with correct names
-        switch (ThisEvent.EventType) {
-        case ES_NO_EVENT:
-        default: // all unhandled events pass the event back up to the next level
+                // now put the machine into the actual initial state
+                nextState = SubDriveAround;
+                makeTransition = TRUE;
+                ThisEvent.EventType = ES_NO_EVENT;
+            }
             break;
-        }
-        break;
-        
-    default: // all unhandled states fall into here
-        break;
+
+        case SubDriveAround: // in the first state, replace this with correct names
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    onwards();
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case TAPE_DETECTED:
+                    /////////////////seeing what tape state to go in////////////
+                    switch (ThisEvent.EventParam) {
+
+                            //                        case TAPE_TOP_PARAM:
+                            //                            nextState
+                            //                            break;
+
+                        case TAPE_LEFT_PARAM:
+                            nextState = SubAdjustToTheLeft;
+                            makeTransition = TRUE;
+                            break;
+
+                        case TAPE_RIGHT_PARAM:
+                            nextState = SubAdjustToTheRight;
+                            makeTransition = TRUE;
+                            break;
+
+                        case TAPE_CORNER_PARAM:
+                            break;
+
+                        default:
+                            break;
+                    }
+                    /////////////////seeing what tape state to go in////////////
+                    break;
+
+                case ES_NO_EVENT:
+                default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+
+        case SubAdjustToTheLeft:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    tape_realign_left_detected();
+                    break;
+
+
+                default:
+                    break;
+            }
+            break;
+
+        case SubAdjustToTheRight:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    tape_realign_right_detected();
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case SubCornerResponse:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    break;
+                
+                case TAPE_DETECTED:
+                    if(ThisEvent.EventParam == TAPE_CORNER_PARAM){
+                        nextState = SubDriveAround;
+                        makeTransition = TRUE;
+                    }
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+
+        default: // all unhandled states fall into here
+            break;
     } // end switch on Current State
 
     if (makeTransition == TRUE) { // making a state transition, send EXIT and ENTRY

@@ -34,12 +34,12 @@
 
 #define TAPE_TOGGLE_TIME 5
 
-#define THRESHOLD_CORNER_NOT_DETECTED   700
+#define THRESHOLD_CORNER_NOT_DETECTED   1090
 #define THRESHOLD_TOP_NOT_DETECTED      1110
 #define THRESHOLD_LEFT_NOT_DETECTED     1110
 #define THRESHOLD_RIGHT_NOT_DETECTED    1110
 
-#define THRESHOLD_CORNER_DETECTED       500    
+#define THRESHOLD_CORNER_DETECTED       1030    
 #define THRESHOLD_TOP_DETECTED          1080
 #define THRESHOLD_LEFT_DETECTED         1050
 #define THRESHOLD_RIGHT_DETECTED        1000
@@ -77,7 +77,7 @@ uint8_t InitTapeService(uint8_t Priority) {
 
     MyPriority = Priority;
 
-    printf("in init service\r\n");
+    printf("in init tape service\r\n");
 
     // in here you write your initialization code
     // this includes all hardware and software initialization
@@ -122,7 +122,7 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
      in here you write your service code
      *******************************************/
     static ES_EventTyp_t lastEvent = TAPE_NOT_DETECTED;
-    ES_EventTyp_t curEvent = lastEvent;
+    ES_EventTyp_t curEvent;
 
     static uint16_t AvgValueLow = 0;
 
@@ -162,25 +162,25 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
                 AvgValueLow = (AvgValueLow + tape_sensor_top + tape_sensor_left +
                         tape_sensor_right + tape_sensor_corner) / 5;
 
-//                printf("top: %d\r\n", tape_sensor_top);
-//                printf("left: %d\r\n", tape_sensor_left);
-//                printf("right: %d\r\n", tape_sensor_right);
-//                printf("corner: %d\r\n", tape_sensor_corner);
+                //                printf("top: %d\r\n", tape_sensor_top);
+                //                printf("left: %d\r\n", tape_sensor_left);
+                //                printf("right: %d\r\n", tape_sensor_right);
+                //                printf("corner: %d\r\n", tape_sensor_corner);
 
-                tape_toggle_flag = 1;\
+                tape_toggle_flag = 1;
                 IO_PortsClearPortBits(PORTX, TAPE_TOGGLE);
-            } else {
+            } else if (tape_toggle_flag == 1) {
                 atop = (10 * (AD_ReadADPin(TAPE_TOP) - AvgValueLow)) - 2000;
                 aleft = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
                 aright = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
                 acorner = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
-                
+
                 IO_PortsSetPortBits(PORTX, TAPE_TOGGLE);
 
-//                printf("atop: %d\r\n", atop);
-//                printf("aleft: %d\r\n", aleft);
-//                printf("aright: %d\r\n", aright);
-//                printf("acorner: %d\r\n", acorner);
+                //                printf("atop: %d\r\n", atop);
+                //                printf("aleft: %d\r\n", aleft);
+                //                printf("aright: %d\r\n", aright);
+                //                printf("acorner: %d\r\n", acorner);
 
                 if (atop < THRESHOLD_TOP_DETECTED ||
                         aleft < THRESHOLD_LEFT_DETECTED ||
@@ -211,6 +211,7 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
                 }
                 //returnVal = TRUE;
                 lastEvent = curEvent; // update history
+                
 #ifndef SIMPLESERVICE_TEST           // keep this as is for test harness
                 PostTopLevelHSM(ReturnEvent);
 #else
