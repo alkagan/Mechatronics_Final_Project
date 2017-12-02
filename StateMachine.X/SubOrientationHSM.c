@@ -156,14 +156,16 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateCornerTape:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse();
+                    onwards();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case TAPE_DETECTED:
-                    printf("tape detected\r\n");
-                    nextState = LocateFrontTape;
-                    makeTransition = TRUE;
+                    if (ThisEvent.EventParam == TAPE_CORNER_PARAM) {
+                        printf("tape detected\r\n");
+                        nextState = LocateFrontTape;
+                        makeTransition = TRUE;
+                    }
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
                 default:
@@ -172,20 +174,21 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             break;
 
         case LocateFrontTape:
-            switch (ThisEvent.EventType){
+            switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     rotate_counter_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 case TAPE_DETECTED:
                     printf("tape detected");
-//                    if(ThisEvent.EventParam == tape_sensor_top){
-//                        stop_everything();
-//                    }
                     
+                    if (ThisEvent.EventParam == TAPE_TOP_PARAM) {
+                        stop_everything();
+                    }
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                
+
                 default:
                     break;
             }

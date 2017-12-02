@@ -36,6 +36,12 @@
 #define TAPE_LEFT               AD_PORTV6   //uint16_t value
 #define TAPE_TOGGLE             PIN3        //Port X output pin
 
+// Tape Parameters
+#define TAPE_TOP_PARAM                  1
+#define TAPE_LEFT_PARAM                 2
+#define TAPE_RIGHT_PARAM                3
+#define TAPE_CORNER_PARAM               4
+
 // Track Wire Pin Configuration
 #define TRACK_WIRE              AD_PORTW7   //uint16_t value
 

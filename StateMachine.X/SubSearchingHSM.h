@@ -17,8 +17,8 @@
  * Updated on 16/Sep/2013
  */
 
-#ifndef SUB_TEMPLATE_HSM_H  // <- This should be changed to your own guard on both
-#define SUB_TEMPLATE_HSM_H  //    of these lines
+#ifndef SUB_SEARCHING_HSM_H  // <- This should be changed to your own guard on both
+#define SUB_SEARCHING_HSM_H  //    of these lines
 
 
 /*******************************************************************************

@@ -4,6 +4,9 @@
  *
  * Created on November 16, 2017, 10:20 PM
  */
+#define TAPE
+
+#ifdef MOTOR
 
 #include <BOARD.h>
 #include <stdio.h>
@@ -142,14 +145,9 @@ int main(void) {
          */
     }
 }
+#endif
 
-/*/*
- * File:   StickyBoi.c
- * Author: dmquiroz
- *
- * Created on November 15, 2017, 3:32 PM
- */
-
+#ifdef TAPE
 
 #include "xc.h"
 #include <stdio.h>
@@ -210,4 +208,5 @@ void delay(int time) {
     int zeropoint = TIMERS_GetTime();
     while ((TIMERS_GetTime() - zeropoint) < time);
 }
-*/
+
+#endif

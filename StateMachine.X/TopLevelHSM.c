@@ -161,7 +161,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            printf("before suborient\r\n");
+            printf("\r\n before suborient\r\n");
             ThisEvent = RunSubOrientationHSM(ThisEvent);
             printf("after suborient\r\n");
             switch (ThisEvent.EventType) {

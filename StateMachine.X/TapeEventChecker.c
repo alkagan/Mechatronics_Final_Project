@@ -32,16 +32,17 @@
 #include "serial.h"
 #include "AD.h"
 #include "pin_configuration.h"
+#include "TapeService.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-#define THRESHOLD_CORNER_NOT_DETECTED   540
+#define THRESHOLD_CORNER_NOT_DETECTED   580
 #define THRESHOLD_TOP_NOT_DETECTED      1200
 #define THRESHOLD_LEFT_NOT_DETECTED     1350
 #define THRESHOLD_RIGHT_NOT_DETECTED    1400
 
-#define THRESHOLD_CORNER_DETECTED       480     
+#define THRESHOLD_CORNER_DETECTED       300    
 #define THRESHOLD_TOP_DETECTED          1100
 #define THRESHOLD_LEFT_DETECTED         1000
 #define THRESHOLD_RIGHT_DETECTED        1000

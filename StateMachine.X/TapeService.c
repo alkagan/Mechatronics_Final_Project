@@ -34,15 +34,16 @@
 
 #define TAPE_TOGGLE_TIME 5
 
-#define THRESHOLD_CORNER_NOT_DETECTED   540
-#define THRESHOLD_TOP_NOT_DETECTED      1200
-#define THRESHOLD_LEFT_NOT_DETECTED     1350
-#define THRESHOLD_RIGHT_NOT_DETECTED    1400
+#define THRESHOLD_CORNER_NOT_DETECTED   700
+#define THRESHOLD_TOP_NOT_DETECTED      1110
+#define THRESHOLD_LEFT_NOT_DETECTED     1110
+#define THRESHOLD_RIGHT_NOT_DETECTED    1110
 
-#define THRESHOLD_CORNER_DETECTED       480     
-#define THRESHOLD_TOP_DETECTED          1100
-#define THRESHOLD_LEFT_DETECTED         1000
+#define THRESHOLD_CORNER_DETECTED       500    
+#define THRESHOLD_TOP_DETECTED          1080
+#define THRESHOLD_LEFT_DETECTED         1050
 #define THRESHOLD_RIGHT_DETECTED        1000
+
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ******************************************************************************/
@@ -153,8 +154,6 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
             ES_Timer_InitTimer(TAPE_TIMER, TAPE_TOGGLE_TIME);
 
             if (tape_toggle_flag == 0) {
-                IO_PortsSetPortBits(PORTX, TAPE_TOP | TAPE_LEFT | TAPE_RIGHT | TAPE_CORNER);
-
                 tape_sensor_top = AD_ReadADPin(TAPE_TOP);
                 tape_sensor_left = AD_ReadADPin(TAPE_LEFT);
                 tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);
@@ -162,13 +161,26 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
 
                 AvgValueLow = (AvgValueLow + tape_sensor_top + tape_sensor_left +
                         tape_sensor_right + tape_sensor_corner) / 5;
-                tape_toggle_flag = 1;
+
+//                printf("top: %d\r\n", tape_sensor_top);
+//                printf("left: %d\r\n", tape_sensor_left);
+//                printf("right: %d\r\n", tape_sensor_right);
+//                printf("corner: %d\r\n", tape_sensor_corner);
+
+                tape_toggle_flag = 1;\
+                IO_PortsClearPortBits(PORTX, TAPE_TOGGLE);
             } else {
-                IO_PortsClearPortBits(PORTX, TAPE_TOP | TAPE_LEFT | TAPE_RIGHT | TAPE_CORNER);
                 atop = (10 * (AD_ReadADPin(TAPE_TOP) - AvgValueLow)) - 2000;
                 aleft = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
                 aright = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
                 acorner = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
+                
+                IO_PortsSetPortBits(PORTX, TAPE_TOGGLE);
+
+//                printf("atop: %d\r\n", atop);
+//                printf("aleft: %d\r\n", aleft);
+//                printf("aright: %d\r\n", aright);
+//                printf("acorner: %d\r\n", acorner);
 
                 if (atop < THRESHOLD_TOP_DETECTED ||
                         aleft < THRESHOLD_LEFT_DETECTED ||
@@ -189,13 +201,13 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
             if (curEvent != lastEvent) { // check for change from last time
                 ReturnEvent.EventType = curEvent;
                 if (tape_sensor_top < THRESHOLD_TOP_DETECTED) {
-                    ReturnEvent.EventParam = tape_sensor_top;
+                    ReturnEvent.EventParam = TAPE_TOP_PARAM;
                 } else if (tape_sensor_left < THRESHOLD_LEFT_DETECTED) {
-                    ReturnEvent.EventParam = tape_sensor_left;
+                    ReturnEvent.EventParam = TAPE_LEFT_PARAM;
                 } else if (tape_sensor_right < THRESHOLD_RIGHT_DETECTED) {
-                    ReturnEvent.EventParam = tape_sensor_right;
+                    ReturnEvent.EventParam = TAPE_RIGHT_PARAM;
                 } else if (tape_sensor_corner < THRESHOLD_CORNER_DETECTED) {
-                    ReturnEvent.EventParam = tape_sensor_corner;
+                    ReturnEvent.EventParam = TAPE_CORNER_PARAM;
                 }
                 //returnVal = TRUE;
                 lastEvent = curEvent; // update history
