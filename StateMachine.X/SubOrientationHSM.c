@@ -116,7 +116,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
     ES_Tattle(); // trace call stack
 
     switch (CurrentState) {
-        case InitSubOrientationState: // If current state is initial Psedudo State
+        case InitSubOrientationState: // If current state is initial Pseudo State
             if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
             {
                 // this is where you would put any actions associated with the
@@ -146,6 +146,11 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case TAPE_NOT_DETECTED:
+                case TAPE_DETECTED:
+                ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
                 case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
                     break;
@@ -162,12 +167,18 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
 
                 case TAPE_DETECTED:
                     if (ThisEvent.EventParam == TAPE_CORNER_PARAM) {
-                        printf("tape detected\r\n");
-                        nextState = LocateFrontTape;
-                        makeTransition = TRUE;
+                        printf("corner tape detected\r\n");
+//                        nextState = LocateFrontTape;
+//                        makeTransition = TRUE;
+                        stop_everything();
                     }
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
+                    
+//                case TAPE_NOT_DETECTED:
+//                    stop_everything();
+//                    break;
+                    
                 default:
                     break;
             }
@@ -176,7 +187,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateFrontTape:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    rotate_counter_clockwise();
+                    
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 

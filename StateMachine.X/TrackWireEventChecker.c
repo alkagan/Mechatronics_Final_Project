@@ -27,7 +27,7 @@
  ******************************************************************************/
 
 #include "ES_Configure.h"
-#include "BeaconEventChecker.h"
+#include "TrackWireEventChecker.h"
 #include "ES_Events.h"
 #include "serial.h"
 #include "AD.h"
@@ -39,8 +39,8 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define BEACON_DETECTED_THRESHOLD     300
-#define BEACON_NOT_DETECTED_THRESHOLD 800
+#define TRACKWIRE_DETECTED_THRESHOLD     600
+#define TRACKWIRE_NOT_DETECTED_THRESHOLD 400
 
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
@@ -87,33 +87,32 @@ static ES_Event storedEvent;
  * @note Use this code as a template for your other event checkers, and modify as necessary.
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
-uint8_t CheckForBeaconEvent(void) {
-    static ES_EventTyp_t last_beacon_event = BEACON_NOT_DETECTED;
-    ES_EventTyp_t current_beacon_event;
+uint8_t CheckForTrackWireEvent(void) {
+    static ES_EventTyp_t last_track_event = TRACKWIRE_NOT_DETECTED;
+    ES_EventTyp_t current_track_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
-    uint16_t beacon_reading = AD_ReadADPin(BEACON_DETECTOR);
+    uint16_t trackwire_reading = AD_ReadADPin(TRACK_WIRE);
 
-    if (beacon_reading > BEACON_NOT_DETECTED_THRESHOLD){
-        current_beacon_event = BEACON_NOT_DETECTED;
-        //printf("BeaconEventChecker: BEACON DETECTED NONE\r\n");
-    } else if (beacon_reading < BEACON_DETECTED_THRESHOLD){
-        current_beacon_event = BEACON_DETECTED;
+    if (trackwire_reading > TRACKWIRE_DETECTED_THRESHOLD){
+        current_track_event = TRACKWIRE_DETECTED;
+//        printf("******************************************************************************************************************************\r\n\n");
+//        printf("\n\nTrackwireEventChecker: TRACKWIRE DETECTED\r\n");
+//        printf("******************************************************************************************************************************\r\n\n");
+    } else if (trackwire_reading < TRACKWIRE_NOT_DETECTED_THRESHOLD){
+        current_track_event = TRACKWIRE_NOT_DETECTED;
     } else {
-        current_beacon_event = last_beacon_event;
+        current_track_event = last_track_event;
     }
 
-    if (current_beacon_event != last_beacon_event) { // check for change from last time
-        thisEvent.EventType = current_beacon_event;
-        thisEvent.EventParam = beacon_reading;
+    if (current_track_event != last_track_event) { // check for change from last time
+        thisEvent.EventType = current_track_event;
+        thisEvent.EventParam = trackwire_reading;
         returnVal = TRUE;
-        last_beacon_event = current_beacon_event; // update history
-#ifndef EVENTCHECKER_TEST           // keep this as is for test harness
-        PostTopLevelHSM(thisEvent); // ensures continuous checking for bump events
-#else
-        SaveEvent(thisEvent);
-#endif   
+        last_track_event = current_track_event; // update history
+        PostTopLevelHSM(thisEvent); // ensures continuous checking 
+  
     }
     return (returnVal);
 }

@@ -34,15 +34,31 @@
 
 #define TAPE_TOGGLE_TIME 5
 
-#define THRESHOLD_CORNER_NOT_DETECTED   700
+#define MORNING // defining light threshold since it varies with amount of daylight
+
+#ifdef  MORNING ////////////////////////////////////////////////////////////////
+#define THRESHOLD_CORNER_DETECTED       1320    
+#define THRESHOLD_TOP_DETECTED          1350
+#define THRESHOLD_LEFT_DETECTED         1350
+#define THRESHOLD_RIGHT_DETECTED        1380
+
+#define THRESHOLD_CORNER_NOT_DETECTED   1370
+#define THRESHOLD_TOP_NOT_DETECTED      1370
+#define THRESHOLD_LEFT_NOT_DETECTED     1370
+#define THRESHOLD_RIGHT_NOT_DETECTED    1370
+#endif /////////////////////////////////////////////////////////////////////////
+
+#ifdef  NIGHT //////////////////////////////////////////////////////////////////
+#define THRESHOLD_CORNER_DETECTED       1040    
+#define THRESHOLD_TOP_DETECTED          1000
+#define THRESHOLD_LEFT_DETECTED         1000
+#define THRESHOLD_RIGHT_DETECTED        1000
+
+#define THRESHOLD_CORNER_NOT_DETECTED   1080
 #define THRESHOLD_TOP_NOT_DETECTED      1110
 #define THRESHOLD_LEFT_NOT_DETECTED     1110
 #define THRESHOLD_RIGHT_NOT_DETECTED    1110
-
-#define THRESHOLD_CORNER_DETECTED       500    
-#define THRESHOLD_TOP_DETECTED          1080
-#define THRESHOLD_LEFT_DETECTED         1050
-#define THRESHOLD_RIGHT_DETECTED        1000
+#endif /////////////////////////////////////////////////////////////////////////
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -188,26 +204,34 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
                         acorner < THRESHOLD_CORNER_DETECTED
                         ) {
                     curEvent = TAPE_DETECTED;
+//                    printf("atop: %d\r\n", atop);
+//                    printf("aleft: %d\r\n", aleft);
+//                    printf("aright: %d\r\n", aright);
+//                    printf("acorner: %d\r\n", acorner);
                 } else if (atop > THRESHOLD_TOP_NOT_DETECTED ||
                         aleft > THRESHOLD_LEFT_NOT_DETECTED ||
                         aright > THRESHOLD_RIGHT_NOT_DETECTED ||
                         acorner > THRESHOLD_CORNER_NOT_DETECTED
                         ) {
                     curEvent = TAPE_NOT_DETECTED;
+//                    printf("N_atop: %d\r\n", atop);
+//                    printf("N_aleft: %d\r\n", aleft);
+//                    printf("N_aright: %d\r\n", aright);
+//                    printf("N_acorner: %d\r\n", acorner);
                 }
                 tape_toggle_flag = 0;
             }
 
             if (curEvent != lastEvent) { // check for change from last time
                 ReturnEvent.EventType = curEvent;
-                if (tape_sensor_top < THRESHOLD_TOP_DETECTED) {
-                    ReturnEvent.EventParam = TAPE_TOP_PARAM;
+                if (tape_sensor_corner < THRESHOLD_CORNER_DETECTED) {
+                    ReturnEvent.EventParam = TAPE_CORNER_PARAM;
                 } else if (tape_sensor_left < THRESHOLD_LEFT_DETECTED) {
                     ReturnEvent.EventParam = TAPE_LEFT_PARAM;
                 } else if (tape_sensor_right < THRESHOLD_RIGHT_DETECTED) {
                     ReturnEvent.EventParam = TAPE_RIGHT_PARAM;
-                } else if (tape_sensor_corner < THRESHOLD_CORNER_DETECTED) {
-                    ReturnEvent.EventParam = TAPE_CORNER_PARAM;
+                } else if (tape_sensor_top < THRESHOLD_TOP_DETECTED) {
+                    ReturnEvent.EventParam = TAPE_TOP_PARAM;
                 }
                 //returnVal = TRUE;
                 lastEvent = curEvent; // update history
