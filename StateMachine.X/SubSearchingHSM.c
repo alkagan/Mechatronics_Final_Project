@@ -44,7 +44,7 @@ typedef enum {
     SubAdjustToTheLeft,
     SubAdjustToTheRight,
     SubCornerResponse,
-} TemplateSubHSMState_t;
+} SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
 	"InitPSubState",
@@ -54,7 +54,7 @@ static const char *StateNames[] = {
 	"SubCornerResponse",
 };
 
-
+#define REALIGNMENT_TIMER_LENGTH 500
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -68,7 +68,7 @@ static const char *StateNames[] = {
 /* You will need MyPriority and the state variable; you may need others as well.
  * The type of state variable should match that of enum in header file. */
 
-static TemplateSubHSMState_t CurrentState = InitPSubState; // <- change name to match ENUM
+static SubSearchingHSMState_t CurrentState = InitPSubState; // <- change name to match ENUM
 static uint8_t MyPriority;
 
 
@@ -114,7 +114,7 @@ uint8_t InitSubSearchingHSM(void) {
  * @author Gabriel H Elkaim, 2011.10.23 19:25 */
 ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
     uint8_t makeTransition = FALSE; // use to flag transition
-    TemplateSubHSMState_t nextState; // <- change type to correct enum
+    SubSearchingHSMState_t nextState; // <- change type to correct enum
 
     ES_Tattle(); // trace call stack
 
@@ -177,8 +177,22 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     tape_realign_left_detected();
+                    //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
 
+                    // case not detected? when left tape is still on? maybe use
+                    //that instead of a timer?
+                case TAPE_NOT_DETECTED:
+                    if(ThisEvent.EventParam == TAPE_LEFT_PARAM){
+                        nextState = SubDriveAround;
+                        makeTransition = TRUE;
+                    }
+                    break;
+                    
+//                case ES_TIMEOUT:
+//                    nextState = SubDriveAround;
+//                    makeTransition = TRUE;
+//                    break;
 
                 default:
                     break;
@@ -189,8 +203,17 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     tape_realign_right_detected();
+                    ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
 
+                    // case not detected? when left tape is still on? maybe use
+                    //that instead of a timer?
+
+                case ES_TIMEOUT:
+                    nextState = SubDriveAround;
+                    makeTransition = TRUE;
+                    break;
+                    
                 default:
                     break;
             }
@@ -201,15 +224,16 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     rotate_clockwise();
                     break;
-                
+
                 case TAPE_DETECTED:
-                    if(ThisEvent.EventParam == TAPE_CORNER_PARAM){
+                    if (ThisEvent.EventParam == TAPE_TOP_PARAM) {
                         nextState = SubDriveAround;
                         makeTransition = TRUE;
                     }
+                    
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 default:
                     break;
             }

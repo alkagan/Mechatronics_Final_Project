@@ -92,7 +92,7 @@ static const char *EventNames[] = {
 #define TIMER_UNUSED ((pPostFunc)0)
 #define TIMER0_RESP_FUNC PostTopLevelHSM
 #define TIMER1_RESP_FUNC PostTapeService
-#define TIMER2_RESP_FUNC TIMER_UNUSED
+#define TIMER2_RESP_FUNC PostTopLevelHSM 
 #define TIMER3_RESP_FUNC TIMER_UNUSED
 #define TIMER4_RESP_FUNC TIMER_UNUSED
 #define TIMER5_RESP_FUNC TIMER_UNUSED
@@ -113,8 +113,9 @@ static const char *EventNames[] = {
 // definitions for the response functions to make it easire to check that
 // the timer number matches where the timer event will be routed
 
-#define BUMPER_TIMER 0
-#define TAPE_TIMER   1
+#define BUMPER_TIMER      0
+#define TAPE_TIMER        1
+#define REALIGNMENT_TIMER 2
 
 /****************************************************************************/
 // The maximum number of services sets an upper bound on the number of 

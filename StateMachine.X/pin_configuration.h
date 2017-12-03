@@ -3,7 +3,7 @@
  * Author: Kagan
  * 
  * Setting the pin configuration for the final project.
-   Total number of AD pins used:  8 (4 on V port, 4 on W port)
+   Total number of AD pins used:  9 (4 on V port, 5 on W port)
    Total number of I/O Pins used: 2
    Total number of PWM pins used: 2
  */
