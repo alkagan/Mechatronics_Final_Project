@@ -136,36 +136,36 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubDriveAround: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    onwards();
+                    reverse();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case TAPE_DETECTED:
-                    /////////////////seeing what tape state to go in////////////
-                    switch (ThisEvent.EventParam) {
-
-                            //                        case TAPE_TOP_PARAM:
-                            //                            nextState
-                            //                            break;
-
-                        case TAPE_LEFT_PARAM:
-                            nextState = SubAdjustToTheLeft;
-                            makeTransition = TRUE;
-                            break;
-
-                        case TAPE_RIGHT_PARAM:
-                            nextState = SubAdjustToTheRight;
-                            makeTransition = TRUE;
-                            break;
-
-                        case TAPE_CORNER_PARAM:
-                            break;
-
-                        default:
-                            break;
-                    }
-                    /////////////////seeing what tape state to go in////////////
-                    break;
+//                case TAPE_DETECTED:
+//                    /////////////////seeing what tape state to go in////////////
+//                    switch (ThisEvent.EventParam) {
+//
+//                            //                        case TAPE_TOP_PARAM:
+//                            //                            nextState
+//                            //                            break;
+//
+//                        case TAPE_LEFT_PARAM:
+//                            nextState = SubAdjustToTheLeft;
+//                            makeTransition = TRUE;
+//                            break;
+//
+//                        case TAPE_RIGHT_PARAM:
+//                            nextState = SubAdjustToTheRight;
+//                            makeTransition = TRUE;
+//                            break;
+//
+//                        case TAPE_CORNER_PARAM:
+//                            break;
+//
+//                        default:
+//                            break;
+//                    }
+//                    /////////////////seeing what tape state to go in////////////
+//                    break;
 
                 case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level

@@ -146,8 +146,8 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // transition from the initial pseudo-state into the actual
                 // initial state
                 // Initialize all sub-state machines
-//                InitSubSearchingHSM();
                 InitSubOrientationHSM();
+                InitSubSearchingHSM();                
 
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
@@ -189,7 +189,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             //state machine does
             LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
             LED_SetBank(0x02, 0x0F);
-            
+            ThisEvent = RunSubSearchingHSM(ThisEvent);
 //            ThisEvent = RunSubSearchingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:

@@ -91,19 +91,19 @@ uint8_t CheckTapeEvent(void) {
     ES_EventTyp_t curTapeEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    uint16_t tape_sensor_val = AD_ReadADPin(AD_PORTV3); // read the battery voltage
+    uint16_t tape_sensor_val = AD_ReadADPin(AD_PORTV3);
 
     if (tape_sensor_val > TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
-         curTapeEvent = TAPE_NOT_DETECTED;
-    } else if (tape_sensor_val < TAPE_THRESHOLD_NOT_DETECTED){
-         curTapeEvent = TAPE_DETECTED;
-    } else{
+        curTapeEvent = TAPE_NOT_DETECTED;
+    } else if (tape_sensor_val < TAPE_THRESHOLD_DETECTED) {
+        curTapeEvent = TAPE_DETECTED;
+    } else {
         curTapeEvent = lastTapeEvent;
     }
-    if ( curTapeEvent != lastTapeEvent) { // check for change from last time
+    if (curTapeEvent != lastTapeEvent) { // check for change from last time
         thisEvent.EventType = curTapeEvent;
         returnVal = TRUE;
-        lastTapeEvent =  curTapeEvent; // update history
+        lastTapeEvent = curTapeEvent; // update history
 #ifndef EVENTCHECKER_TEST           // keep this as is for test harness
         PostTopLevelHSM(thisEvent);
 #else

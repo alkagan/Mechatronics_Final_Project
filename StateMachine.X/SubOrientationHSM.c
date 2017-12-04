@@ -136,20 +136,17 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     LED_SetBank(LED_BANK1|LED_BANK2|LED_BANK3, 0);
-                    printf("gets to locatebeacon\r\n");
-                    rotate_clockwise();
+                    rotate_counter_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                    //printf("after es_entry\r\n");    
                 case BEACON_DETECTED:
-                    printf("gets to beacondetected\r\n");
                     nextState = LocateTape;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case ES_NO_EVENT:
+                //case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
                     break;
             }
@@ -164,13 +161,12 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     break;
 
                 case TAPE_DETECTED:
-                    printf("tape detected\r\n");
                     nextState = FinalizeOrientation;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case ES_NO_EVENT:
+                //case ES_NO_EVENT:
                 default:
                     break;
             }
