@@ -15,6 +15,9 @@
 #ifndef CONFIGURE_H
 #define CONFIGURE_H
 
+#include "TapeEventChecker.h"
+
+
 
 
 //defines for keyboard input
@@ -83,7 +86,7 @@ static const char *EventNames[] = {
 
 /****************************************************************************/
 // This is the list of event checking functions
-#define EVENT_CHECK_LIST  CheckForBeaconEvent
+#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckTapeEvent
 
 /****************************************************************************/
 // These are the definitions for the post functions to be executed when the
@@ -91,7 +94,7 @@ static const char *EventNames[] = {
 // a timers, then you can use TIMER_UNUSED
 #define TIMER_UNUSED ((pPostFunc)0)
 #define TIMER0_RESP_FUNC PostTopLevelHSM
-#define TIMER1_RESP_FUNC PostTapeService
+#define TIMER1_RESP_FUNC PostTopLevelHSM
 #define TIMER2_RESP_FUNC PostTopLevelHSM 
 #define TIMER3_RESP_FUNC TIMER_UNUSED
 #define TIMER4_RESP_FUNC TIMER_UNUSED
@@ -126,7 +129,7 @@ static const char *EventNames[] = {
 /****************************************************************************/
 // This macro determines that nuber of services that are *actually* used in
 // a particular application. It will vary in value from 1 to MAX_NUM_SERVICES
-#define NUM_SERVICES 3
+#define NUM_SERVICES 2
 
 /****************************************************************************/
 // These are the definitions for Service 0, the lowest priority service

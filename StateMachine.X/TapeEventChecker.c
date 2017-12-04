@@ -26,26 +26,21 @@
  * MODULE #INCLUDE                                                             *
  ******************************************************************************/
 
-#include "ES_Configure.h"
-#include "TapeEventChecker.h"
-#include "ES_Events.h"
-#include "serial.h"
+#include "BOARD.h"
 #include "AD.h"
+#include "ES_Configure.h"
+#include "ES_Framework.h"
+#include <stdio.h>
+#include "ES_Timers.h"
 #include "pin_configuration.h"
-#include "TapeService.h"
+#include "TapeEventChecker.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-#define THRESHOLD_CORNER_NOT_DETECTED   580
-#define THRESHOLD_TOP_NOT_DETECTED      1200
-#define THRESHOLD_LEFT_NOT_DETECTED     1350
-#define THRESHOLD_RIGHT_NOT_DETECTED    1400
+#define TAPE_THRESHOLD_DETECTED         100
+#define TAPE_THRESHOLD_NOT_DETECTED     1000
 
-#define THRESHOLD_CORNER_DETECTED       300    
-#define THRESHOLD_TOP_DETECTED          1100
-#define THRESHOLD_LEFT_DETECTED         1000
-#define THRESHOLD_RIGHT_DETECTED        1000
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
  ******************************************************************************/
@@ -91,66 +86,27 @@ static ES_Event storedEvent;
  * @note Use this code as a template for your other event checkers, and modify as necessary.
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
-uint8_t CheckTape(void) {
-    static ES_EventTyp_t lastEvent = TAPE_NOT_DETECTED;
-    ES_EventTyp_t curEvent;
+uint8_t CheckTapeEvent(void) {
+    static ES_EventTyp_t lastTapeEvent = BATTERY_DISCONNECTED;
+    ES_EventTyp_t curTapeEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    
-    uint16_t tape_sensor_top = AD_ReadADPin(TAPE_TOP); 
-    uint16_t tape_sensor_left = AD_ReadADPin(TAPE_LEFT);
-    uint16_t tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);
-    uint16_t tape_sensor_corner = AD_ReadADPin(TAPE_CORNER);
-    uint16_t AvgValueLow = (AvgValueLow + tape_sensor_top + tape_sensor_left +
-                            tape_sensor_right + tape_sensor_corner ) / 5;
-    
-    printf("top: %d\r\n", tape_sensor_top);
-    printf("left: %d\r\n", tape_sensor_left);
-    printf("right: %d\r\n", tape_sensor_right);
-    printf("corner: %d\r\n", tape_sensor_corner);
-    
-    uint16_t atop = (10 * (AD_ReadADPin(TAPE_TOP) - AvgValueLow)) - 2000;
-    uint16_t aleft = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
-    uint16_t aright = (10 * (AD_ReadADPin(TAPE_RIGHT) - AvgValueLow)) - 2000;
-    uint16_t acorner = (10 * (AD_ReadADPin(TAPE_CORNER) - AvgValueLow)) - 2000;
-    
-    printf("atop: %d\r\n", atop);
-    printf("aleft: %d\r\n", aleft);
-    printf("aright: %d\r\n", aright);
-    printf("acorner: %d\r\n", acorner);
-        
-    if (tape_sensor_top < THRESHOLD_TOP_DETECTED ||
-        tape_sensor_left < THRESHOLD_LEFT_DETECTED ||
-        tape_sensor_right < THRESHOLD_RIGHT_DETECTED ||
-        tape_sensor_corner < THRESHOLD_CORNER_DETECTED
-        ) { 
-        curEvent = TAPE_DETECTED;
-    } else if (tape_sensor_top > THRESHOLD_TOP_NOT_DETECTED ||
-        tape_sensor_left > THRESHOLD_LEFT_NOT_DETECTED ||
-        tape_sensor_right > THRESHOLD_RIGHT_NOT_DETECTED ||
-        tape_sensor_corner > THRESHOLD_CORNER_NOT_DETECTED
-        ){
-        curEvent = TAPE_NOT_DETECTED;
+    uint16_t tape_sensor_val = AD_ReadADPin(AD_PORTV3); // read the battery voltage
+
+    if (tape_sensor_val > TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
+         curTapeEvent = TAPE_NOT_DETECTED;
+    } else if (tape_sensor_val < TAPE_THRESHOLD_NOT_DETECTED){
+         curTapeEvent = TAPE_DETECTED;
     }
-    
-    if (curEvent != lastEvent) { // check for change from last time
-        thisEvent.EventType = curEvent;
-        if (tape_sensor_top < THRESHOLD_TOP_DETECTED){
-            thisEvent.EventParam = tape_sensor_top;
-        } else if (tape_sensor_left < THRESHOLD_LEFT_DETECTED){
-            thisEvent.EventParam = tape_sensor_left;
-        } else if (tape_sensor_right < THRESHOLD_RIGHT_DETECTED){
-            thisEvent.EventParam = tape_sensor_right;
-        } else if (tape_sensor_corner < THRESHOLD_CORNER_DETECTED){
-            thisEvent.EventParam = tape_sensor_corner;
-        }    
+    if ( curTapeEvent != lastTapeEvent) { // check for change from last time
+        thisEvent.EventType = curTapeEvent;
         returnVal = TRUE;
-        lastEvent = curEvent; // update history
+        lastTapeEvent =  curTapeEvent; // update history
 #ifndef EVENTCHECKER_TEST           // keep this as is for test harness
         PostTopLevelHSM(thisEvent);
 #else
         SaveEvent(thisEvent);
-#endif   
+#endif                                
     }
     return (returnVal);
 }

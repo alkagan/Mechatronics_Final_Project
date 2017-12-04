@@ -34,7 +34,8 @@
 #include "SubOrientationHSM.h"
 #include "pwm.h"
 #include "pin_configuration.h"
-#include "TapeService.h"
+#include "TapeEventChecker.h"
+#include "serial.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -156,18 +157,18 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateCornerTape:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    onwards();
+                    onwards_NOS();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case TAPE_DETECTED:
-                    if (ThisEvent.EventParam == TAPE_CORNER_PARAM) {
-                        printf("tape detected\r\n");
-                        nextState = LocateFrontTape;
-                        makeTransition = TRUE;
-                    }
+                    printf("tape detected\r\n");
+                    nextState = LocateFrontTape;
+                    makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
+                    
+                case ES_NO_EVENT:                    
                 default:
                     break;
             }
@@ -176,17 +177,17 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateFrontTape:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    rotate_counter_clockwise();
+                    stop_everything();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case TAPE_DETECTED:
-                    printf("tape detected");
-                    
-                    if (ThisEvent.EventParam == TAPE_TOP_PARAM) {
-                        stop_everything();
-                    }
-                    ThisEvent.EventType = ES_NO_EVENT;
+//                    printf("tape detected");
+//
+//                    if (ThisEvent.EventParam == TAPE_TOP_PARAM) {
+//                        stop_everything();
+//                    }
+//                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 default:

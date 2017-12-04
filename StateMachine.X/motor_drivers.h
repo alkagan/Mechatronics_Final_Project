@@ -13,6 +13,8 @@
 
 void onwards_NOS(void);
 
+void onwards_TYO(void);
+
 void onwards(void);
 
 void snails_pace(void);

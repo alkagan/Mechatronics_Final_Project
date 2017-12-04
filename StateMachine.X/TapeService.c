@@ -32,17 +32,8 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define TAPE_TOGGLE_TIME 5
-
-#define THRESHOLD_CORNER_NOT_DETECTED   1090
-#define THRESHOLD_TOP_NOT_DETECTED      1110
-#define THRESHOLD_LEFT_NOT_DETECTED     1110
-#define THRESHOLD_RIGHT_NOT_DETECTED    1110
-
-#define THRESHOLD_CORNER_DETECTED       1030    
-#define THRESHOLD_TOP_DETECTED          1080
-#define THRESHOLD_LEFT_DETECTED         1050
-#define THRESHOLD_RIGHT_DETECTED        1000
+#define TAPE_DETECTED       100
+#define TAPE_NOT_DETECTED   1000
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -125,16 +116,8 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
     ES_EventTyp_t curEvent;
 
     static uint16_t AvgValueLow = 0;
+    uint16_t tape_reading = AD_ReadADPin(PORTV3);
 
-    static uint16_t tape_sensor_top;
-    static uint16_t tape_sensor_right;
-    static uint16_t tape_sensor_left;
-    static uint16_t tape_sensor_corner;
-
-    static uint16_t atop;
-    static uint16_t aleft;
-    static uint16_t aright;
-    static uint16_t acorner;
 
     static uint8_t tape_toggle_flag = 0;
     //uint16_t batVoltage = AD_ReadADPin(BAT_VOLTAGE); // read the battery voltage
@@ -145,58 +128,11 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
             // go in the init function above.
             //
             // This section is used to reset service for some reason
-            ES_Timer_InitTimer(TAPE_TIMER, TAPE_TOGGLE_TIME);
+          
 
             break;
 
-        case ES_TIMEOUT:
-
-            ES_Timer_InitTimer(TAPE_TIMER, TAPE_TOGGLE_TIME);
-
-            if (tape_toggle_flag == 0) {
-                tape_sensor_top = AD_ReadADPin(TAPE_TOP);
-                tape_sensor_left = AD_ReadADPin(TAPE_LEFT);
-                tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);
-                tape_sensor_corner = AD_ReadADPin(TAPE_CORNER);
-
-                AvgValueLow = (AvgValueLow + tape_sensor_top + tape_sensor_left +
-                        tape_sensor_right + tape_sensor_corner) / 5;
-
-                //                printf("top: %d\r\n", tape_sensor_top);
-                //                printf("left: %d\r\n", tape_sensor_left);
-                //                printf("right: %d\r\n", tape_sensor_right);
-                //                printf("corner: %d\r\n", tape_sensor_corner);
-
-                tape_toggle_flag = 1;
-                IO_PortsClearPortBits(PORTX, TAPE_TOGGLE);
-            } else if (tape_toggle_flag == 1) {
-                atop = (10 * (AD_ReadADPin(TAPE_TOP) - AvgValueLow)) - 2000;
-                aleft = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
-                aright = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
-                acorner = (10 * (AD_ReadADPin(TAPE_LEFT) - AvgValueLow)) - 2000;
-
-                IO_PortsSetPortBits(PORTX, TAPE_TOGGLE);
-
-                //                printf("atop: %d\r\n", atop);
-                //                printf("aleft: %d\r\n", aleft);
-                //                printf("aright: %d\r\n", aright);
-                //                printf("acorner: %d\r\n", acorner);
-
-                if (atop < THRESHOLD_TOP_DETECTED ||
-                        aleft < THRESHOLD_LEFT_DETECTED ||
-                        aright < THRESHOLD_RIGHT_DETECTED ||
-                        acorner < THRESHOLD_CORNER_DETECTED
-                        ) {
-                    curEvent = TAPE_DETECTED;
-                } else if (atop > THRESHOLD_TOP_NOT_DETECTED ||
-                        aleft > THRESHOLD_LEFT_NOT_DETECTED ||
-                        aright > THRESHOLD_RIGHT_NOT_DETECTED ||
-                        acorner > THRESHOLD_CORNER_NOT_DETECTED
-                        ) {
-                    curEvent = TAPE_NOT_DETECTED;
-                }
-                tape_toggle_flag = 0;
-            }
+        case :
 
             if (curEvent != lastEvent) { // check for change from last time
                 ReturnEvent.EventType = curEvent;
@@ -211,7 +147,7 @@ ES_Event RunTapeService(ES_Event ThisEvent) {
                 }
                 //returnVal = TRUE;
                 lastEvent = curEvent; // update history
-                
+
 #ifndef SIMPLESERVICE_TEST           // keep this as is for test harness
                 PostTopLevelHSM(ReturnEvent);
 #else

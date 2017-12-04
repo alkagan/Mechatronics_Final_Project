@@ -13,14 +13,15 @@
 #include "motor_drivers.h"
 #include <stdio.h>
 
-#define MAX_SPEED    1000
-#define NORMAL_SPEED 500
-#define SNAIL_PACE   200
-#define NOT_MOVING   0
-#define REVERSE      1
-#define LITTLE_MORE  650
+#define FAST_AND_FURIOUS    1000
+#define TOKYO_DRIFT         750
+#define NORMAL_SPEED        500
+#define SNAIL_PACE          200
+#define NOT_MOVING          0
+#define REVERSE             1
+#define LITTLE_MORE         650
 
-#define REVERSE_1_SECOND 1000
+#define REVERSE_1_SECOND    1000
 
 /* Digital I/O is X, Y, Z Ports, will use the X port for our
  * switches and direction signal
@@ -28,8 +29,14 @@
 
 void onwards_NOS(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, MAX_SPEED);
-    PWM_SetDutyCycle(RIGHT_MOTOR, MAX_SPEED);
+    PWM_SetDutyCycle(LEFT_MOTOR, FAST_AND_FURIOUS);
+    PWM_SetDutyCycle(RIGHT_MOTOR, FAST_AND_FURIOUS);
+}
+
+void onwards_TYO(void){
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
 void onwards(void){
@@ -64,8 +71,8 @@ void rotate_clockwise(void){
     printf("rotate_clockwise\r\n");
     //PWM_SetFrequency(PWM_1KHZ);
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
     
 }
 
@@ -74,8 +81,8 @@ void rotate_clockwise(void){
 void rotate_counter_clockwise(void){
     printf("rotate counterclockwise\r\n");
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
 void tape_realign_left_detected(void){
