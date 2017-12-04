@@ -36,6 +36,7 @@
 #include "pin_configuration.h"
 #include "TapeEventChecker.h"
 #include "serial.h"
+#include "LED.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -43,15 +44,15 @@
 typedef enum {
     InitSubOrientationState,
     LocateBeaconState,
-    LocateCornerTape,
-    LocateFrontTape,
+    LocateTape,
+    FinalizeOrientation,
 } SubOrientationHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSubOrientationState",
 	"LocateBeaconState",
-	"LocateCornerTape",
-	"LocateFrontTape",
+	"LocateTape",
+	"FinalizeOrientation",
 };
 
 /*******************************************************************************
@@ -134,6 +135,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateBeaconState: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    LED_SetBank(LED_BANK1|LED_BANK2|LED_BANK3, 0);
                     printf("gets to locatebeacon\r\n");
                     rotate_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
@@ -142,7 +144,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     //printf("after es_entry\r\n");    
                 case BEACON_DETECTED:
                     printf("gets to beacondetected\r\n");
-                    nextState = LocateCornerTape;
+                    nextState = LocateTape;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -154,40 +156,42 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
 
             break;
 
-        case LocateCornerTape:
+        case LocateTape:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    onwards_NOS();
+                    onwards_TYO();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case TAPE_DETECTED:
                     printf("tape detected\r\n");
-                    nextState = LocateFrontTape;
+                    nextState = FinalizeOrientation;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
-                case ES_NO_EVENT:                    
+
+                case ES_NO_EVENT:
                 default:
                     break;
             }
             break;
 
-        case LocateFrontTape:
+        case FinalizeOrientation:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    stop_everything();
+                    rotate_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case TAPE_DETECTED:
-//                    printf("tape detected");
-//
-//                    if (ThisEvent.EventParam == TAPE_TOP_PARAM) {
-//                        stop_everything();
-//                    }
-//                    ThisEvent.EventType = ES_NO_EVENT;
+                case TAPE_NOT_DETECTED:
+                    LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
+                    LED_SetBank(0x01, 0x0F);
+                    stop_everything();
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    ES_Event NextEvent;
+                    NextEvent.EventType = ORIENTATION_TO_SEARCHING;
+                    PostTopLevelHSM(NextEvent); 
                     break;
 
                 default:

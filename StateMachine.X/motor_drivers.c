@@ -15,11 +15,11 @@
 
 #define FAST_AND_FURIOUS    1000
 #define TOKYO_DRIFT         750
-#define NORMAL_SPEED        500
+#define NORMAL_SPEED        650
 #define SNAIL_PACE          200
 #define NOT_MOVING          0
 #define REVERSE             1
-#define LITTLE_MORE         650
+#define LITTLE_MORE         675
 
 #define REVERSE_1_SECOND    1000
 

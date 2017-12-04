@@ -67,9 +67,9 @@ int main(void) {
         uint16_t right_switch_input = AD_ReadADPin(AD_PORTW5);
 
         uint16_t tape_sensor_top = AD_ReadADPin(TAPE_TOP);
-        uint16_t tape_sensor_left = AD_ReadADPin(TAPE_LEFT);        //idk
-        uint16_t tape_sensor_right = AD_ReadADPin(TAPE_RIGHT);      //idk
-        uint16_t tape_sensor_corner = AD_ReadADPin(TAPE_CORNER);    //idk
+        uint16_t tape_sensor_left = AD_ReadADPin(TAPE_LEFT); //idk
+        uint16_t tape_sensor_right = AD_ReadADPin(TAPE_RIGHT); //idk
+        uint16_t tape_sensor_corner = AD_ReadADPin(TAPE_CORNER); //idk
 
         printf("tape_top: %d\r\n", tape_sensor_top);
         printf("tape_left: %d\r\n", tape_sensor_left);
@@ -82,12 +82,12 @@ int main(void) {
 
         //////////////////////////////////////////////////////////
         //Esteban's attempt at this Beacon shit
-//        for (i = 0; i < 10000; i++);
-//        uint16_t beacon_reading = AD_ReadADPin(AD_PORTW6);
-//        for (i = 0; i < 10000; i++);
-//        if (beacon_reading < 800) {
-//            printf("Beacon reading: %d\r\n\n", beacon_reading);
-//        }
+        //        for (i = 0; i < 10000; i++);
+        //        uint16_t beacon_reading = AD_ReadADPin(AD_PORTW6);
+        //        for (i = 0; i < 10000; i++);
+        //        if (beacon_reading < 800) {
+        //            printf("Beacon reading: %d\r\n\n", beacon_reading);
+        //        }
         //        if( beacon_reading < 800) {
         //            printf("a");
         //        } else if( beacon_reading > 800) {
@@ -175,31 +175,34 @@ int main(void) {
     SERIAL_Init();
 
     while (1) {
-        IO_PortsSetPortBits(PORTX, PIN3);
-        delay(magicnumber);
-
-        // Accounts for noise
+        //        IO_PortsSetPortBits(PORTX, PIN3);
+        //        delay(magicnumber);
+        //
+        //        // Accounts for noise
+        //        uint16_t corner = AD_ReadADPin(AD_PORTV3);
+        //        uint16_t tapeRight = AD_ReadADPin(AD_PORTV4);
+        //        uint16_t tapeLeft = AD_ReadADPin(AD_PORTV5);
+        //        uint16_t tapeCenter = AD_ReadADPin(AD_PORTV6);
+        //        uint16_t AvgValueLow = (AvgValueLow + corner + tapeRight + tapeLeft + tapeCenter) / 5;
+        //
+        //        delay(magicnumber);
+        //
+        //        IO_PortsClearPortBits(PORTX, PIN3);
+        //        delay(magicnumber);
+        //
+        //        // Takes real value of each sensor
+        //        uint16_t acorner = (AD_ReadADPin(AD_PORTV3));
+        //        uint16_t atapeRight = (AD_ReadADPin(AD_PORTV4) );
+        //        uint16_t atapeLeft = (AD_ReadADPin(AD_PORTV5) );
+        //        uint16_t atapeCenter = (AD_ReadADPin(AD_PORTV6));
+        //        printf("corner is %i\r\n tapeRight is %i\r\n tapeLeft is %i\r\n tapeCenter"
+        //                " is %i\r\n AvgValueLow is %i\r\n corner is %i\r\n atapeRight is %i\r\n atapeLeft is %i\r\n atapeCenter"
+        //                " is %i\r\n____________________,\r\n, cht, tapeLeft,
+        //                tapeCenter, AvgValueLow, acorner, atapeRight, atapeLeft, atapeCenter);
+        //
+        //        delay(magicnumber);
         uint16_t corner = AD_ReadADPin(AD_PORTV3);
-        uint16_t tapeRight = AD_ReadADPin(AD_PORTV4);
-        uint16_t tapeLeft = AD_ReadADPin(AD_PORTV5);
-        uint16_t tapeCenter = AD_ReadADPin(AD_PORTV6);
-        uint16_t AvgValueLow = (AvgValueLow + corner + tapeRight + tapeLeft + tapeCenter) / 5;
-
-        delay(magicnumber);
-
-        IO_PortsClearPortBits(PORTX, PIN3);
-        delay(magicnumber);
-
-        // Takes real value of each sensor
-        uint16_t acorner = (10 * (AD_ReadADPin(AD_PORTV3) - AvgValueLow)) - 2000;
-        uint16_t atapeRight = (10 * (AD_ReadADPin(AD_PORTV4) - AvgValueLow)) - 2000;
-        uint16_t atapeLeft = (10 * (AD_ReadADPin(AD_PORTV5) - AvgValueLow)) - 2000;
-        uint16_t atapeCenter = (10 * (AD_ReadADPin(AD_PORTV6) - AvgValueLow)) - 2000;
-        printf("corner is %i\r\n tapeRight is %i\r\n tapeLeft is %i\r\n tapeCenter"
-                " is %i\r\n AvgValueLow is %i\r\n corner is %i\r\n atapeRight is %i\r\n atapeLeft is %i\r\n atapeCenter"
-                " is %i\r\n____________________,\r\n", corner, tapeRight, tapeLeft,
-                tapeCenter, AvgValueLow, acorner, atapeRight, atapeLeft, atapeCenter);
-
+        printf("corner is %i\r\n", corner);
         delay(magicnumber);
     }
 }

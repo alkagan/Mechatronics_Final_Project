@@ -87,7 +87,7 @@ static ES_Event storedEvent;
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckTapeEvent(void) {
-    static ES_EventTyp_t lastTapeEvent = BATTERY_DISCONNECTED;
+    static ES_EventTyp_t lastTapeEvent = TAPE_NOT_DETECTED;
     ES_EventTyp_t curTapeEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
@@ -97,6 +97,8 @@ uint8_t CheckTapeEvent(void) {
          curTapeEvent = TAPE_NOT_DETECTED;
     } else if (tape_sensor_val < TAPE_THRESHOLD_NOT_DETECTED){
          curTapeEvent = TAPE_DETECTED;
+    } else{
+        curTapeEvent = lastTapeEvent;
     }
     if ( curTapeEvent != lastTapeEvent) { // check for change from last time
         thisEvent.EventType = curTapeEvent;

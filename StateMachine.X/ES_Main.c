@@ -28,10 +28,12 @@ void main(void) {
     AD_Init();
     TIMERS_Init();
     PWM_Init();
+    LED_Init();
 
     set_AD_pins();
     set_IO_pins();
     set_PWM_pins();
+    LED_AddBanks(0x07);
 
     printf("Starting ES Framework Template\r\n");
     printf("using the 2nd Generation Events & Services Framework\r\n");

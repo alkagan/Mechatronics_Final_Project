@@ -161,13 +161,17 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            printf("\r\n before suborient\r\n");
             ThisEvent = RunSubOrientationHSM(ThisEvent);
-            printf("after suborient\r\n");
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;
-
+                    
+                case ORIENTATION_TO_SEARCHING:
+                    nextState = SearchingState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
 //                case TAPE_DETEECTED:
 //                    nextState = SearchingState;
 //                    makeTransition = TRUE;
@@ -183,8 +187,10 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-
-            ThisEvent = RunSubSearchingHSM(ThisEvent);
+            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
+            LED_SetBank(0x02, 0x0F);
+            
+//            ThisEvent = RunSubSearchingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;
