@@ -32,8 +32,11 @@
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.h</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.h</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/pin_configuration.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeService.h</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RC_Servo.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -65,7 +68,9 @@
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RC_Servo.c</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.c</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

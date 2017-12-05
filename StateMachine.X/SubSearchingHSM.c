@@ -49,6 +49,7 @@ typedef enum {
     SubAdjustToTheRight,
     SubCornerDetected,
     SubFinalAdjustment,
+    SubDummyState,
 } SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
@@ -59,6 +60,7 @@ static const char *StateNames[] = {
 	"SubAdjustToTheRight",
 	"SubCornerDetected",
 	"SubFinalAdjustment",
+	"SubDummyState",
 };
 
 #define BUMP_TIME_VALUE 3000
@@ -68,10 +70,11 @@ static const char *StateNames[] = {
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ***************************er***************************************************/
+
 /* Prototypes for private functions for this machine. They should be functions
    relevant to the behavior of this state machine */
 
-void reverse_try2(void){
+void reverse_try2(void) {
     printf("reverse\r\n");
     IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, 700);
@@ -168,21 +171,21 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
             }
             break;
-            
+
         case SubCollisionPart2:
-            switch (ThisEvent.EventType){
+            switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     reverse_try2();
                     ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 case ES_TIMEOUT:
                     nextState = SubAdjustToTheRight;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 default:
                     break;
             }
@@ -213,6 +216,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
                 case CORNER_TAPE_DETECTED:
                     nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case TRACKWIRE_DETECTED:
+                    nextState = SubDummyState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -252,6 +261,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
                 case CORNER_TAPE_DETECTED:
                     nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case TRACKWIRE_DETECTED:
+                    nextState = SubDummyState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -328,6 +343,20 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             //check event
             //case tape detected
 
+            case SubDummyState:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    stop_everything();
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
+                default:
+                    break;
+            }
+            break;
 
 
         default: // all unhandled states fall into here

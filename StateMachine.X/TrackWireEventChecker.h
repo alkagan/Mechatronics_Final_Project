@@ -19,8 +19,8 @@
  * Modified on September 12, 2016, 7:59 PM
  */
 
-#ifndef TEMPLATEEVENTCHECKER_H
-#define	TEMPLATEEVENTCHECKER_H
+#ifndef TRACKWIREEVENTCHECKER_H
+#define	TRACKWIREEVENTCHECKER_H
 
 /*******************************************************************************
  * PUBLIC #INCLUDES                                                            *
@@ -57,9 +57,9 @@
  * @note Use this code as a template for your other event checkers, and modify as necessary.
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
-uint8_t TemplateCheckBattery(void);
+uint8_t CheckForTrackWireEvent(void);
 
 
 
-#endif	/* TEMPLATEEVENTCHECKER_H */
+#endif	/* TRACKWIREEVENTCHECKER_H */
 

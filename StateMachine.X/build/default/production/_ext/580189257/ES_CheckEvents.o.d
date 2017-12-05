@@ -8,4 +8,5 @@ build/default/production/_ext/580189257/ES_CheckEvents.o:  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.h  \
- C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h 
+ C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h  \
+ C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h 

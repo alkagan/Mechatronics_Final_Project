@@ -31,7 +31,7 @@
 #include "TapeEventChecker.h"
 #include "BeaconEventChecker.h"
 #include "CornerTapeEventChecker.h"
-
+#include "TrackWireEventChecker.h"
 /*******************************************************************************
  * PUBLIC #DEFINES                                                             *
  ******************************************************************************/
