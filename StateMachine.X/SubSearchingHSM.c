@@ -65,7 +65,8 @@ static const char *StateNames[] = {
 	"SubAllThreeDestroyed",
 };
 
-#define BUMP_TIME_VALUE 3000
+#define BUMP_TIME_VALUE 400
+#define TRACKWIRE_TIME_LENGTH   20 
 
 #define REALIGNMENT_TIMER_LENGTH 500
 
@@ -157,7 +158,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubCollision: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    stop_everything();
+                    reverse();
                     ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -177,7 +178,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubCollisionPart2:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse_try2();
+                    rotate_clockwise();
                     ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -223,10 +224,22 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case TRACKWIRE_DETECTED:
-                    nextState = SubDummyState;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
+                    //start timer
+                    ES_Timer_InitTimer(TRACK_TIMER, TRACKWIRE_TIME_LENGTH);
+                    //nextState = SubDummyState;
+                    //makeTransition = TRUE;
+                    //ThisEvent.EventType = ES_NO_EVENT;
                     break;
+
+                case ES_TIMEOUT:
+                    //transition into dummy state
+                    if (ThisEvent.EventParam == TRACK_TIMER) {
+                        nextState = SubDummyState;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    }
+                    break;
+
 
                 case ES_EXIT:
                     stop_everything();
@@ -242,7 +255,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     //  tape_realign_left_detected();
                     tape_realign_right_detected();
-                    LED_InvertBank(LED_BANK1, 0x0F);
+                    //LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
 
@@ -268,9 +281,19 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case TRACKWIRE_DETECTED:
-                    nextState = SubDummyState;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
+                    ES_Timer_InitTimer(TRACK_TIMER, TRACKWIRE_TIME_LENGTH);
+                    //                    nextState = SubDummyState;
+                    //                    makeTransition = TRUE;
+                    //                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    //transition into dummy state
+                    if (ThisEvent.EventParam == TRACK_TIMER) {
+                        nextState = SubDummyState;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    }
                     break;
 
                 case ES_EXIT:
@@ -353,16 +376,16 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case TRACKWIRE_NOT_DETECTED:
+                    printf("SubSearchingHSM: In subDummyState: trackwire count before: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
+                    printf("SubSearchingHSM: In subDummyState: trackwire count after: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
                         nextState = SubAllThreeDestroyed;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
                     } else {
                         nextState = SubAdjustToTheLeft;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
                     }
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
@@ -375,6 +398,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             break;
 
         case SubAllThreeDestroyed:
+            printf("SubSearchingHSM: In SubAllthreedestroyed state\r\n");
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     rotate_clockwise();

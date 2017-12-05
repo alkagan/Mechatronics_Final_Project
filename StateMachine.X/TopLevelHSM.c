@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include "ES_Configure.h"
 #include "ES_Framework.h"
-#include "LED.h"
+//#include "LED.h"
 #include "BOARD.h"
 #include "TopLevelHSM.h"
 #include "SubSearchingHSM.h"
@@ -149,7 +149,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // Initialize all sub-state machines
                 InitSubOrientationHSM();
                 InitSubSearchingHSM();                
-                LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
+                //LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
 
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
@@ -184,7 +184,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
+            //LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
             ThisEvent = RunSubSearchingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:

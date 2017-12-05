@@ -138,7 +138,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
 //            LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
+                    //LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
                     rotate_counter_clockwise();
                     printf("SubOrientation: Entry to locate beacon state\r\n");
                     ThisEvent.EventType = ES_NO_EVENT;

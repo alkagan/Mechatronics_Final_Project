@@ -27,7 +27,7 @@
  * switches and direction signal
 */
 
-void onwards_NOS(void){
+void onwards_NOS(void){    
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, FAST_AND_FURIOUS);
     PWM_SetDutyCycle(RIGHT_MOTOR, FAST_AND_FURIOUS);
@@ -61,7 +61,7 @@ void stop_everything(void){
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
     printf("reverse\r\n");
-    IO_PortsClearPortBits(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
+    IO_PortsClearPortBits(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
@@ -103,8 +103,8 @@ void tape_realign_left_detected(void){
 
 
 void tape_realign_right_detected(void){
-    IO_PortsWritePort(PORTX, 0);
-    //IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
+    //IO_PortsWritePort(PORTX, 0);
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }

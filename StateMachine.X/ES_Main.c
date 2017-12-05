@@ -1,7 +1,7 @@
 #include <BOARD.h>
 #include <xc.h>
 #include <stdio.h>
-#include "LED.h"
+//#include "LED.h"
 #include "ES_Configure.h"
 #include "ES_Framework.h"
 #include "pin_configuration.h"
@@ -29,15 +29,15 @@ void main(void) {
     AD_Init();
     TIMERS_Init();
     PWM_Init();
-    LED_Init();
+    //LED_Init();
 
     set_AD_pins();
     set_IO_pins();
     set_PWM_pins();
-    LED_AddBanks(LED_BANK1);
-    LED_AddBanks(LED_BANK2);
-    LED_AddBanks(LED_BANK3);
-    LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
+//    LED_AddBanks(LED_BANK1);
+//    LED_AddBanks(LED_BANK2);
+//    LED_AddBanks(LED_BANK3);
+//    LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
 
     
 
