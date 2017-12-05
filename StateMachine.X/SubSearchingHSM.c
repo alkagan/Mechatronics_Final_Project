@@ -50,6 +50,7 @@ typedef enum {
     SubCornerDetected,
     SubFinalAdjustment,
     SubDummyState,
+    SubAllThreeDestroyed,
 } SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
@@ -61,6 +62,7 @@ static const char *StateNames[] = {
 	"SubCornerDetected",
 	"SubFinalAdjustment",
 	"SubDummyState",
+	"SubAllThreeDestroyed",
 };
 
 #define BUMP_TIME_VALUE 3000
@@ -89,7 +91,7 @@ void reverse_try2(void) {
 
 static SubSearchingHSMState_t CurrentState = InitSearchSubState; // <- change name to match ENUM
 static uint8_t MyPriority;
-
+static uint8_t kill_count_BRRRRRRRRRAAAAAAPPPPPPP = 0;
 
 /*******************************************************************************
  * PUBLIC FUNCTIONS                                                            *
@@ -343,10 +345,24 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             //check event
             //case tape detected
 
-            case SubDummyState:
+        case SubDummyState:
             switch (ThisEvent.EventType) {
+
                 case ES_ENTRY:
                     stop_everything();
+                    break;
+
+                case TRACKWIRE_NOT_DETECTED:
+                    kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
+                    if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
+                        nextState = SubAllThreeDestroyed;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    } else {
+                        nextState = SubAdjustToTheLeft;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    }
                     break;
 
                 case ES_EXIT:
@@ -357,6 +373,19 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
             }
             break;
+
+        case SubAllThreeDestroyed:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    break;
+
+                default:
+                    break;
+            }
+
+            break;
+
 
 
         default: // all unhandled states fall into here
