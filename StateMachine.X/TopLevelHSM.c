@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include "ES_Configure.h"
 #include "ES_Framework.h"
+#include "LED.h"
 #include "BOARD.h"
 #include "TopLevelHSM.h"
 #include "SubSearchingHSM.h"
@@ -148,6 +149,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // Initialize all sub-state machines
                 InitSubOrientationHSM();
                 InitSubSearchingHSM();                
+                LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
 
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
@@ -155,7 +157,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 ThisEvent.EventType = ES_NO_EVENT;
                 ;
             }
-            break;
+            break;  //InitPState
 
         case OrientationState: // in the first state, replace this with correct names
             // run sub-state machine for this state
@@ -166,17 +168,12 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
                     
-                case ORIENTATION_TO_SEARCHING:
+                case TAPE_NOT_DETECTED:
                     nextState = SearchingState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
-                    break;
+                    break;  //orientation to searching
                     
-//                case TAPE_DETEECTED:
-//                    nextState = SearchingState;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
 
                 default:
                     break;
@@ -187,14 +184,19 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            LED_SetBank(0x02, 0x0F);
+            LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
             ThisEvent = RunSubSearchingHSM(ThisEvent);
-//            ThisEvent = RunSubSearchingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;
-
+                    
+                case BUMP_PRESSED:
+                    LED_InvertBank(LED_BANK3, 0x02);
+                    nextState = EngagingState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;  //orientation to searching
+                    
                 default:
                     break;
             }
@@ -210,6 +212,11 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
 
+                case BUMP_RELEASED:
+                    stop_everything();
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;  //orientation to searching
+                    
                 default:
                     break;
             }
@@ -248,6 +255,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
         default: // all unhandled states fall into here
             break;
     } // end switch on Current State
+    
     //printf("running top level sm: the event is %d \r\n", ThisEvent.EventType);
 
     if (makeTransition == TRUE) { // making a state transition, send EXIT and ENTRY

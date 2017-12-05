@@ -34,12 +34,13 @@
 #include "SubSearchingHSM.h"
 #include "pin_configuration.h"
 #include "motor_drivers.h"
+#include "LED.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 typedef enum {
-    InitPSubState,
+    InitSearchSubState,
     SubDriveAround,
     SubAdjustToTheLeft,
     SubAdjustToTheRight,
@@ -47,7 +48,7 @@ typedef enum {
 } SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
-	"InitPSubState",
+	"InitSearchSubState",
 	"SubDriveAround",
 	"SubAdjustToTheLeft",
 	"SubAdjustToTheRight",
@@ -58,7 +59,7 @@ static const char *StateNames[] = {
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
- ******************************************************************************/
+ ***************************er***************************************************/
 /* Prototypes for private functions for this machine. They should be functions
    relevant to the behavior of this state machine */
 
@@ -68,7 +69,7 @@ static const char *StateNames[] = {
 /* You will need MyPriority and the state variable; you may need others as well.
  * The type of state variable should match that of enum in header file. */
 
-static SubSearchingHSMState_t CurrentState = InitPSubState; // <- change name to match ENUM
+static SubSearchingHSMState_t CurrentState = InitSearchSubState; // <- change name to match ENUM
 static uint8_t MyPriority;
 
 
@@ -89,7 +90,7 @@ static uint8_t MyPriority;
 uint8_t InitSubSearchingHSM(void) {
     ES_Event returnEvent;
 
-    CurrentState = InitPSubState;
+    CurrentState = InitSearchSubState;
     returnEvent = RunSubSearchingHSM(INIT_EVENT);
     if (returnEvent.EventType == ES_NO_EVENT) {
         return TRUE;
@@ -119,7 +120,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
     ES_Tattle(); // trace call stack
 
     switch (CurrentState) {
-        case InitPSubState: // If current state is initial Psedudo State
+        case InitSearchSubState: // If current state is initial Psedudo State
             if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
             {
                 // this is where you would put any actions associated with the
@@ -127,7 +128,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 // initial state
 
                 // now put the machine into the actual initial state
-                nextState = SubDriveAround;
+                nextState = SubAdjustToTheLeft;
                 makeTransition = TRUE;
                 ThisEvent.EventType = ES_NO_EVENT;
             }
@@ -137,7 +138,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     reverse();
-                    ThisEvent.EventType = ES_NO_EVENT;
+                    //ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
 //                case TAPE_DETECTED:
@@ -176,7 +177,8 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheLeft:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    tape_realign_left_detected();
+                    tape_realign_right_detected();
+                    LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
 
@@ -184,8 +186,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //that instead of a timer?
                 case TAPE_NOT_DETECTED:
                     if(ThisEvent.EventParam == TAPE_LEFT_PARAM){
-                        nextState = SubDriveAround;
+                        nextState = SubAdjustToTheRight;
                         makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
                     }
                     break;
                     
@@ -202,16 +205,18 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheRight:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    tape_realign_right_detected();
-                    ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
+                    tape_realign_left_detected();
+                    LED_InvertBank(LED_BANK1, 0x0F);
+                    //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
 
                     // case not detected? when left tape is still on? maybe use
                     //that instead of a timer?
 
-                case ES_TIMEOUT:
-                    nextState = SubDriveAround;
+                case TAPE_DETECTED:
+                    nextState = SubAdjustToTheLeft;
                     makeTransition = TRUE;
+                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
                     
                 default:

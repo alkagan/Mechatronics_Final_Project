@@ -104,7 +104,7 @@ uint8_t CheckForBeaconEvent(void) {
 
     if (current_beacon_event != last_beacon_event) { // check for change from last time
         thisEvent.EventType = current_beacon_event;
-        thisEvent.EventParam = beacon_reading;
+        //thisEvent.EventParam = beacon_reading;
         returnVal = TRUE;
         last_beacon_event = current_beacon_event; // update history
 #ifndef EVENTCHECKER_TEST           // keep this as is for test harness

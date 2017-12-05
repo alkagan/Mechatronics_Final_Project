@@ -38,8 +38,8 @@
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-#define BUMP_PRESSED    0x7F
-#define BUMP_RELEASED   0x80
+//#define BUMP_PRESSED    0x7F
+//#define BUMP_RELEASED   0x80
 
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
@@ -92,8 +92,8 @@ uint8_t CheckForBumpEvent(void) {
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
     
-    bool left_bumper = IO_PortsReadPort((PORTV) & PIN3);
-    bool right_bumper = IO_PortsReadPort((PORTV) & PIN4);
+    bool left_bumper = IO_PortsReadPort(PORTW & LEFT_BUMPER);
+    bool right_bumper = IO_PortsReadPort(PORTW & RIGHT_BUMPER);
 
     if(left_bumper != 0 || right_bumper != 0){
         current_bump_event = BUMP_PRESSED;
@@ -106,9 +106,9 @@ uint8_t CheckForBumpEvent(void) {
 
         // differentiating which parameter gets passed to service routine
         if(left_bumper != 0){
-            thisEvent.EventParam = left_bumper;
+            thisEvent.EventParam = 0;
         } else {
-            thisEvent.EventParam = right_bumper;
+            thisEvent.EventParam = 1;
         }
 
         returnVal = TRUE;

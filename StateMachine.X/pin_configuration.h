@@ -47,4 +47,8 @@
 #define INDEXER                 RC_PORTY06  //Servo 
 #define PUSHER                  RC_PORTY07  //Servo
 
+// RC Servo Pins
+#define RIGHT_BUMPER            PIN5 //uint16_t value
+#define LEFT_BUMPER              PIN8 //uint16_t value
+
 #endif

@@ -1,6 +1,7 @@
 #include <BOARD.h>
 #include <xc.h>
 #include <stdio.h>
+#include "LED.h"
 #include "ES_Configure.h"
 #include "ES_Framework.h"
 #include "pin_configuration.h"
@@ -13,6 +14,7 @@ void set_AD_pins(void) {
 
 void set_IO_pins(void) {
     IO_PortsSetPortOutputs(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    IO_PortsSetPortInputs(PORTW, (LEFT_BUMPER | RIGHT_BUMPER));
     //printf("I/O pins set\r\n");
 }
 
@@ -33,7 +35,12 @@ void main(void) {
     set_AD_pins();
     set_IO_pins();
     set_PWM_pins();
-    LED_AddBanks(0x07);
+    LED_AddBanks(LED_BANK1);
+    LED_AddBanks(LED_BANK2);
+    LED_AddBanks(LED_BANK3);
+    LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
+
+    
 
     printf("Starting ES Framework Template\r\n");
     printf("using the 2nd Generation Events & Services Framework\r\n");
