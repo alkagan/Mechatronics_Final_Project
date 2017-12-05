@@ -106,9 +106,9 @@ uint8_t CheckForBumpEvent(void) {
 
         // differentiating which parameter gets passed to service routine
         if(left_bumper != 0){
-            thisEvent.EventParam = 0;
+            thisEvent.EventParam = 0x0;
         } else {
-            thisEvent.EventParam = 1;
+            thisEvent.EventParam = 0x1;
         }
 
         returnVal = TRUE;

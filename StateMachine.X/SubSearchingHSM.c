@@ -185,11 +185,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     // case not detected? when left tape is still on? maybe use
                     //that instead of a timer?
                 case TAPE_NOT_DETECTED:
-                    if(ThisEvent.EventParam == TAPE_LEFT_PARAM){
                         nextState = SubAdjustToTheRight;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
-                    }
                     break;
                     
 //                case ES_TIMEOUT:

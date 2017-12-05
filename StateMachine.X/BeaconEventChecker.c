@@ -89,7 +89,7 @@ static ES_Event storedEvent;
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForBeaconEvent(void) {
     static ES_EventTyp_t last_beacon_event = BEACON_NOT_DETECTED;
-    ES_EventTyp_t current_beacon_event;
+    ES_EventTyp_t current_beacon_event = last_beacon_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
@@ -101,7 +101,7 @@ uint8_t CheckForBeaconEvent(void) {
     } else if (beacon_reading < BEACON_DETECTED_THRESHOLD){
         current_beacon_event = BEACON_DETECTED;
     }
-
+     
     if (current_beacon_event != last_beacon_event) { // check for change from last time
         thisEvent.EventType = current_beacon_event;
         //thisEvent.EventParam = beacon_reading;
