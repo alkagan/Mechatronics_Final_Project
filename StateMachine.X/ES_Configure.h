@@ -53,9 +53,11 @@ typedef enum {
     BUMP_RELEASED,
     TAPE_DETECTED,
     TAPE_NOT_DETECTED,
-	BEACON_DETECTED,
-	BEACON_NOT_DETECTED,
+    BEACON_DETECTED,
+    BEACON_NOT_DETECTED,
     ORIENTATION_TO_SEARCHING,
+    CORNER_TAPE_NOT_DETECTED,
+    CORNER_TAPE_DETECTED,
     NUMBEROFEVENTS,
 } ES_EventTyp_t;
 
@@ -79,6 +81,8 @@ static const char *EventNames[] = {
 	"BEACON_DETECTED",
 	"BEACON_NOT_DETECTED",
 	"ORIENTATION_TO_SEARCHING",
+	"CORNER_TAPE_NOT_DETECTED",
+	"CORNER_TAPE_DETECTED",
 	"NUMBEROFEVENTS",
 };
 
@@ -88,7 +92,7 @@ static const char *EventNames[] = {
 
 /****************************************************************************/
 // This is the list of event checking functions
-#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckTapeEvent, CheckForBumpEvent
+#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckCornerTapeEvent, CheckTapeEvent, CheckForBumpEvent
 
 /****************************************************************************/
 // These are the definitions for the post functions to be executed when the

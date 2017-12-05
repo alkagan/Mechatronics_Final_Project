@@ -30,18 +30,16 @@
 #define LAUNCHER_MOTOR          PWM_PORTY10         //PWM signal
 
 // Tape Sensor Pin Configuration
-#define TAPE_CORNER             AD_PORTV3   //uint16_t value
-#define TAPE_TOP                AD_PORTV4   //uint16_t value
-#define TAPE_RIGHT              AD_PORTV5   //uint16_t value
+#define TAPE_CORNER             AD_PORTV4   //uint16_t value
+#define TAPE_FOLLOWER           AD_PORTV3   //uint16_t value
+#define TAPE_REN                AD_PORTV5   //uint16_t value
 
 // Tape Parameters
-#define TAPE_TOP_PARAM                  1
-#define TAPE_LEFT_PARAM                 2
+#define TAPE_TOP_PARAM          0x03
+#define TAPE_CORNER_PARAM       0x04
+
 // Track Wire Pin Configuration
 #define TRACK_WIRE              AD_PORTW7   //uint16_t value
-
-#define TAPE_RIGHT_PARAM                3
-#define TAPE_CORNER_PARAM               4
 
 // RC Servo Pins
 #define INDEXER                 RC_PORTY06  //Servo 

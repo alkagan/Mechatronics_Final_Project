@@ -30,6 +30,7 @@
 #include "BOARD.h"
 #include "TapeEventChecker.h"
 #include "BeaconEventChecker.h"
+#include "CornerTapeEventChecker.h"
 
 /*******************************************************************************
  * PUBLIC #DEFINES                                                             *

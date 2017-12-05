@@ -8,7 +8,7 @@
 
 void set_AD_pins(void) {
     AD_AddPins(BEACON_DETECTOR | LEFT_SWITCH | RIGHT_SWITCH | TRACK_WIRE
-            | TAPE_TOP | TAPE_RIGHT | TAPE_CORNER);
+            | TAPE_FOLLOWER | TAPE_REN | TAPE_CORNER);
     //printf("AD pins set\r\n");
 }
 

@@ -91,7 +91,7 @@ uint8_t CheckTapeEvent(void) {
     ES_EventTyp_t curTapeEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    uint16_t tape_sensor_val = AD_ReadADPin(AD_PORTV3);
+    uint16_t tape_sensor_val = AD_ReadADPin(TAPE_FOLLOWER);
 
     if (tape_sensor_val > TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
         curTapeEvent = TAPE_NOT_DETECTED;

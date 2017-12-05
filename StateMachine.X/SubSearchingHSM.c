@@ -44,6 +44,8 @@ typedef enum {
     SubCollision,
     SubAdjustToTheLeft,
     SubAdjustToTheRight,
+    SubCornerDetected,
+    SubFinalAdjustment,
 } SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
@@ -51,6 +53,8 @@ static const char *StateNames[] = {
 	"SubCollision",
 	"SubAdjustToTheLeft",
 	"SubAdjustToTheRight",
+	"SubCornerDetected",
+	"SubFinalAdjustment",
 };
 
 #define REALIGNMENT_TIMER_LENGTH 500
@@ -168,6 +172,16 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
                 default:
                     break;
             }
@@ -190,18 +204,87 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 case BUMP_PRESSED:
                     nextState = SubCollision;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
                 default:
                     break;
             }
             break;
-            
+
+        case SubCornerDetected:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    //reverse
+                    //start timer
+                    break;
+                //case timeout
+                    //go to subfinaladjustment
+                   
+
+                case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
+                    nextState = SubFinalAdjustment; //middle state
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case SubFinalAdjustment:
+            switch (ThisEvent.EventType) {
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubAdjustToTheRight; //middle state
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+            //case middle state
+            //check event
+            //case tape detected
+
+
 
         default: // all unhandled states fall into here
             break;
