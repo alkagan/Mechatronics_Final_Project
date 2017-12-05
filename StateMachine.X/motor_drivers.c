@@ -87,14 +87,15 @@ void rotate_counter_clockwise(void){
 
 void tape_realign_left_detected(void){
     IO_PortsWritePort(PORTX, 0);
-    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, FAST_AND_FURIOUS);
+    IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, NOT_MOVING);
 }
 
+
 void tape_realign_right_detected(void){
     IO_PortsWritePort(PORTX, 0);
-    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
+    //IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
-    PWM_SetDutyCycle(RIGHT_MOTOR, FAST_AND_FURIOUS);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }

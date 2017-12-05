@@ -177,7 +177,8 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheLeft:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    tape_realign_right_detected();
+                   // tape_realign_right_detected();
+                    tape_realign_left_detected();
                     LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
@@ -203,7 +204,8 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheRight:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    tape_realign_left_detected();
+                  //  tape_realign_left_detected();
+                    tape_realign_right_detected();
                     LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;

@@ -100,6 +100,8 @@ uint8_t CheckForBeaconEvent(void) {
         //printf("BeaconEventChecker: BEACON DETECTED NONE\r\n");
     } else if (beacon_reading < BEACON_DETECTED_THRESHOLD){
         current_beacon_event = BEACON_DETECTED;
+    } else {
+        current_beacon_event = last_beacon_event;
     }
      
     if (current_beacon_event != last_beacon_event) { // check for change from last time

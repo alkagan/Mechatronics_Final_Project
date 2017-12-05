@@ -172,25 +172,25 @@ section                    address  length [bytes]      (dec)  Description
 .text                   0x9d009670          0x8bc        2236  App's exec code 
 .rodata                 0x9d009f2c          0x44c        1100  Read-only const 
 .text                   0x9d00a378          0x814        2068  App's exec code 
-.text                   0x9d00ab8c          0x768        1896  App's exec code 
-.text                   0x9d00b2f4          0x6cc        1740  App's exec code 
-.rodata                 0x9d00b9c0          0x2c4         708  Read-only const 
-.text.fpsubadd          0x9d00bc84          0x278         632   
-.text                   0x9d00befc          0x458        1112  App's exec code 
-.rodata                 0x9d00c354          0x38c         908  Read-only const 
-.rodata                 0x9d00c6e0          0x32c         812  Read-only const 
-.rodata                 0x9d00ca0c          0x2b4         692  Read-only const 
-.rodata                 0x9d00ccc0          0x280         640  Read-only const 
-.rodata                 0x9d00cf40          0x278         632  Read-only const 
-.rodata                 0x9d00d1b8          0x278         632  Read-only const 
-.rodata                 0x9d00d430          0x13c         316  Read-only const 
-.text._outcnvrt         0x9d00d56c          0x13c         316   
-.rodata                 0x9d00d6a8          0x120         288  Read-only const 
-.text                   0x9d00d7c8          0x120         288  App's exec code 
-.text._flsbuf_simple    0x9d00d8e8           0xfc         252   
-.text                   0x9d00d9e4           0xe0         224  App's exec code 
-.text.general_exception 0x9d00dac4           0xdc         220   
-.text                   0x9d00dba0          0x178         376  App's exec code 
+.text                   0x9d00ab8c          0x758        1880  App's exec code 
+.text                   0x9d00b2e4          0x6cc        1740  App's exec code 
+.rodata                 0x9d00b9b0          0x2c4         708  Read-only const 
+.text.fpsubadd          0x9d00bc74          0x278         632   
+.text                   0x9d00beec          0x458        1112  App's exec code 
+.rodata                 0x9d00c344          0x38c         908  Read-only const 
+.rodata                 0x9d00c6d0          0x32c         812  Read-only const 
+.rodata                 0x9d00c9fc          0x2b4         692  Read-only const 
+.rodata                 0x9d00ccb0          0x280         640  Read-only const 
+.rodata                 0x9d00cf30          0x278         632  Read-only const 
+.rodata                 0x9d00d1a8          0x278         632  Read-only const 
+.rodata                 0x9d00d420          0x13c         316  Read-only const 
+.text._outcnvrt         0x9d00d55c          0x13c         316   
+.rodata                 0x9d00d698          0x120         288  Read-only const 
+.text                   0x9d00d7b8          0x120         288  App's exec code 
+.text._flsbuf_simple    0x9d00d8d8           0xfc         252   
+.text                   0x9d00d9d4           0xe0         224  App's exec code 
+.text.general_exception 0x9d00dab4           0xdc         220   
+.text                   0x9d00db90          0x188         392  App's exec code 
 .text.fputc             0x9d00dd18           0xac         172   
 .text.repl.constprop.0  0x9d00ddc4           0xac         172   
 .text                   0x9d00de70           0xa8         168  App's exec code 
@@ -1461,9 +1461,9 @@ END GROUP
  .debug_line    0x00001c0b      0x1bb build/default/production/_ext/580189257/TopLevelHSM.o
  .debug_line    0x00001dc6      0x204 build/default/production/_ext/580189257/SubSearchingHSM.o
  .debug_line    0x00001fca      0x224 build/default/production/_ext/580189257/SubOrientationHSM.o
- .debug_line    0x000021ee      0x1b5 build/default/production/_ext/580189257/BeaconEventChecker.o
- .debug_line    0x000023a3      0x1b8 build/default/production/_ext/580189257/BumpEventChecker.o
- .debug_line    0x0000255b      0x10d build/default/production/_ext/580189257/motor_drivers.o
+ .debug_line    0x000021ee      0x1b6 build/default/production/_ext/580189257/BeaconEventChecker.o
+ .debug_line    0x000023a4      0x1b8 build/default/production/_ext/580189257/BumpEventChecker.o
+ .debug_line    0x0000255c      0x10c build/default/production/_ext/580189257/motor_drivers.o
  .debug_line    0x00002668      0x308 build/default/production/_ext/580189257/RC_Servo.o
  .debug_line    0x00002970      0x1b3 build/default/production/_ext/580189257/TapeEventChecker.o
  .debug_line    0x00002b23       0x6e c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libmchp_peripheral_32MX320F128H.a(int_configure_system_lib.o)
@@ -2471,8 +2471,8 @@ LOAD data_init
                 0x9d00a844                PostTopLevelHSM
                 0x9d00a88c                RunTopLevelHSM
 
-.text           0x9d00ab8c      0x768
- .text          0x9d00ab8c      0x3c0 build/default/production/_ext/580189257/motor_drivers.o
+.text           0x9d00ab8c      0x758
+ .text          0x9d00ab8c      0x3b0 build/default/production/_ext/580189257/motor_drivers.o
                 0x9d00ab8c                onwards_NOS
                 0x9d00abe4                onwards_TYO
                 0x9d00ac3c                onwards
@@ -2483,105 +2483,105 @@ LOAD data_init
                 0x9d00ae14                rotate_counter_clockwise
                 0x9d00ae7c                tape_realign_left_detected
                 0x9d00aee4                tape_realign_right_detected
- .text          0x9d00af4c      0x3a8 build/default/production/_ext/580189257/SubOrientationHSM.o
-                0x9d00af4c                InitSubOrientationHSM
-                0x9d00afb8                RunSubOrientationHSM
+ .text          0x9d00af3c      0x3a8 build/default/production/_ext/580189257/SubOrientationHSM.o
+                0x9d00af3c                InitSubOrientationHSM
+                0x9d00afa8                RunSubOrientationHSM
 
-.text           0x9d00b2f4      0x6cc
- .text          0x9d00b2f4      0x39c build/default/production/_ext/580189257/ES_TattleTale.o
-                0x9d00b2f4                ES_TattleTaleDump
-                0x9d00b484                ES_AddTattlePoint
-                0x9d00b5ac                ES_CheckTail
- .text          0x9d00b690      0x330 build/default/production/_ext/580189257/SubSearchingHSM.o
-                0x9d00b690                InitSubSearchingHSM
-                0x9d00b6fc                RunSubSearchingHSM
+.text           0x9d00b2e4      0x6cc
+ .text          0x9d00b2e4      0x39c build/default/production/_ext/580189257/ES_TattleTale.o
+                0x9d00b2e4                ES_TattleTaleDump
+                0x9d00b474                ES_AddTattlePoint
+                0x9d00b59c                ES_CheckTail
+ .text          0x9d00b680      0x330 build/default/production/_ext/580189257/SubSearchingHSM.o
+                0x9d00b680                InitSubSearchingHSM
+                0x9d00b6ec                RunSubSearchingHSM
 
-.rodata         0x9d00b9c0      0x2c4
- .rodata        0x9d00b9c0      0x2c4 build/default/production/_ext/580189257/SubOrientationHSM.o
+.rodata         0x9d00b9b0      0x2c4
+ .rodata        0x9d00b9b0      0x2c4 build/default/production/_ext/580189257/SubOrientationHSM.o
 
-.text.fpsubadd  0x9d00bc84      0x278
+.text.fpsubadd  0x9d00bc74      0x278
  .text.fpsubadd
-                0x9d00bc84      0x278 c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libm.a(fp32subadd.o)
-                0x9d00bc84                fpsub
-                0x9d00bc84                __subsf3
-                0x9d00bc8c                __addsf3
-                0x9d00bc8c                fpadd
+                0x9d00bc74      0x278 c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libm.a(fp32subadd.o)
+                0x9d00bc74                fpsub
+                0x9d00bc74                __subsf3
+                0x9d00bc7c                __addsf3
+                0x9d00bc7c                fpadd
 
-.text           0x9d00befc      0x458
- .text          0x9d00befc      0x26c build/default/production/_ext/580189257/ES_Queue.o
-                0x9d00befc                ES_InitQueue
-                0x9d00bf5c                ES_EnQueueFIFO
-                0x9d00c020                ES_DeQueue
-                0x9d00c12c                ES_IsQueueEmpty
- .text          0x9d00c168      0x1ec build/default/production/_ext/580189257/ES_Main.o
-                0x9d00c168                set_AD_pins
-                0x9d00c19c                set_IO_pins
-                0x9d00c1e4                set_PWM_pins
-                0x9d00c218                main
+.text           0x9d00beec      0x458
+ .text          0x9d00beec      0x26c build/default/production/_ext/580189257/ES_Queue.o
+                0x9d00beec                ES_InitQueue
+                0x9d00bf4c                ES_EnQueueFIFO
+                0x9d00c010                ES_DeQueue
+                0x9d00c11c                ES_IsQueueEmpty
+ .text          0x9d00c158      0x1ec build/default/production/_ext/580189257/ES_Main.o
+                0x9d00c158                set_AD_pins
+                0x9d00c18c                set_IO_pins
+                0x9d00c1d4                set_PWM_pins
+                0x9d00c208                main
 
-.rodata         0x9d00c354      0x38c
- .rodata        0x9d00c354      0x1d8 build/default/production/_ext/580189257/ES_Main.o
- .rodata        0x9d00c52c      0x1b4 build/default/production/_ext/580189257/TopLevelHSM.o
+.rodata         0x9d00c344      0x38c
+ .rodata        0x9d00c344      0x1d8 build/default/production/_ext/580189257/ES_Main.o
+ .rodata        0x9d00c51c      0x1b4 build/default/production/_ext/580189257/TopLevelHSM.o
 
-.rodata         0x9d00c6e0      0x32c
- .rodata        0x9d00c6e0      0x1b0 build/default/production/_ext/580189257/SubSearchingHSM.o
- .rodata        0x9d00c890      0x17c build/default/production/_ext/580189257/ES_Timers.o
+.rodata         0x9d00c6d0      0x32c
+ .rodata        0x9d00c6d0      0x1b0 build/default/production/_ext/580189257/SubSearchingHSM.o
+ .rodata        0x9d00c880      0x17c build/default/production/_ext/580189257/ES_Timers.o
 
-.rodata         0x9d00ca0c      0x2b4
- .rodata        0x9d00ca0c      0x160 build/default/production/_ext/580189257/ES_Framework.o
- .rodata        0x9d00cb6c      0x154 build/default/production/_ext/580189257/ES_TattleTale.o
+.rodata         0x9d00c9fc      0x2b4
+ .rodata        0x9d00c9fc      0x160 build/default/production/_ext/580189257/ES_Framework.o
+ .rodata        0x9d00cb5c      0x154 build/default/production/_ext/580189257/ES_TattleTale.o
 
-.rodata         0x9d00ccc0      0x280
- .rodata        0x9d00ccc0      0x144 build/default/production/_ext/580189257/ES_CheckEvents.o
- .rodata        0x9d00ce04      0x13c build/default/production/_ext/580189257/ES_KeyboardInput.o
+.rodata         0x9d00ccb0      0x280
+ .rodata        0x9d00ccb0      0x144 build/default/production/_ext/580189257/ES_CheckEvents.o
+ .rodata        0x9d00cdf4      0x13c build/default/production/_ext/580189257/ES_KeyboardInput.o
 
-.rodata         0x9d00cf40      0x278
- .rodata        0x9d00cf40      0x13c build/default/production/_ext/580189257/ES_PostList.o
- .rodata        0x9d00d07c      0x13c build/default/production/_ext/580189257/ES_Queue.o
+.rodata         0x9d00cf30      0x278
+ .rodata        0x9d00cf30      0x13c build/default/production/_ext/580189257/ES_PostList.o
+ .rodata        0x9d00d06c      0x13c build/default/production/_ext/580189257/ES_Queue.o
 
-.rodata         0x9d00d1b8      0x278
- .rodata        0x9d00d1b8      0x13c build/default/production/_ext/580189257/BeaconEventChecker.o
- .rodata        0x9d00d2f4      0x13c build/default/production/_ext/580189257/BumpEventChecker.o
+.rodata         0x9d00d1a8      0x278
+ .rodata        0x9d00d1a8      0x13c build/default/production/_ext/580189257/BeaconEventChecker.o
+ .rodata        0x9d00d2e4      0x13c build/default/production/_ext/580189257/BumpEventChecker.o
 
-.rodata         0x9d00d430      0x13c
- .rodata        0x9d00d430      0x13c build/default/production/_ext/580189257/TapeEventChecker.o
+.rodata         0x9d00d420      0x13c
+ .rodata        0x9d00d420      0x13c build/default/production/_ext/580189257/TapeEventChecker.o
 
 .text._outcnvrt
-                0x9d00d56c      0x13c
+                0x9d00d55c      0x13c
  .text._outcnvrt
-                0x9d00d56c      0x13c c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\liblega-c.a(_doprnt_cdnopsuxX.eo)
+                0x9d00d55c      0x13c c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
-.rodata         0x9d00d6a8      0x120
- .rodata        0x9d00d6a8      0x120 build/default/production/_ext/331920610/LED.o
+.rodata         0x9d00d698      0x120
+ .rodata        0x9d00d698      0x120 build/default/production/_ext/331920610/LED.o
 
-.text           0x9d00d7c8      0x120
- .text          0x9d00d7c8      0x120 build/default/production/_ext/580189257/ES_KeyboardInput.o
-                0x9d00d7c8                InitKeyboardInput
-                0x9d00d840                PostKeyboardInput
-                0x9d00d888                RunKeyboardInput
-                0x9d00d8c8                KeyboardInput_PrintEvents
+.text           0x9d00d7b8      0x120
+ .text          0x9d00d7b8      0x120 build/default/production/_ext/580189257/ES_KeyboardInput.o
+                0x9d00d7b8                InitKeyboardInput
+                0x9d00d830                PostKeyboardInput
+                0x9d00d878                RunKeyboardInput
+                0x9d00d8b8                KeyboardInput_PrintEvents
 
 .text._flsbuf_simple
-                0x9d00d8e8       0xfc
+                0x9d00d8d8       0xfc
  .text._flsbuf_simple
-                0x9d00d8e8       0xfc c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\liblega-c.a(_iobfuncs.o)
-                0x9d00d8e8                _flsbuf_simple
+                0x9d00d8d8       0xfc c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\liblega-c.a(_iobfuncs.o)
+                0x9d00d8d8                _flsbuf_simple
 
-.text           0x9d00d9e4       0xe0
- .text          0x9d00d9e4       0xe0 build/default/production/_ext/580189257/BumpEventChecker.o
-                0x9d00d9e4                CheckForBumpEvent
+.text           0x9d00d9d4       0xe0
+ .text          0x9d00d9d4       0xe0 build/default/production/_ext/580189257/BumpEventChecker.o
+                0x9d00d9d4                CheckForBumpEvent
 
 .text.general_exception
-                0x9d00dac4       0xdc
+                0x9d00dab4       0xdc
  .text.general_exception
-                0x9d00dac4       0xdc c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(general-exception.o)
-                0x9d00dac4                _general_exception_context
+                0x9d00dab4       0xdc c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(general-exception.o)
+                0x9d00dab4                _general_exception_context
 
-.text           0x9d00dba0      0x178
- .text          0x9d00dba0       0xc0 build/default/production/_ext/580189257/TapeEventChecker.o
-                0x9d00dba0                CheckTapeEvent
- .text          0x9d00dc60       0xb8 build/default/production/_ext/580189257/BeaconEventChecker.o
-                0x9d00dc60                CheckForBeaconEvent
+.text           0x9d00db90      0x188
+ .text          0x9d00db90       0xc8 build/default/production/_ext/580189257/BeaconEventChecker.o
+                0x9d00db90                CheckForBeaconEvent
+ .text          0x9d00dc58       0xc0 build/default/production/_ext/580189257/TapeEventChecker.o
+                0x9d00dc58                CheckTapeEvent
 
 .text.fputc     0x9d00dd18       0xac
  .text.fputc    0x9d00dd18       0xac c:/program files (x86)/microchip/xc32/v1.44/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\liblega-c.a(fputc.o)
