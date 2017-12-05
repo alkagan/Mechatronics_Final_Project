@@ -212,10 +212,10 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
 
-                case BUMP_RELEASED:
-                    stop_everything();
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;  //orientation to searching
+//                case BUMP_RELEASED:
+//                    stop_everything();
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;  //orientation to searching
                     
                 default:
                     break;

@@ -41,18 +41,16 @@
  ******************************************************************************/
 typedef enum {
     InitSearchSubState,
-    SubDriveAround,
+    SubCollision,
     SubAdjustToTheLeft,
     SubAdjustToTheRight,
-    SubCornerResponse,
 } SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSearchSubState",
-	"SubDriveAround",
+	"SubCollision",
 	"SubAdjustToTheLeft",
 	"SubAdjustToTheRight",
-	"SubCornerResponse",
 };
 
 #define REALIGNMENT_TIMER_LENGTH 500
@@ -134,39 +132,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             }
             break;
 
-        case SubDriveAround: // in the first state, replace this with correct names
+        case SubCollision: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse();
+                    stop_everything();
                     //ThisEvent.EventType = ES_NO_EVENT;
                     break;
-
-//                case TAPE_DETECTED:
-//                    /////////////////seeing what tape state to go in////////////
-//                    switch (ThisEvent.EventParam) {
-//
-//                            //                        case TAPE_TOP_PARAM:
-//                            //                            nextState
-//                            //                            break;
-//
-//                        case TAPE_LEFT_PARAM:
-//                            nextState = SubAdjustToTheLeft;
-//                            makeTransition = TRUE;
-//                            break;
-//
-//                        case TAPE_RIGHT_PARAM:
-//                            nextState = SubAdjustToTheRight;
-//                            makeTransition = TRUE;
-//                            break;
-//
-//                        case TAPE_CORNER_PARAM:
-//                            break;
-//
-//                        default:
-//                            break;
-//                    }
-//                    /////////////////seeing what tape state to go in////////////
-//                    break;
 
                 case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
@@ -177,7 +148,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheLeft:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                   // tape_realign_right_detected();
+                    // tape_realign_right_detected();
                     tape_realign_left_detected();
                     LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
@@ -186,15 +157,16 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     // case not detected? when left tape is still on? maybe use
                     //that instead of a timer?
                 case TAPE_NOT_DETECTED:
-                        nextState = SubAdjustToTheRight;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
+                    nextState = SubAdjustToTheRight;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
-//                case ES_TIMEOUT:
-//                    nextState = SubDriveAround;
-//                    makeTransition = TRUE;
-//                    break;
+
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
 
                 default:
                     break;
@@ -204,7 +176,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheRight:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                  //  tape_realign_left_detected();
+                    //  tape_realign_left_detected();
                     tape_realign_right_detected();
                     LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
@@ -216,34 +188,20 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case TAPE_DETECTED:
                     nextState = SubAdjustToTheLeft;
                     makeTransition = TRUE;
-                     ThisEvent.EventType = ES_NO_EVENT;
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-
-        case SubCornerResponse:
-            switch (ThisEvent.EventType) {
-                case ES_ENTRY:
-                    rotate_clockwise();
-                    break;
-
-                case TAPE_DETECTED:
-                    if (ThisEvent.EventParam == TAPE_TOP_PARAM) {
-                        nextState = SubDriveAround;
-                        makeTransition = TRUE;
-                    }
-                    
-                    
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-
+                    
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
                 default:
                     break;
             }
             break;
+            
 
         default: // all unhandled states fall into here
             break;

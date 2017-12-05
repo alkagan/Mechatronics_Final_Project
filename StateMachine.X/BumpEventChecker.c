@@ -88,14 +88,14 @@ static ES_Event storedEvent;
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForBumpEvent(void) {
     static ES_EventTyp_t last_bump_event = BUMP_RELEASED;
-    ES_EventTyp_t current_bump_event;
+    ES_EventTyp_t current_bump_event = last_bump_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
     
-    bool left_bumper = IO_PortsReadPort(PORTW & LEFT_BUMPER);
-    bool right_bumper = IO_PortsReadPort(PORTW & RIGHT_BUMPER);
+    uint16_t left_bumper = AD_ReadADPin(LEFT_SWITCH);
+    uint16_t right_bumper = AD_ReadADPin(RIGHT_SWITCH);
 
-    if(left_bumper != 0 || right_bumper != 0){
+    if(left_bumper > 800 || right_bumper > 800){
         current_bump_event = BUMP_PRESSED;
     } else {
         current_bump_event = BUMP_RELEASED;
@@ -105,9 +105,11 @@ uint8_t CheckForBumpEvent(void) {
         thisEvent.EventType = current_bump_event;
 
         // differentiating which parameter gets passed to service routine
-        if(left_bumper != 0){
+        if(left_bumper > 800 && right_bumper > 800){
+            thisEvent.EventParam = 0x02;
+        } else if(left_bumper > 800){
             thisEvent.EventParam = 0x0;
-        } else {
+        } else if (right_bumper > 800){
             thisEvent.EventParam = 0x1;
         }
 
