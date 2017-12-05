@@ -38,7 +38,7 @@
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-#define TAPE_THRESHOLD_DETECTED         200
+#define TAPE_THRESHOLD_DETECTED         500
 #define TAPE_THRESHOLD_NOT_DETECTED     1000
 
 /*******************************************************************************
@@ -93,10 +93,10 @@ uint8_t CheckCornerTapeEvent(void) {
     uint8_t returnVal = FALSE;
     uint16_t tape_sensor_val = AD_ReadADPin(TAPE_CORNER);
 
-    if (tape_sensor_val < TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
-        curCornerTapeEvent = CORNER_TAPE_NOT_DETECTED;
-    } else if (tape_sensor_val > TAPE_THRESHOLD_DETECTED) {
+    if (tape_sensor_val > TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
         curCornerTapeEvent = CORNER_TAPE_DETECTED;
+    } else if (tape_sensor_val < TAPE_THRESHOLD_DETECTED) {
+        curCornerTapeEvent = CORNER_TAPE_NOT_DETECTED;
     } else {
         curCornerTapeEvent = lastCornerTapeEvent;
     }

@@ -234,11 +234,11 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //start timer
                     break;
                 //case timeout
-                    //go to subfinaladjustment
+                    //nextState = SubFinalAdjustment
                    
 
                 case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
-                    nextState = SubFinalAdjustment; //middle state
+                    nextState = SubAdjustToTheRight; //middle state
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -260,6 +260,11 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
         case SubFinalAdjustment:
             switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+
+                    break;
+                    
                 case CORNER_TAPE_DETECTED:
                     nextState = SubAdjustToTheRight; //middle state
                     makeTransition = TRUE;

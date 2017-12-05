@@ -94,9 +94,9 @@ uint8_t CheckTapeEvent(void) {
     uint16_t tape_sensor_val = AD_ReadADPin(TAPE_FOLLOWER);
 
     if (tape_sensor_val > TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
-        curTapeEvent = TAPE_NOT_DETECTED;
-    } else if (tape_sensor_val < TAPE_THRESHOLD_DETECTED) {
         curTapeEvent = TAPE_DETECTED;
+    } else if (tape_sensor_val < TAPE_THRESHOLD_DETECTED) {
+        curTapeEvent = TAPE_NOT_DETECTED;
     } else {
         curTapeEvent = lastTapeEvent;
     }
