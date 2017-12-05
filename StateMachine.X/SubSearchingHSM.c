@@ -35,6 +35,8 @@
 #include "pin_configuration.h"
 #include "motor_drivers.h"
 #include "LED.h"
+#include "pwm.h"
+#include "IO_Ports.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -42,6 +44,7 @@
 typedef enum {
     InitSearchSubState,
     SubCollision,
+    SubCollisionPart2,
     SubAdjustToTheLeft,
     SubAdjustToTheRight,
     SubCornerDetected,
@@ -51,11 +54,14 @@ typedef enum {
 static const char *StateNames[] = {
 	"InitSearchSubState",
 	"SubCollision",
+	"SubCollisionPart2",
 	"SubAdjustToTheLeft",
 	"SubAdjustToTheRight",
 	"SubCornerDetected",
 	"SubFinalAdjustment",
 };
+
+#define BUMP_TIME_VALUE 3000
 
 #define REALIGNMENT_TIMER_LENGTH 500
 
@@ -64,6 +70,13 @@ static const char *StateNames[] = {
  ***************************er***************************************************/
 /* Prototypes for private functions for this machine. They should be functions
    relevant to the behavior of this state machine */
+
+void reverse_try2(void){
+    printf("reverse\r\n");
+    IO_PortsWritePort(PORTX, 0);
+    PWM_SetDutyCycle(LEFT_MOTOR, 700);
+    PWM_SetDutyCycle(RIGHT_MOTOR, 700);
+}
 
 /*******************************************************************************
  * PRIVATE MODULE VARIABLES                                                            *
@@ -140,11 +153,37 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     stop_everything();
-                    //ThisEvent.EventType = ES_NO_EVENT;
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubCollisionPart2;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+            
+        case SubCollisionPart2:
+            switch (ThisEvent.EventType){
+                case ES_ENTRY:
+                    reverse_try2();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                case ES_TIMEOUT:
+                    nextState = SubAdjustToTheRight;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                default:
                     break;
             }
             break;
@@ -233,9 +272,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //reverse
                     //start timer
                     break;
-                //case timeout
+                    //case timeout
                     //nextState = SubFinalAdjustment
-                   
+
 
                 case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
                     nextState = SubAdjustToTheRight; //middle state
@@ -264,7 +303,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     rotate_clockwise();
 
                     break;
-                    
+
                 case CORNER_TAPE_DETECTED:
                     nextState = SubAdjustToTheRight; //middle state
                     makeTransition = TRUE;

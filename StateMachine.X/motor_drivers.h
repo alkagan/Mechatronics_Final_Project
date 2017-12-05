@@ -23,6 +23,8 @@ void stop_everything(void);
 
 void reverse(void);
 
+void reverse_again(void);
+
 void rotate_clockwise(void);
 
 void rotate_counter_clockwise(void);

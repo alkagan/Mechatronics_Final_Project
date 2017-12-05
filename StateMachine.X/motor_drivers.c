@@ -53,6 +53,7 @@ void snails_pace(void){
 
 void stop_everything(void){
     printf("stopeverything\r\n");
+    IO_PortsWritePort(PORTX, 0x00);
     PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
     PWM_SetDutyCycle(RIGHT_MOTOR, NOT_MOVING);
 }
@@ -60,6 +61,14 @@ void stop_everything(void){
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
     printf("reverse\r\n");
+    IO_PortsClearPortBits(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
+    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+}
+
+// Setting both direction pins to HIGH which makes motors turn in reverse
+void reverse_again(void){
+    printf("reverse_again\r\n");
     IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);

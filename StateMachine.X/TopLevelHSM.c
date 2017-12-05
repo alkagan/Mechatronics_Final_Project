@@ -190,12 +190,12 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
                     
-                case BUMP_PRESSED:
-                    LED_InvertBank(LED_BANK3, 0x02);
-                    nextState = EngagingState;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;  //orientation to searching
+//                case BUMP_PRESSED:
+//                    LED_InvertBank(LED_BANK3, 0x02);
+//                    nextState = EngagingState;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;  //orientation to searching
                     
                 default:
                     break;
