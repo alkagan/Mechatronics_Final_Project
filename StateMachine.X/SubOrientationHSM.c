@@ -55,6 +55,8 @@ static const char *StateNames[] = {
 	"FinalizeOrientation",
 };
 
+#define OH_SHIT_TIMER_LENGTH 10000
+
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ******************************************************************************/
@@ -134,10 +136,11 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             break; //break from init subOrientation state
 
         case LocateBeaconState: // in the first state, replace this with correct names
-//            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-//            LED_SetBank(0x01, 0x0F);
+            //            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
+            //            LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     //LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
                     rotate_counter_clockwise();
                     printf("SubOrientation: Entry to locate beacon state\r\n");
@@ -150,14 +153,22 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case ES_TIMEOUT:
+                    nextState = LocateTape;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
                 case ES_EXIT:
                     printf("SubOrientation: EXIT to locate beacon state\r\n");
                     stop_everything();
                     break;
 
-                    case TAPE_DETECTED:
+                /////// is this necessary/was this accidentally included?////////
+                case TAPE_DETECTED:
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
+
                 default: // all unhandled events pass the event back up to the next level
                     break;
             }
@@ -203,16 +214,16 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     break;
 
 
-//                case TAPE_NOT_DETECTED:
+                    //                case TAPE_NOT_DETECTED:
                     //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
                     //LED_SetBank(0x01, 0x0F);
-//                    stop_everything();
-//                    makeTransition = TRUE;
-//                    
-//                    ES_Event NextEvent;
-//                    NextEvent.EventType = ORIENTATION_TO_SEARCHING;
-//                    PostTopLevelHSM(NextEvent);
-//                    ThisEvent.EventType = ES_NO_EVENT;
+                    //                    stop_everything();
+                    //                    makeTransition = TRUE;
+                    //                    
+                    //                    ES_Event NextEvent;
+                    //                    NextEvent.EventType = ORIENTATION_TO_SEARCHING;
+                    //                    PostTopLevelHSM(NextEvent);
+                    //                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:

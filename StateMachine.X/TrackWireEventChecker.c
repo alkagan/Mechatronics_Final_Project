@@ -42,6 +42,8 @@
 #define TRACKWIRE_DETECTED_THRESHOLD     700
 #define TRACKWIRE_NOT_DETECTED_THRESHOLD 300
 
+
+
 /*******************************************************************************
  * EVENTCHECKER_TEST SPECIFIC CODE                                                             *
  ******************************************************************************/

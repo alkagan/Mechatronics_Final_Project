@@ -27,7 +27,7 @@
 #define RIGHT_MOTOR             PWM_PORTY12 //PWM signal
 #define LEFT_MOTOR_DIRECTION    PIN11       //Port X output pin
 #define RIGHT_MOTOR_DIRECTION   PIN12       //Port X output pin
-#define LAUNCHER_MOTOR          PWM_PORTY10         //PWM signal
+#define LAUNCHER_MOTOR          PWM_PORTY10 //PWM signal
 
 // Tape Sensor Pin Configuration
 #define TAPE_CORNER             AD_PORTV4   //uint16_t value
