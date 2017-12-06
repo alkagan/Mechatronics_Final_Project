@@ -66,11 +66,11 @@ static const char *StateNames[] = {
 	"SubAllThreeDestroyed",
 };
 
-#define BUMP_TIME_VALUE 200
-#define TRACKWIRE_TIME_LENGTH   100 
+#define BUMP_TIME_VALUE             200
+#define TRACKWIRE_TIME_LENGTH       127
 
-#define REALIGNMENT_TIMER_LENGTH 500
-
+#define REALIGNMENT_TIMER_LENGTH    500
+#define OH_SHIT_TIMER_LENGTH        7500
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ***************************er***************************************************/
@@ -198,6 +198,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubAdjustToTheLeft:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     // tape_realign_right_detected();
                     tape_realign_left_detected(); //turn right
                     //LED_InvertBank(LED_BANK1, 0x0F);
@@ -238,6 +239,10 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                         nextState = SubDummyState;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
+                    } else if(ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH){
+                        nextState = SubAdjustToTheRight;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
                     }
                     break;
 
@@ -256,6 +261,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     //  tape_realign_left_detected();
                     tape_realign_right_detected(); //left turn
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     //LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
@@ -292,6 +298,10 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //transition into dummy state
                     if (ThisEvent.EventParam == TRACK_TIMER) {
                         nextState = SubDummyState;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    } else if(ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH){
+                        nextState = SubAdjustToTheRight;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     }
