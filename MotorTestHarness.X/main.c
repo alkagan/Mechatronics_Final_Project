@@ -229,7 +229,7 @@ void delay(int time) {
 #include "pin_configuration.h"
 
 #define time_delay 500
-#define DUTY_CYCLE 350 //doesn't work for full duty cycle (1000)
+#define DUTY_CYCLE 1000 //doesn't work for full duty cycle (1000)
 #define ADC_MAX 1023.0
 #define RC_MAX (MAXPULSE - MINPULSE)
 #define INDEXER RC_PORTY06  //Servo 

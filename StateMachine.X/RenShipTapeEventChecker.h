@@ -19,8 +19,8 @@
  * Modified on September 12, 2016, 7:59 PM
  */
 
-#ifndef BUMPEVENTCHECKER_H
-#define	BUMPEVENTCHECKER_H
+#ifndef RENSHIPTAPEEVENTCHECKER_H
+#define	RENSHIPTAPEEVENTCHECKER_H
 
 /*******************************************************************************
  * PUBLIC #INCLUDES                                                            *
@@ -28,11 +28,7 @@
 
 #include "ES_Configure.h"   // defines ES_Event, INIT_EVENT, ENTRY_EVENT, and EXIT_EVENT
 #include "BOARD.h"
-#include "TapeEventChecker.h"
-#include "BeaconEventChecker.h"
-#include "CornerTapeEventChecker.h"
-#include "TrackWireEventChecker.h"
-#include "RenShipTapeEventChecker.h"
+
 /*******************************************************************************
  * PUBLIC #DEFINES                                                             *
  ******************************************************************************/
@@ -61,9 +57,9 @@
  * @note Use this code as a template for your other event checkers, and modify as necessary.
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
-uint8_t CheckForBumpEvent(void);
+uint8_t CheckRenShipTapeEvent(void);
 
 
 
-#endif	/* DROIDEVENTCHECKER_H */
+#endif	/* TEMPLATEEVENTCHECKER_H */
 
