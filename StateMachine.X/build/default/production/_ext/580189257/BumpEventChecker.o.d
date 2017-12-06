@@ -7,6 +7,8 @@ build/default/production/_ext/580189257/BumpEventChecker.o:  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h  \
+ C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.h  \
+ C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/KillCountEventChecker.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Events.h  \
  C:/CMPE118/include/serial.h  \
 C:/CMPE118/include/AD.h  \

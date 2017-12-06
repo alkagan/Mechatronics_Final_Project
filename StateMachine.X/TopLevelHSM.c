@@ -35,6 +35,7 @@
 #include "TopLevelHSM.h"
 #include "SubSearchingHSM.h"
 #include "SubOrientationHSM.h" //#include all sub state machines called
+#include "SubEngagingHSM.h"
 /*******************************************************************************
  * PRIVATE #DEFINES                                                            *
  ******************************************************************************/
@@ -49,8 +50,6 @@ typedef enum {
     OrientationState, // 1
     SearchingState, // 2
     EngagingState, // 3
-    ApproachShipState, // 4
-    TakeDownShipState, // 5
 } HSM_State_t;
 
 static const char *StateNames[] = {
@@ -58,8 +57,6 @@ static const char *StateNames[] = {
 	"OrientationState",
 	"SearchingState",
 	"EngagingState",
-	"ApproachShipState",
-	"TakeDownShipState",
 };
 
 
@@ -148,7 +145,8 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 // initial state
                 // Initialize all sub-state machines
                 InitSubOrientationHSM();
-                InitSubSearchingHSM();                
+                InitSubSearchingHSM();
+                InitSubEngagingHSM();
                 //LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
 
                 // now put the machine into the actual initial state
@@ -190,12 +188,11 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_NO_EVENT:
                     break;
                     
-//                case BUMP_PRESSED:
-//                    LED_InvertBank(LED_BANK3, 0x02);
-//                    nextState = EngagingState;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;  //orientation to searching
+                case ALL_ATM6s_DESTROYED:
+                    nextState = EngagingState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
                     
                 default:
                     break;
@@ -207,7 +204,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
 
-            //ThisEvent = RunSubEngagingHSM(ThisEvent);
+            ThisEvent = RunSubEngagingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;
@@ -221,36 +218,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                     break;
             }
             break;  // engaging state
-
-        case ApproachShipState: // in the first state, replace this with correct names
-            // run sub-state machine for this state
-            //NOTE: the SubState Machine runs and responds to events before anything in the this
-            //state machine does
-
-            //ThisEvent = RunSubApproachingHSM(ThisEvent);
-            switch (ThisEvent.EventType) {
-                case ES_NO_EVENT:
-                    break;
-
-                default:
-                    break;
-            }
-            break;  // approach ship state
-
-        case TakeDownShipState: // in the first state, replace this with correct names
-            // run sub-state machine for this state
-            //NOTE: the SubState Machine runs and responds to events before anything in the this
-            //state machine does
-
-            //ThisEvent = RunSubTakeDownShipHSM(ThisEvent);
-            switch (ThisEvent.EventType) {
-                case ES_NO_EVENT:
-                    break;
-
-                default:
-                    break;
-            }
-            break;  //Take Down Ship State
 
         default: // all unhandled states fall into here
             break;

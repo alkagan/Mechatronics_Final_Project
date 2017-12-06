@@ -46,6 +46,8 @@ typedef enum {
     LocateBeaconState,
     LocateTape,
     FinalizeOrientation,
+    SubCollision,
+    SubCollisionPart2,
 } SubOrientationHSMState_t;
 
 static const char *StateNames[] = {
@@ -53,9 +55,12 @@ static const char *StateNames[] = {
 	"LocateBeaconState",
 	"LocateTape",
 	"FinalizeOrientation",
+	"SubCollision",
+	"SubCollisionPart2",
 };
 
 #define OH_SHIT_TIMER_LENGTH 10000
+#define BUMP_TIME_VALUE      200
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -71,7 +76,7 @@ static const char *StateNames[] = {
 
 static SubOrientationHSMState_t CurrentState = InitSubOrientationState;
 static uint8_t MyPriority;
-static uint8_t tape_sensor_parameter;
+
 
 /*******************************************************************************
  * PUBLIC FUNCTIONS                                                            *
@@ -153,6 +158,9 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case BUMP_PRESSED:
+                    break;
+
                 case ES_TIMEOUT:
                     nextState = LocateTape;
                     makeTransition = TRUE;
@@ -164,7 +172,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     stop_everything();
                     break;
 
-                /////// is this necessary/was this accidentally included?////////
+                    /////// is this necessary/was this accidentally included?////////
                 case TAPE_DETECTED:
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -201,6 +209,45 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     break;
             }
             break; //break from Locate Tape
+
+        case SubCollision: // in the first state, replace this with correct names
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubCollisionPart2;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_NO_EVENT:
+                default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+
+        case SubCollisionPart2:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = LocateTape;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
 
         case FinalizeOrientation:
             //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);

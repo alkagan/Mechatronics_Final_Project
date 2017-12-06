@@ -14,9 +14,9 @@
 #include <stdio.h>
 
 #define FAST_AND_FURIOUS    1000
-#define TOKYO_DRIFT         750
-#define NORMAL_SPEED        650
-#define SNAIL_PACE          550
+#define TOKYO_DRIFT         800
+#define NORMAL_SPEED        700
+#define SNAIL_PACE          200
 #define NOT_MOVING          0
 #define REVERSE             1
 #define LITTLE_MORE         675
@@ -82,7 +82,6 @@ void rotate_clockwise(void){
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
-    
 }
 
 // Setting left direction pins to HIGH which makes left motor reverse
@@ -97,14 +96,14 @@ void rotate_counter_clockwise(void){
 void tape_realign_left_detected(void){
     IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
-    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NOT_MOVING);
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
 
 void tape_realign_right_detected(void){
     //IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }

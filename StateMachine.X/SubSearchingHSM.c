@@ -37,6 +37,7 @@
 #include "LED.h"
 #include "pwm.h"
 #include "IO_Ports.h"
+#include <stdio.h>
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -65,8 +66,8 @@ static const char *StateNames[] = {
 	"SubAllThreeDestroyed",
 };
 
-#define BUMP_TIME_VALUE 400
-#define TRACKWIRE_TIME_LENGTH   20 
+#define BUMP_TIME_VALUE 200
+#define TRACKWIRE_TIME_LENGTH   100 
 
 #define REALIGNMENT_TIMER_LENGTH 500
 
@@ -199,7 +200,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     // tape_realign_right_detected();
                     tape_realign_left_detected(); //turn right
-                    LED_InvertBank(LED_BANK1, 0x0F);
+                    //LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
 
@@ -379,7 +380,13 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
                     printf("SubSearchingHSM: In subDummyState: trackwire count after: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
+                        IO_PortsSetPortBits(PORTX, ALL_3_DESTROYED);
                         nextState = SubAllThreeDestroyed;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                        //once kill count is 3 set io port bit high
+                        //checker function detects event, leaves state                        
+                        //PostTopLevelHSM(ALL_ATM6s_DESTROYED);
                     } else {
                         nextState = SubAdjustToTheLeft;
                     }
@@ -400,7 +407,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             printf("SubSearchingHSM: In SubAllthreedestroyed state\r\n");
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    rotate_clockwise();
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, 500);
+                    break;
+
+                case ES_TIMEOUT:
+                    stop_everything();
                     break;
 
                 default:

@@ -42,7 +42,7 @@ typedef enum { ES_Timer_ERR           = -1,
  * @return None.
  * @brief  Initializes the timer module
  * @author Max Dunne, 2011.11.15 */
-void             ES_Timer_Init(void);
+void ES_Timer_Init(void);
 
 /**
  * @Function ES_Timer_InitTimer(uint8_t Num, uint32_t NewTime)

@@ -59,7 +59,5 @@
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckRenShipTapeEvent(void);
 
-
-
 #endif	/* TEMPLATEEVENTCHECKER_H */
 

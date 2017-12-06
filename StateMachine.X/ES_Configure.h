@@ -60,6 +60,8 @@ typedef enum {
     CORNER_TAPE_DETECTED,
     TRACKWIRE_DETECTED,
     TRACKWIRE_NOT_DETECTED,
+    ALL_ATM6s_DESTROYED,
+    ALL_ATM6s_NOT_DESTROYED,
     NUMBEROFEVENTS,
 } ES_EventTyp_t;
 
@@ -87,6 +89,8 @@ static const char *EventNames[] = {
 	"CORNER_TAPE_DETECTED",
 	"TRACKWIRE_DETECTED",
 	"TRACKWIRE_NOT_DETECTED",
+	"ALL_ATM6s_DESTROYED",
+	"ALL_ATM6s_NOT_DESTROYED",
 	"NUMBEROFEVENTS",
 };
 
@@ -96,7 +100,7 @@ static const char *EventNames[] = {
 
 /****************************************************************************/
 // This is the list of event checking functions
-#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckForTrackWireEvent, CheckCornerTapeEvent, CheckTapeEvent, CheckForBumpEvent, CheckRenShipTapeEvent 
+#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckForTrackWireEvent, CheckCornerTapeEvent, CheckTapeEvent, CheckForBumpEvent, CheckRenShipTapeEvent, CheckKillCountEvent 
 
 /****************************************************************************/
 // These are the definitions for the post functions to be executed when the

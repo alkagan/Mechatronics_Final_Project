@@ -33,6 +33,7 @@
 #include "CornerTapeEventChecker.h"
 #include "TrackWireEventChecker.h"
 #include "RenShipTapeEventChecker.h"
+#include "KillCountEventChecker.h"
 /*******************************************************************************
  * PUBLIC #DEFINES                                                             *
  ******************************************************************************/

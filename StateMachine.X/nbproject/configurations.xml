@@ -37,6 +37,9 @@
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.h</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/KillCountEventChecker.h</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubEngagingHSM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -71,6 +74,9 @@
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.c</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c</itemPath>
       <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.c</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.c</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/KillCountEventChecker.c</itemPath>
+      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubEngagingHSM.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

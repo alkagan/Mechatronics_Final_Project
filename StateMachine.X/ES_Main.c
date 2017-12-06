@@ -24,7 +24,6 @@ void set_PWM_pins(void) {
 
 void main(void) {
     ES_Return_t ErrorType;
-
     BOARD_Init();
     AD_Init();
     TIMERS_Init();
