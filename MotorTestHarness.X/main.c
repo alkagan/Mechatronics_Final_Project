@@ -234,6 +234,7 @@ void delay(int time) {
 #define RC_MAX (MAXPULSE - MINPULSE)
 #define INDEXER RC_PORTY06  //Servo 
 #define PUSHER  RC_PORTY07
+#define TRACK_WIRE AD_PORTW7   //uint16_t value
 
 void delay(int time) {
     int zeropoint = TIMERS_GetTime();
@@ -249,12 +250,14 @@ int main(void) {
     PWM_Init();
     RC_AddPins(RC_PORTY07 | RC_PORTY06);
     PWM_AddPins(PWM_PORTY10);
+    AD_AddPins(TRACK_WIRE);
 
     static int i = 0;
     static uint16_t ServoVal = 0;
     static uint16_t ServoDuty;
     static bool flag = 0;
-    PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
+    static uint16_t track_wire_value = 0;
+    //PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
 
     while (1) {
         if (flag == TRUE) {
@@ -263,7 +266,8 @@ int main(void) {
             ServoVal += 2;
         }
 
-
+        track_wire_value = AD_ReadADPin(TRACK_WIRE);
+        printf("trackWireVal: %d\r\n", track_wire_value);
         ServoDuty = 1000 + ServoVal;
         RC_SetPulseTime(RC_PORTY07, ServoDuty);
         RC_SetPulseTime(RC_PORTY06, ServoDuty);

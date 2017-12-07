@@ -91,7 +91,7 @@ static ES_Event storedEvent;
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForTrackWireEvent(void) {
     static ES_EventTyp_t last_track_event = TRACKWIRE_NOT_DETECTED;
-    ES_EventTyp_t current_track_event;
+    ES_EventTyp_t current_track_event = last_track_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 

@@ -26,4 +26,5 @@ C:/CMPE118/include/IO_Ports.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.h  \
  C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RC_Servo.h  \
  C:/CMPE118/include/LED.h  \
-C:/CMPE118/include/pwm.h 
+C:/CMPE118/include/pwm.h  \
+ C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h 
