@@ -19,7 +19,7 @@
 #define FAST_AND_FURIOUS    1000
 #define TOKYO_DRIFT         700
 #define NORMAL_SPEED        600
-#define SNAIL_PACE          100
+#define SNAIL_PACE          250
 #define NOT_MOVING          0
 #define REVERSE             1
 #define LITTLE_MORE         675
@@ -114,7 +114,7 @@ void rotate_counter_clockwise(void){
 void turn_right(void){
     IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
-    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(LEFT_MOTOR, FAST_AND_FURIOUS);
     PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
@@ -122,7 +122,7 @@ void turn_left(void){
     //IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
-    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, FAST_AND_FURIOUS);
 }
 
 void attack_ATM6(void){

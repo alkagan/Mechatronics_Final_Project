@@ -72,7 +72,7 @@ static const char *StateNames[] = {
 #define BUMP_TIME_VALUE             200
 #define TRACKWIRE_TIME_LENGTH       0
 #define REALIGNMENT_TIMER_LENGTH    500
-#define OH_SHIT_TIMER_LENGTH        7500
+#define OH_SHIT_TIMER_LENGTH        4000
 #define SHOOTING_TIMER_LENGTH       500
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -324,7 +324,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //nextState = SubFinalAdjustment
 
                 case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
-                    nextState = SubFinalAdjustment; //middle state
+                    nextState = SubTapeDetected; //middle state
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
