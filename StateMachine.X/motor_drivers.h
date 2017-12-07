@@ -30,9 +30,9 @@ void rotate_clockwise(void);
 
 void rotate_counter_clockwise(void);
 
-void tape_realign_left_detected(void);
+void turn_right(void);
 
-void tape_realign_right_detected(void);
+void turn_left(void);
 
 void attack_ATM6(void);
 

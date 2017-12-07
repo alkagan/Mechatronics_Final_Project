@@ -47,11 +47,12 @@ typedef enum {
     InitSearchSubState,
     SubCollision,
     SubCollisionPart2,
-    SubAdjustToTheLeft,
-    SubAdjustToTheRight,
+    SubTapeDetected,
+    SubWhiteDetected,
     SubCornerDetected,
     SubFinalAdjustment,
     SubTrackWireDetectedState,
+    SubTrackWireDetectedStatePart2,
     SubAllThreeDestroyed,
 } SubSearchingHSMState_t;
 
@@ -59,32 +60,27 @@ static const char *StateNames[] = {
 	"InitSearchSubState",
 	"SubCollision",
 	"SubCollisionPart2",
-	"SubAdjustToTheLeft",
-	"SubAdjustToTheRight",
+	"SubTapeDetected",
+	"SubWhiteDetected",
 	"SubCornerDetected",
 	"SubFinalAdjustment",
 	"SubTrackWireDetectedState",
+	"SubTrackWireDetectedStatePart2",
 	"SubAllThreeDestroyed",
 };
 
 #define BUMP_TIME_VALUE             200
-#define TRACKWIRE_TIME_LENGTH       350
-
+#define TRACKWIRE_TIME_LENGTH       0
 #define REALIGNMENT_TIMER_LENGTH    500
 #define OH_SHIT_TIMER_LENGTH        7500
+#define SHOOTING_TIMER_LENGTH       500
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ***************************er***************************************************/
 
 /* Prototypes for private functions for this machine. They should be functions
    relevant to the behavior of this state machine */
-
-void reverse_try2(void) {
-    printf("reverse\r\n");
-    IO_PortsWritePort(PORTX, 0);
-    PWM_SetDutyCycle(LEFT_MOTOR, 700);
-    PWM_SetDutyCycle(RIGHT_MOTOR, 700);
-}
+ 
 
 /*******************************************************************************
  * PRIVATE MODULE VARIABLES                                                            *
@@ -151,7 +147,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 // initial state
 
                 // now put the machine into the actual initial state
-                nextState = SubAdjustToTheLeft;
+                nextState = SubTapeDetected;
                 makeTransition = TRUE;
                 ThisEvent.EventType = ES_NO_EVENT;
             }
@@ -186,7 +182,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case ES_TIMEOUT:
-                    nextState = SubAdjustToTheRight;
+                    nextState = SubWhiteDetected;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -196,12 +192,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             }
             break;
 
-        case SubAdjustToTheLeft:
+        case SubTapeDetected:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     // tape_realign_right_detected();
-                    tape_realign_left_detected(); //turn right
+                    turn_right(); //turn right
                     //LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
@@ -209,7 +205,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     // case not detected? when left tape is still on? maybe use
                     //that instead of a timer?
                 case TAPE_NOT_DETECTED:
-                    nextState = SubAdjustToTheRight;
+                    nextState = SubWhiteDetected;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -241,7 +237,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     } else if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubAdjustToTheRight;
+                        nextState = SubWhiteDetected;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     }
@@ -257,11 +253,11 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             }
             break;
 
-        case SubAdjustToTheRight:
+        case SubWhiteDetected:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     //  tape_realign_left_detected();
-                    tape_realign_right_detected(); //left turn
+                    turn_left(); //left turn
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     //LED_InvertBank(LED_BANK1, 0x0F);
                     //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
@@ -271,7 +267,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //that instead of a timer?
 
                 case TAPE_DETECTED:
-                    nextState = SubAdjustToTheLeft;
+                    nextState = SubTapeDetected;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -302,7 +298,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     } else if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubAdjustToTheRight;
+                        nextState = SubWhiteDetected;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     }
@@ -327,9 +323,8 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //case timeout
                     //nextState = SubFinalAdjustment
 
-
                 case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
-                    nextState = SubAdjustToTheRight; //middle state
+                    nextState = SubFinalAdjustment; //middle state
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -356,7 +351,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case CORNER_TAPE_DETECTED:
-                    nextState = SubAdjustToTheRight; //middle state
+                    nextState = SubWhiteDetected; //middle state
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -382,14 +377,30 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubTrackWireDetectedState:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    ES_Timer_InitTimer(SHOOTING_TIMER, SHOOTING_TIMER_LENGTH);
                     stop_everything();
-                    ping_pong_dispenser_low();
                     attack_ATM6();
                     break;
 
+                case ES_TIMEOUT:
+                    nextState = SubTrackWireDetectedStatePart2;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+
+        case SubTrackWireDetectedStatePart2:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    ping_pong_dispenser_low();
+                    break;
+                    
                 case TRACKWIRE_NOT_DETECTED:
                     ping_pong_dispenser_med();
-                    stop_attack_ATM6();
                     printf("SubSearchingHSM: In subDummyState: trackwire count before: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
                     printf("SubSearchingHSM: In subDummyState: trackwire count after: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
@@ -405,7 +416,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                         //checker function detects event, leaves state                        
                         //PostTopLevelHSM(ALL_ATM6s_DESTROYED);
                     } else {
-                        nextState = SubAdjustToTheLeft;
+                        nextState = SubTapeDetected;
                     }
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
@@ -414,8 +425,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_EXIT:
                     stop_everything();
                     ping_pong_dispenser_high();
+                    stop_attack_ATM6();
                     break;
-
+                    
                 default:
                     break;
             }

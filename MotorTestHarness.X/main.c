@@ -4,7 +4,7 @@
  *
  * Created on November 16, 2017, 10:20 PM
  */
-#define SERVO
+#define MOTORS_TURNING
 
 #ifdef MOTOR
 
@@ -249,44 +249,122 @@ int main(void) {
     PWM_Init();
     RC_AddPins(RC_PORTY07 | RC_PORTY06);
     PWM_AddPins(PWM_PORTY10);
-    
+
     static int i = 0;
     static uint16_t ServoVal = 0;
     static uint16_t ServoDuty;
     static bool flag = 0;
-        PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
+    PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
 
     while (1) {
-        if ( flag == TRUE) {
+        if (flag == TRUE) {
             ServoVal = ServoVal - 2;
         } else if (flag == FALSE) {
             ServoVal += 2;
         }
-        
-        
+
+
         ServoDuty = 1000 + ServoVal;
         RC_SetPulseTime(RC_PORTY07, ServoDuty);
         RC_SetPulseTime(RC_PORTY06, ServoDuty);
         if (ServoVal == 1000) {
             flag = 1;
-        } else if (ServoVal == 0){
+        } else if (ServoVal == 0) {
             flag = 0;
         }
         //delay(10);
         printf("servoduty: %d\r\n", ServoDuty);
         printf("servoVal:  %d\r\n", ServoVal);
-        
-        
+
+
         delay(500);
-//        if (ServoVal == 1000) {
-//            ServoVal -= 10;
-//            ServoDuty = 1000 + ServoVal;
-//            RC_SetPulseTime(RC_PORTX03, ServoDuty);
-//        }
+        //        if (ServoVal == 1000) {
+        //            ServoVal -= 10;
+        //            ServoDuty = 1000 + ServoVal;
+        //            RC_SetPulseTime(RC_PORTX03, ServoDuty);
+        //        }
     }
 
     //    ServoVal = ((float) (PotValue) / 1023)*1000;
     //            ServoDuty = 1000 + (unsigned short int) ServoVal;
     //            RC_SetPulseTime(RC_PORTZ08, ServoDuty);
 }
+#endif
+
+#ifdef MOTORS_TURNING
+
+#include <BOARD.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "AD.h"
+#include "IO_Ports.h"
+#include "LED.h"
+#include "pwm.h"
+#include "serial.h"
+#include "timers.h"
+#include "RC_Servo.h"
+#include "pin_configuration.h"
+
+#define time_delay 500
+
+#define LEFT_MOTOR              PWM_PORTZ06 //PWM signal
+#define RIGHT_MOTOR             PWM_PORTY12 //PWM signal
+#define LEFT_MOTOR_DIRECTION    PIN11       //Port X output pin
+#define RIGHT_MOTOR_DIRECTION   PIN12       //Port X output pin
+
+#define FAST_AND_FURIOUS    1000
+#define TOKYO_DRIFT         600
+#define NORMAL_SPEED        600
+#define SNAIL_PACE          200
+#define NOT_MOVING          0
+#define REVERSE             1
+#define LITTLE_MORE         675
+
+void delay(int time) {
+    int zeropoint = TIMERS_GetTime();
+    while ((TIMERS_GetTime() - zeropoint) < time);
+}
+
+void turn_right(void) {
+    IO_PortsWritePort(PORTX, 0);
+    IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
+}
+
+void turn_left(void) {
+    //IO_PortsWritePort(PORTX, 0);
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
+    PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+}
+
+void set_IO_pins(void) {
+    IO_PortsSetPortOutputs(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    //printf("I/O pins set\r\n");
+}
+
+int main(void) {
+    BOARD_Init();
+    AD_Init();
+    TIMERS_Init();
+    SERIAL_Init();
+    PWM_Init();
+    set_IO_pins();
+    
+    PWM_AddPins(LEFT_MOTOR | RIGHT_MOTOR);
+
+    while (1) {
+        printf("turning left\r\n");
+        turn_left();
+        printf("delay1 \r\n");
+        delay(2000);
+        printf("turning right\r\n");
+        turn_right();
+        printf("delay2 \r\n");
+        delay(2000);
+    }
+}
+
+
 #endif

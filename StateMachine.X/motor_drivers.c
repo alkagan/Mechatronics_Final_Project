@@ -13,6 +13,22 @@
 #include "motor_drivers.h"
 #include <stdio.h>
 
+#define BATTERY_CHARGED
+
+#ifdef BATTERY_CHARGED
+#define FAST_AND_FURIOUS    1000
+#define TOKYO_DRIFT         700
+#define NORMAL_SPEED        600
+#define SNAIL_PACE          100
+#define NOT_MOVING          0
+#define REVERSE             1
+#define LITTLE_MORE         675
+
+#define REVERSE_1_SECOND    1000
+#define FIRING_BALL_SPEED   800
+#endif
+
+#ifdef BATTERY_ALMOST_DISCHARGED
 #define FAST_AND_FURIOUS    1000
 #define TOKYO_DRIFT         800
 #define NORMAL_SPEED        700
@@ -23,6 +39,7 @@
 
 #define REVERSE_1_SECOND    1000
 #define FIRING_BALL_SPEED   800
+#endif
 
 /* Digital I/O is X, Y, Z Ports, will use the X port for our
  * switches and direction signal
@@ -94,15 +111,14 @@ void rotate_counter_clockwise(void){
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
-void tape_realign_left_detected(void){
+void turn_right(void){
     IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
-
-void tape_realign_right_detected(void){
+void turn_left(void){
     //IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
