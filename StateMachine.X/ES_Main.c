@@ -5,6 +5,7 @@
 #include "ES_Configure.h"
 #include "ES_Framework.h"
 #include "pin_configuration.h"
+#include "RC_Servo.h"
 
 void set_AD_pins(void) {
     AD_AddPins(BEACON_DETECTOR | LEFT_SWITCH | RIGHT_SWITCH | TRACK_WIRE
@@ -18,8 +19,12 @@ void set_IO_pins(void) {
 }
 
 void set_PWM_pins(void) {
-    PWM_AddPins(LEFT_MOTOR | RIGHT_MOTOR);
+    PWM_AddPins(LEFT_MOTOR | RIGHT_MOTOR | LAUNCHER_MOTOR);
     //printf("PWM pins set\r\n");
+}
+
+void set_RC_pins(void){
+    RC_AddPins(INDEXER | PUSHER);
 }
 
 void main(void) {
@@ -28,11 +33,13 @@ void main(void) {
     AD_Init();
     TIMERS_Init();
     PWM_Init();
+    RC_Init();
     //LED_Init();
 
     set_AD_pins();
     set_IO_pins();
     set_PWM_pins();
+    set_RC_pins();
 //    LED_AddBanks(LED_BANK1);
 //    LED_AddBanks(LED_BANK2);
 //    LED_AddBanks(LED_BANK3);

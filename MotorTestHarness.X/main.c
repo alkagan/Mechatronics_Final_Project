@@ -229,7 +229,7 @@ void delay(int time) {
 #include "pin_configuration.h"
 
 #define time_delay 500
-#define DUTY_CYCLE 1000 //doesn't work for full duty cycle (1000)
+#define DUTY_CYCLE 800 //doesn't work for full duty cycle (1000)
 #define ADC_MAX 1023.0
 #define RC_MAX (MAXPULSE - MINPULSE)
 #define INDEXER RC_PORTY06  //Servo 
@@ -254,15 +254,15 @@ int main(void) {
     static uint16_t ServoVal = 0;
     static uint16_t ServoDuty;
     static bool flag = 0;
+        PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
 
     while (1) {
         if ( flag == TRUE) {
-            ServoVal = ServoVal - 1;
+            ServoVal = ServoVal - 2;
         } else if (flag == FALSE) {
-            ServoVal += 1;
+            ServoVal += 2;
         }
         
-        PWM_SetDutyCycle(PWM_PORTY10, DUTY_CYCLE);
         
         ServoDuty = 1000 + ServoVal;
         RC_SetPulseTime(RC_PORTY07, ServoDuty);
@@ -277,7 +277,7 @@ int main(void) {
         printf("servoVal:  %d\r\n", ServoVal);
         
         
-        //delay(500);
+        delay(500);
 //        if (ServoVal == 1000) {
 //            ServoVal -= 10;
 //            ServoDuty = 1000 + ServoVal;

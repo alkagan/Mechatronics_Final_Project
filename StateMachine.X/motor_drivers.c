@@ -22,6 +22,7 @@
 #define LITTLE_MORE         675
 
 #define REVERSE_1_SECOND    1000
+#define FIRING_BALL_SPEED   800
 
 /* Digital I/O is X, Y, Z Ports, will use the X port for our
  * switches and direction signal
@@ -106,4 +107,32 @@ void tape_realign_right_detected(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+}
+
+void attack_ATM6(void){
+    PWM_SetDutyCycle(LAUNCHER_MOTOR, FIRING_BALL_SPEED);
+}
+
+void stop_attack_ATM6(void){
+    PWM_SetDutyCycle(LAUNCHER_MOTOR, 0);
+}
+
+void ping_pong_dispenser_low(void){
+    RC_SetPulseTime(INDEXER, 1000);
+}
+
+void ping_pong_dispenser_med(void){
+    RC_SetPulseTime(INDEXER, 1500);
+}
+
+void ping_pong_dispenser_high(void){
+    RC_SetPulseTime(INDEXER, 2000);
+}
+
+void final_attack_low(void){
+    RC_SetPulseTime(PUSHER, 2000);
+}
+
+void final_attack_high(void){
+    RC_SetPulseTime(PUSHER, 1000);
 }

@@ -38,6 +38,7 @@
 #include "pwm.h"
 #include "IO_Ports.h"
 #include <stdio.h>
+#include "RC_Servo.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -50,7 +51,7 @@ typedef enum {
     SubAdjustToTheRight,
     SubCornerDetected,
     SubFinalAdjustment,
-    SubDummyState,
+    SubTrackWireDetectedState,
     SubAllThreeDestroyed,
 } SubSearchingHSMState_t;
 
@@ -62,12 +63,12 @@ static const char *StateNames[] = {
 	"SubAdjustToTheRight",
 	"SubCornerDetected",
 	"SubFinalAdjustment",
-	"SubDummyState",
+	"SubTrackWireDetectedState",
 	"SubAllThreeDestroyed",
 };
 
 #define BUMP_TIME_VALUE             200
-#define TRACKWIRE_TIME_LENGTH       127
+#define TRACKWIRE_TIME_LENGTH       350
 
 #define REALIGNMENT_TIMER_LENGTH    500
 #define OH_SHIT_TIMER_LENGTH        7500
@@ -228,7 +229,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case TRACKWIRE_DETECTED:
                     //start timer
                     ES_Timer_InitTimer(TRACK_TIMER, TRACKWIRE_TIME_LENGTH);
-                    //nextState = SubDummyState;
+                    //nextState = SubTrackWireDetectedState;
                     //makeTransition = TRUE;
                     //ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -236,10 +237,10 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_TIMEOUT:
                     //transition into dummy state
                     if (ThisEvent.EventParam == TRACK_TIMER) {
-                        nextState = SubDummyState;
+                        nextState = SubTrackWireDetectedState;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
-                    } else if(ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH){
+                    } else if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
                         nextState = SubAdjustToTheRight;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
@@ -289,7 +290,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
                 case TRACKWIRE_DETECTED:
                     ES_Timer_InitTimer(TRACK_TIMER, TRACKWIRE_TIME_LENGTH);
-                    //                    nextState = SubDummyState;
+                    //                    nextState = SubTrackWireDetectedState;
                     //                    makeTransition = TRUE;
                     //                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -297,10 +298,10 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 case ES_TIMEOUT:
                     //transition into dummy state
                     if (ThisEvent.EventParam == TRACK_TIMER) {
-                        nextState = SubDummyState;
+                        nextState = SubTrackWireDetectedState;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
-                    } else if(ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH){
+                    } else if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
                         nextState = SubAdjustToTheRight;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
@@ -378,22 +379,28 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             //check event
             //case tape detected
 
-        case SubDummyState:
+        case SubTrackWireDetectedState:
             switch (ThisEvent.EventType) {
-
                 case ES_ENTRY:
                     stop_everything();
+                    ping_pong_dispenser_low();
+                    attack_ATM6();
                     break;
 
                 case TRACKWIRE_NOT_DETECTED:
+                    ping_pong_dispenser_med();
+                    stop_attack_ATM6();
                     printf("SubSearchingHSM: In subDummyState: trackwire count before: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
                     printf("SubSearchingHSM: In subDummyState: trackwire count after: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
                         IO_PortsSetPortBits(PORTX, ALL_3_DESTROYED);
-                        nextState = SubAllThreeDestroyed;
+                        //nextState = SubAllThreeDestroyed;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
+                        ES_Event NextEvent;
+                        NextEvent.EventType = ALL_ATM6s_DESTROYED;
+                        PostTopLevelHSM(NextEvent);
                         //once kill count is 3 set io port bit high
                         //checker function detects event, leaves state                        
                         //PostTopLevelHSM(ALL_ATM6s_DESTROYED);
@@ -406,6 +413,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
                 case ES_EXIT:
                     stop_everything();
+                    ping_pong_dispenser_high();
                     break;
 
                 default:

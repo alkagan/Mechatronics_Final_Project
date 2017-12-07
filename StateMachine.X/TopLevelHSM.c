@@ -209,6 +209,13 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;
+                case ES_ENTRY:
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, 500);
+                    break;
+                case ES_TIMEOUT:
+                    stop_everything();
+                    break;
 
 //                case BUMP_RELEASED:
 //                    stop_everything();

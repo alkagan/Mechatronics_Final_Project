@@ -37,6 +37,7 @@
 #include "TapeEventChecker.h"
 #include "serial.h"
 #include "LED.h"
+#include "RC_Servo.h"
 
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
@@ -145,6 +146,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             //            LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    final_attack_low();
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     //LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
                     rotate_counter_clockwise();

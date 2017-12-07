@@ -10,6 +10,7 @@
 
 #include "PWM.h"
 #include "IO_Ports.h"
+#include "RC_Servo.h"
 
 void onwards_NOS(void);
 
@@ -32,5 +33,19 @@ void rotate_counter_clockwise(void);
 void tape_realign_left_detected(void);
 
 void tape_realign_right_detected(void);
+
+void attack_ATM6(void);
+
+void stop_attack_ATM6(void);
+
+void ping_pong_dispenser_low(void);
+
+void ping_pong_dispenser_med(void);
+
+void ping_pong_dispenser_high(void);
+
+void final_attack_low(void);
+
+void final_attack_high(void);
 
 #endif /* MOTORS_DRIVERS_H */
