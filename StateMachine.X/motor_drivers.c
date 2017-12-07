@@ -79,7 +79,7 @@ void stop_everything(void){
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
     printf("reverse\r\n");
-    IO_PortsClearPortBits(PORTX, 0);
+    IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
@@ -114,7 +114,7 @@ void rotate_counter_clockwise(void){
 void turn_right(void){
     IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
-    PWM_SetDutyCycle(LEFT_MOTOR, FAST_AND_FURIOUS);
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
@@ -122,10 +122,11 @@ void turn_left(void){
     //IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
-    PWM_SetDutyCycle(RIGHT_MOTOR, FAST_AND_FURIOUS);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
 void attack_ATM6(void){
+    ping_pong_dispenser_low();
     PWM_SetDutyCycle(LAUNCHER_MOTOR, FIRING_BALL_SPEED);
 }
 

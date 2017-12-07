@@ -237,7 +237,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     } else if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubWhiteDetected;
+                        nextState = SubCollision;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     }
@@ -298,7 +298,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     } else if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubWhiteDetected;
+                        nextState = SubCollision;
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     }
@@ -328,6 +328,18 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
+                    
+//                    case TAPE_NOT_DETECTED: 
+//                    nextState = SubWhiteDetected; //middle state
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
+                    
+//                    case TAPE_DETECTED: 
+//                    nextState = SubTapeDetected;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
 
                 case BUMP_PRESSED:
                     nextState = SubCollision;
@@ -378,8 +390,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     ES_Timer_InitTimer(SHOOTING_TIMER, SHOOTING_TIMER_LENGTH);
-                    stop_everything();
+                   stop_everything();
                     attack_ATM6();
+                    final_attack_high();
                     break;
 
                 case ES_TIMEOUT:

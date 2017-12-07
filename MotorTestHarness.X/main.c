@@ -4,7 +4,7 @@
  *
  * Created on November 16, 2017, 10:20 PM
  */
-#define MOTORS_TURNING
+#define SERVO
 
 #ifdef MOTOR
 
