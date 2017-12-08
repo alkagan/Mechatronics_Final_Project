@@ -282,11 +282,11 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //case timeout
                     //nextState = SubFinalAdjustment
 
-                case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
-                    nextState = SubTapeDetected; //middle state
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
+//                case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
+//                    nextState = SubTapeDetected; //middle state
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
 
                     //                    case TAPE_NOT_DETECTED: 
                     //                    nextState = SubWhiteDetected; //middle state
@@ -294,8 +294,14 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //                    ThisEvent.EventType = ES_NO_EVENT;
                     //                    break;
 
-                case TAPE_DETECTED:
-                    nextState = SubTapeDetected;
+//                case TAPE_DETECTED:
+//                    nextState = SubTapeDetected;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
+                    
+                    case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
+                    nextState = SubWhiteDetected; //middle state
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;

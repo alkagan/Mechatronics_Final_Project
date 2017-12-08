@@ -93,8 +93,8 @@ void reverse_again(void){
 // while left one remains forward
 void rotate_clockwise(void){
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
 // Setting left direction pins to HIGH which makes left motor reverse
