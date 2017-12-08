@@ -35,6 +35,6 @@
 //#define TAPE_LEFT               AD_PORTV6   //uint16_t value
 
 // Track Wire Pin Configuration
-#define TRACK_WIRE              AD_PORTV6   //uint16_t value
+//#define TRACK_WIRE              AD_PORTV6   //uint16_t value
 
 #endif

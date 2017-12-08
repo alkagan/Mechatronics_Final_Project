@@ -19,7 +19,7 @@
 #define FAST_AND_FURIOUS    1000
 #define TOKYO_DRIFT         700
 #define NORMAL_SPEED        600
-#define SNAIL_PACE          250
+#define SNAIL_PACE          200 
 #define NOT_MOVING          0
 #define REVERSE             1
 #define LITTLE_MORE         675
@@ -70,15 +70,13 @@ void snails_pace(void){
 }
 
 void stop_everything(void){
-    printf("stopeverything\r\n");
     IO_PortsWritePort(PORTX, 0x00);
     PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
     PWM_SetDutyCycle(RIGHT_MOTOR, NOT_MOVING);
 }
 
-// Setting both direction pins to HIGH which makes motors turn in reverse
+// Setting both direction pins to LOW which makes motors turn in reverse
 void reverse(void){
-    printf("reverse\r\n");
     IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
@@ -86,7 +84,6 @@ void reverse(void){
 
 // Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse_again(void){
-    printf("reverse_again\r\n");
     IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
@@ -95,17 +92,14 @@ void reverse_again(void){
 // Setting right direction pins to HIGH which makes right motor reverse
 // while left one remains forward
 void rotate_clockwise(void){
-    printf("rotate_clockwise\r\n");
-    //PWM_SetFrequency(PWM_1KHZ);
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
-    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
 
 // Setting left direction pins to HIGH which makes left motor reverse
 // while right one remains forward
 void rotate_counter_clockwise(void){
-    printf("rotate counterclockwise\r\n");
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
@@ -131,11 +125,11 @@ void attack_ATM6(void){
 }
 
 void stop_attack_ATM6(void){
-    PWM_SetDutyCycle(LAUNCHER_MOTOR, 0);
+    PWM_SetDutyCycle(LAUNCHER_MOTOR, NOT_MOVING);
 }
 
 void ping_pong_dispenser_low(void){
-    RC_SetPulseTime(INDEXER, 1000);
+    RC_SetPulseTime(INDEXER, 1150);
 }
 
 void ping_pong_dispenser_med(void){

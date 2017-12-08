@@ -4,7 +4,7 @@
  *
  * Created on November 16, 2017, 10:20 PM
  */
-#define TRACK
+#define SERVO
 
 #ifdef MOTOR
 
@@ -263,25 +263,42 @@ int main(void) {
         if (flag == TRUE) {
             ServoVal = ServoVal - 2;
         } else if (flag == FALSE) {
-            ServoVal += 2;
+            ServoVal += 5;
         }
 
-        track_wire_value = AD_ReadADPin(TRACK_WIRE);
-        printf("trackWireVal: %d\r\n", track_wire_value);
         ServoDuty = 1000 + ServoVal;
+        
+        ServoVal = 1000;
         RC_SetPulseTime(RC_PORTY07, ServoDuty);
         RC_SetPulseTime(RC_PORTY06, ServoDuty);
-        if (ServoVal == 1000) {
-            flag = 1;
-        } else if (ServoVal == 0) {
-            flag = 0;
-        }
+        delay(500);
+        ServoVal = 500;
+        RC_SetPulseTime(RC_PORTY07, ServoDuty);
+        RC_SetPulseTime(RC_PORTY06, ServoDuty);
+        delay(500);
+        RC_SetPulseTime(RC_PORTY07, ServoDuty);
+        RC_SetPulseTime(RC_PORTY06, ServoDuty);
+        ServoVal = 0;
+        delay(500);
+        
+        track_wire_value = AD_ReadADPin(TRACK_WIRE);
+        printf("trackWireVal: %d\r\n", track_wire_value);
+//        
+////        if (ServoVal == 1000) {
+////            flag = 1;
+////        } else if (ServoVal == 0) {
+////            flag = 0;
+////        }
         //delay(10);
         printf("servoduty: %d\r\n", ServoDuty);
         printf("servoVal:  %d\r\n", ServoVal);
 
-
-        delay(500);
+//        ServoVal = 1000;
+//        delay(500);
+//        ServoVal = 500;
+//        delay(500);
+//        ServoVal = 0;
+//        delay(500);
         //        if (ServoVal == 1000) {
         //            ServoVal -= 10;
         //            ServoDuty = 1000 + ServoVal;

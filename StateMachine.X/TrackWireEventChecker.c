@@ -39,7 +39,7 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define TRACKWIRE_DETECTED_THRESHOLD     600
+#define TRACKWIRE_DETECTED_THRESHOLD     750
 #define TRACKWIRE_NOT_DETECTED_THRESHOLD 200
 
 
@@ -74,9 +74,9 @@ static uint16_t trackwire_reading4 = 0;
 static uint16_t trackwire_reading5 = 0;
 static uint16_t trackwire_reading6 = 0;
 static uint16_t trackwire_reading7 = 0;
-static uint16_t trackwire_reading8 = 0;
-static uint16_t trackwire_reading9 = 0;
-static uint16_t trackwire_reading10 = 0;
+//static uint16_t trackwire_reading8 = 0;
+//static uint16_t trackwire_reading9 = 0;
+//static uint16_t trackwire_reading10 = 0;
 static uint16_t trackwire_reading_average = 0;
 
 /* Any private module level variable that you might need for keeping track of
@@ -108,8 +108,6 @@ uint8_t CheckForTrackWireEvent(void) {
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
-
-
     uint16_t trackwire_reading = AD_ReadADPin(TRACK_WIRE);
 
     if (trackwire_reading > TRACKWIRE_DETECTED_THRESHOLD) {
@@ -120,14 +118,14 @@ uint8_t CheckForTrackWireEvent(void) {
         trackwire_reading5 = AD_ReadADPin(TRACK_WIRE);
         trackwire_reading6 = AD_ReadADPin(TRACK_WIRE);
         trackwire_reading7 = AD_ReadADPin(TRACK_WIRE);
-        trackwire_reading8 = AD_ReadADPin(TRACK_WIRE);
-        trackwire_reading9 = AD_ReadADPin(TRACK_WIRE);
-        trackwire_reading10 = AD_ReadADPin(TRACK_WIRE);
+//        trackwire_reading8 = AD_ReadADPin(TRACK_WIRE);
+//        trackwire_reading9 = AD_ReadADPin(TRACK_WIRE);
+//        trackwire_reading10 = AD_ReadADPin(TRACK_WIRE);
 
         trackwire_reading_average = (trackwire_reading1 + trackwire_reading2
                 + trackwire_reading3 + trackwire_reading4 + trackwire_reading5
-                + trackwire_reading6 + trackwire_reading7 + trackwire_reading8
-                + trackwire_reading9 + trackwire_reading10) / 10;
+                + trackwire_reading6 + trackwire_reading7 /*+ trackwire_reading8
+                + trackwire_reading9 + trackwire_reading10*/) / 7;
 
         if (trackwire_reading_average > last_avg_reading) {
             last_avg_reading = trackwire_reading_average;

@@ -158,10 +158,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             }
             break;  //InitPState
 
-        case OrientationState: // in the first state, replace this with correct names
-            // run sub-state machine for this state
-            //NOTE: the SubState Machine runs and responds to events before anything in the this
-            //state machine does
+        case OrientationState:
             ThisEvent = RunSubOrientationHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
@@ -171,8 +168,7 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                     nextState = SearchingState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
-                    break;  //orientation to searching
-                    
+                    break;  //orientation to searching 
 
                 default:
                     break;
@@ -183,7 +179,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            //LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
             ThisEvent = RunSubSearchingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
@@ -216,11 +211,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 case ES_TIMEOUT:
                     stop_everything();
                     break;
-
-//                case BUMP_RELEASED:
-//                    stop_everything();
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;  //orientation to searching
                     
                 default:
                     break;

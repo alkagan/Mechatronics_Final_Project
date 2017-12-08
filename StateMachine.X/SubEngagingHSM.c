@@ -45,18 +45,23 @@
 typedef enum {
     InitSubOrientationState,
     LocateBeaconState,
-    LocateTape,
+    DriveTowardsBeaconState,
+    SubCollision,
+    SubCollisionPart2,
     FinalizeOrientation,
 } SubEngagingHSMState_t;
 
 static const char *StateNames[] = {
 	"InitSubOrientationState",
 	"LocateBeaconState",
-	"LocateTape",
+	"DriveTowardsBeaconState",
+	"SubCollision",
+	"SubCollisionPart2",
 	"FinalizeOrientation",
 };
 
-#define OH_SHIT_TIMER_LENGTH 10000
+#define OH_SHIT_TIMER_LENGTH 5000
+#define BUMP_TIME_VALUE      200
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -137,40 +142,34 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
             break; //break from init subOrientation state
 
         case LocateBeaconState: // in the first state, replace this with correct names
-            //            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //            LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse();
-                    
-//                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
-//                    //LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
-//                    rotate_counter_clockwise();
-//                    printf("SubOrientation: Entry to locate beacon state\r\n");
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case BEACON_DETECTED:
-//                    nextState = LocateTape;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case ES_TIMEOUT:
-//                    nextState = LocateTape;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case ES_EXIT:
-//                    printf("SubOrientation: EXIT to locate beacon state\r\n");
-//                    stop_everything();
-//                    break;
-//
-//                /////// is this necessary/was this accidentally included?////////
-                case TAPE_DETECTED:
-                    stop_everything();
+                    final_attack_low();
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
+                    rotate_counter_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case BEACON_DETECTED:
+                    nextState = DriveTowardsBeaconState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = DriveTowardsBeaconState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
                     break;
 
                 default: // all unhandled events pass the event back up to the next level
@@ -179,7 +178,7 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
 
             break; //break from LocateBeacon state
 
-        case LocateTape:
+        case DriveTowardsBeaconState:
             //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
             //LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
@@ -195,6 +194,12 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case BEACON_NOT_DETECTED:
+                    nextState = LocateBeaconState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
                 case ES_EXIT:
                     stop_everything();
                     printf("SubOrientation: EXIT from locate tape state\r\n");
@@ -205,6 +210,45 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     break;
             }
             break; //break from Locate Tape
+
+        case SubCollision: // in the first state, replace this with correct names
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubCollisionPart2;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_NO_EVENT:
+                default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+
+        case SubCollisionPart2:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = LocateBeaconState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
 
         case FinalizeOrientation:
             //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
