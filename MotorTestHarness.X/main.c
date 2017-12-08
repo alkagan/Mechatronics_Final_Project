@@ -4,7 +4,7 @@
  *
  * Created on November 16, 2017, 10:20 PM
  */
-#define SERVO
+#define TRACK
 
 #ifdef MOTOR
 
@@ -355,7 +355,7 @@ int main(void) {
     SERIAL_Init();
     PWM_Init();
     set_IO_pins();
-    
+
     PWM_AddPins(LEFT_MOTOR | RIGHT_MOTOR);
 
     while (1) {
@@ -371,4 +371,90 @@ int main(void) {
 }
 
 
+#endif
+
+#ifdef TRACK
+
+#include <BOARD.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "AD.h"
+#include "IO_Ports.h"
+#include "LED.h"
+#include "pwm.h"
+#include "serial.h"
+#include "timers.h"
+#include "RC_Servo.h"
+#include "pin_configuration.h"
+
+#define TRACKWIRE_DETECTED_THRESHOLD 600
+#define TRACKWIRE_NOT_DETECTED_THRESHOLD 200
+
+static last_avg_reading = 600; // initialize to high bound
+static uint16_t trackwire_reading1 = 0;
+static uint16_t trackwire_reading2 = 0;
+static uint16_t trackwire_reading3 = 0;
+static uint16_t trackwire_reading4 = 0;
+static uint16_t trackwire_reading5 = 0;
+static uint16_t trackwire_reading_average = 0;
+bool flag = 0;
+
+void delay(int time) {
+    int zeropoint = TIMERS_GetTime();
+    while ((TIMERS_GetTime() - zeropoint) < time);
+}
+
+int main(void) {
+    BOARD_Init();
+    AD_Init();
+    TIMERS_Init();
+    SERIAL_Init();
+    PWM_Init();
+    uint16_t trackwire_reading;
+    AD_AddPins(TRACK_WIRE);
+
+    while (1) {
+        trackwire_reading = AD_ReadADPin(TRACK_WIRE);
+
+        printf("last_reading:    %d\r\n current_reading: %d\r\n AD_reading:     "
+                " %d\r\n", last_avg_reading, trackwire_reading_average,
+                trackwire_reading);
+
+        if (trackwire_reading > TRACKWIRE_DETECTED_THRESHOLD) {
+            printf("in first if-statement\r\n");
+            //printf("current_reading: %d\r\n", trackwire_reading);
+            trackwire_reading1 = AD_ReadADPin(TRACK_WIRE);
+            trackwire_reading2 = AD_ReadADPin(TRACK_WIRE);
+            trackwire_reading3 = AD_ReadADPin(TRACK_WIRE);
+            trackwire_reading4 = AD_ReadADPin(TRACK_WIRE);
+            trackwire_reading5 = AD_ReadADPin(TRACK_WIRE);
+
+            trackwire_reading_average = (trackwire_reading1 + trackwire_reading2
+                    + trackwire_reading3 + trackwire_reading4 + trackwire_reading5) / 5;
+
+            delay(500);
+            if (trackwire_reading_average > last_avg_reading) {
+                last_avg_reading = trackwire_reading_average;
+                printf("last_reading:    %d\r\n current_reading: %d\r\n AD_reading:     "
+                        " %d\r\n TRACKWIRE ABOVE FOR A CYCLE\r\n", last_avg_reading, trackwire_reading_average, trackwire_reading);
+            } else {
+                flag = 1;
+                last_avg_reading = TRACKWIRE_DETECTED_THRESHOLD; // reset to high bounds
+            }
+
+        } else if (trackwire_reading < TRACKWIRE_NOT_DETECTED_THRESHOLD) {
+            flag = 0;
+            last_avg_reading = TRACKWIRE_DETECTED_THRESHOLD; // reset to high bounds
+        }
+        if (flag == 1) {
+            printf("last_reading:    %d\r\n current_reading: %d\r\n AD_reading:     "
+                    " %d\r\n TRACKWIRE DETECTED\r\n", last_avg_reading, trackwire_reading_average,
+                    trackwire_reading);
+        } else if (flag == 0) {
+            printf("last_reading:    %d\r\n current_reading: %d\r\n AD_reading:     "
+                    " %d\r\n TRACKWIRE  NOT DETECTED\r\n", last_avg_reading, trackwire_reading_average, trackwire_reading);
+        }
+        delay(200);
+    }
+}
 #endif

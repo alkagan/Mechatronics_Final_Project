@@ -74,7 +74,7 @@ static const char *StateNames[] = {
 #define TRACKWIRE_TIME_LENGTH       20
 #define REALIGNMENT_TIMER_LENGTH    500
 #define OH_SHIT_TIMER_LENGTH        4000
-#define SHOOTING_TIMER_LENGTH       400
+#define SHOOTING_TIMER_LENGTH       500
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ***************************er***************************************************/
@@ -398,8 +398,8 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubTrackWireDetectedState:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    stop_everything();
                     ES_Timer_InitTimer(SHOOTING_TIMER, SHOOTING_TIMER_LENGTH);
-                    //stop_everything();
                     attack_ATM6();
                     break;
 

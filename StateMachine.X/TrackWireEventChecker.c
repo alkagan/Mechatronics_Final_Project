@@ -39,7 +39,7 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define TRACKWIRE_DETECTED_THRESHOLD     726
+#define TRACKWIRE_DETECTED_THRESHOLD     600
 #define TRACKWIRE_NOT_DETECTED_THRESHOLD 200
 
 
@@ -66,6 +66,18 @@ static ES_Event storedEvent;
 /*******************************************************************************
  * PRIVATE MODULE VARIABLES                                                    *
  ******************************************************************************/
+static uint16_t last_avg_reading = TRACKWIRE_DETECTED_THRESHOLD; // initialize to high bound
+static uint16_t trackwire_reading1 = 0;
+static uint16_t trackwire_reading2 = 0;
+static uint16_t trackwire_reading3 = 0;
+static uint16_t trackwire_reading4 = 0;
+static uint16_t trackwire_reading5 = 0;
+static uint16_t trackwire_reading6 = 0;
+static uint16_t trackwire_reading7 = 0;
+static uint16_t trackwire_reading8 = 0;
+static uint16_t trackwire_reading9 = 0;
+static uint16_t trackwire_reading10 = 0;
+static uint16_t trackwire_reading_average = 0;
 
 /* Any private module level variable that you might need for keeping track of
    events would be placed here. Private variables should be STATIC so that they
@@ -91,12 +103,50 @@ static ES_Event storedEvent;
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckForTrackWireEvent(void) {
     static ES_EventTyp_t last_track_event = TRACKWIRE_NOT_DETECTED;
+    //static last_avg_reading = TRACKWIRE_DETECTED_THRESHOLD; // initialize to high bound
     ES_EventTyp_t current_track_event = last_track_event;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
 
+
+
     uint16_t trackwire_reading = AD_ReadADPin(TRACK_WIRE);
 
+    if (trackwire_reading > TRACKWIRE_DETECTED_THRESHOLD) {
+        trackwire_reading1 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading2 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading3 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading4 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading5 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading6 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading7 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading8 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading9 = AD_ReadADPin(TRACK_WIRE);
+        trackwire_reading10 = AD_ReadADPin(TRACK_WIRE);
+
+        trackwire_reading_average = (trackwire_reading1 + trackwire_reading2
+                + trackwire_reading3 + trackwire_reading4 + trackwire_reading5
+                + trackwire_reading6 + trackwire_reading7 + trackwire_reading8
+                + trackwire_reading9 + trackwire_reading10) / 10;
+
+        if (trackwire_reading_average > last_avg_reading) {
+            last_avg_reading = trackwire_reading_average;
+            current_track_event = TRACKWIRE_NOT_DETECTED;
+        } else {
+            current_track_event = TRACKWIRE_DETECTED;
+            last_avg_reading = TRACKWIRE_DETECTED_THRESHOLD; // reset to high bounds
+        }
+        
+    } else if (trackwire_reading < TRACKWIRE_NOT_DETECTED_THRESHOLD) {
+        current_track_event = TRACKWIRE_NOT_DETECTED;
+        last_avg_reading = TRACKWIRE_DETECTED_THRESHOLD; // reset to high bounds
+    } else {
+        current_track_event = last_track_event;
+    }
+    /*******************************************************************************
+    
+    AD_ReadADPin(TRACK_WIRE);
+    
     if (trackwire_reading > TRACKWIRE_DETECTED_THRESHOLD){
         current_track_event = TRACKWIRE_DETECTED;
 //        printf("******************************************************************************************************************************\r\n\n");
@@ -107,6 +157,7 @@ uint8_t CheckForTrackWireEvent(void) {
     } else {
         current_track_event = last_track_event;
     }
+     *  ******************************************************************************/
 
     if (current_track_event != last_track_event) { // check for change from last time
         thisEvent.EventType = current_track_event;
@@ -114,7 +165,7 @@ uint8_t CheckForTrackWireEvent(void) {
         returnVal = TRUE;
         last_track_event = current_track_event; // update history
         PostTopLevelHSM(thisEvent); // ensures continuous checking 
-  
+
     }
     return (returnVal);
 }

@@ -32,9 +32,9 @@
 #define TAPE_CORNER             AD_PORTV3   //uint16_t value
 #define TAPE_TOP                AD_PORTV4   //uint16_t value
 #define TAPE_RIGHT              AD_PORTV5   //uint16_t value
-#define TAPE_LEFT               AD_PORTV6   //uint16_t value
+//#define TAPE_LEFT               AD_PORTV6   //uint16_t value
 
 // Track Wire Pin Configuration
-#define TRACK_WIRE              AD_PORTW7   //uint16_t value
+#define TRACK_WIRE              AD_PORTV6   //uint16_t value
 
 #endif
