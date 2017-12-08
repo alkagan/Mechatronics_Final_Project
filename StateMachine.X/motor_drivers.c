@@ -139,7 +139,7 @@ void ping_pong_dispenser_low(void){
 }
 
 void ping_pong_dispenser_med(void){
-    RC_SetPulseTime(INDEXER, 1500);
+    RC_SetPulseTime(INDEXER, 1600);
 }
 
 void ping_pong_dispenser_high(void){
