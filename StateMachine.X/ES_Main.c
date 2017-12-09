@@ -34,26 +34,15 @@ void main(void) {
     TIMERS_Init();
     PWM_Init();
     RC_Init();
-    //LED_Init();
 
     set_AD_pins();
     set_IO_pins();
     set_PWM_pins();
     set_RC_pins();
-//    LED_AddBanks(LED_BANK1);
-//    LED_AddBanks(LED_BANK2);
-//    LED_AddBanks(LED_BANK3);
-//    LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
-
     
-
     printf("Starting ES Framework Template\r\n");
     printf("using the 2nd Generation Events & Services Framework\r\n");
 
-
-    // Your hardware initialization function calls go here
-
-    // now initialize the Events and Services Framework and start it running
     ErrorType = ES_Initialize();
     if (ErrorType == Success) {
         ErrorType = ES_Run();

@@ -23,10 +23,10 @@
 #define RIGHT_SWITCH            AD_PORTW5   //uint16_t value
 
 // Motor Pin Configuration
-#define LEFT_MOTOR              PWM_PORTZ06 //PWM signal
-#define RIGHT_MOTOR             PWM_PORTY12 //PWM signal
-#define LEFT_MOTOR_DIRECTION    PIN11       //Port X output pin
-#define RIGHT_MOTOR_DIRECTION   PIN12       //Port X output pin
+#define LEFT_MOTOR              PWM_PORTY12 //PWM signal
+#define RIGHT_MOTOR             PWM_PORTZ06 //PWM signal
+#define LEFT_MOTOR_DIRECTION    PIN12       //Port X output pin
+#define RIGHT_MOTOR_DIRECTION   PIN11       //Port X output pin
 #define ALL_3_DESTROYED         PIN9        //Port X output pin
 #define LAUNCHER_MOTOR          PWM_PORTY10 //PWM signal
 

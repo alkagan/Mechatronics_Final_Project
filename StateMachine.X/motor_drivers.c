@@ -70,23 +70,12 @@ void snails_pace(void){
 }
 
 void stop_everything(void){
-    printf("stopeverything\r\n");
-    IO_PortsWritePort(PORTX, 0x00);
+    IO_PortsWritePort(PORTX, NOT_MOVING);
     PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
     PWM_SetDutyCycle(RIGHT_MOTOR, NOT_MOVING);
 }
 
-// Setting both direction pins to HIGH which makes motors turn in reverse
 void reverse(void){
-    printf("reverse\r\n");
-    IO_PortsWritePort(PORTX, 0);
-    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
-}
-
-// Setting both direction pins to HIGH which makes motors turn in reverse
-void reverse_again(void){
-    printf("reverse_again\r\n");
     IO_PortsWritePort(PORTX, 0);
     PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
     PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
@@ -94,9 +83,7 @@ void reverse_again(void){
 
 // Setting right direction pins to HIGH which makes right motor reverse
 // while left one remains forward
-void rotate_clockwise(void){
-    printf("rotate_clockwise\r\n");
-    //PWM_SetFrequency(PWM_1KHZ);
+void rotate_counter_clockwise(void){
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
@@ -104,25 +91,22 @@ void rotate_clockwise(void){
 
 // Setting left direction pins to HIGH which makes left motor reverse
 // while right one remains forward
-void rotate_counter_clockwise(void){
-    printf("rotate counterclockwise\r\n");
+void rotate_clockwise(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
 void turn_right(void){
-    IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
 void turn_left(void){
-    //IO_PortsWritePort(PORTX, 0);
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
-    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+    PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
+    PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
 void attack_ATM6(void){

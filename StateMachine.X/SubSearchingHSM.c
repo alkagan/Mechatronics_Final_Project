@@ -148,7 +148,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                 // initial state
 
                 // now put the machine into the actual initial state
-                nextState = SubTapeDetected;
+                nextState = SubWhiteDetected;
                 makeTransition = TRUE;
                 ThisEvent.EventType = ES_NO_EVENT;
             }
@@ -158,14 +158,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
-                    // tape_realign_right_detected();
                     turn_right(); //turn right
-                    //LED_InvertBank(LED_BANK1, 0x0F);
-                    //ES_Timer_InitTimer(REALIGNMENT_TIMER, REALIGNMENT_TIMER_LENGTH);
                     break;
-
-                    // case not detected? when left tape is still on? maybe use
-                    //that instead of a timer?
+                    
                 case TAPE_NOT_DETECTED:
                     nextState = SubWhiteDetected;
                     makeTransition = TRUE;
@@ -185,8 +180,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case TRACKWIRE_DETECTED:
-                    //start timer
-                    //ES_Timer_InitTimer(TRACK_TIMER, TRACKWIRE_TIME_LENGTH);
+
                     nextState = SubTrackWireDetectedState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
@@ -219,13 +213,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubWhiteDetected:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    //  tape_realign_left_detected();
                     turn_left(); //left turn
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     break;
-
-                    // case not detected? when left tape is still on? maybe use
-                    //that instead of a timer?
 
                 case TAPE_DETECTED:
                     nextState = SubTapeDetected;
@@ -246,19 +236,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case TRACKWIRE_DETECTED:
-                    //ES_Timer_InitTimer(TRACK_TIMER, TRACKWIRE_TIME_LENGTH);
                     nextState = SubTrackWireDetectedState;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_TIMEOUT:
-                    //transition into dummy state
-                    //                    if (ThisEvent.EventParam == TRACKWIRE_TIME_LENGTH) {
-                    //                        nextState = SubTrackWireDetectedState;
-                    //                        makeTransition = TRUE;
-                    //                        ThisEvent.EventType = ES_NO_EVENT;
-                    //                    } else 
 
                     if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
                         nextState = SubCollision;
@@ -282,26 +265,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     rotate_clockwise();
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     break;
-                    //case timeout
-                    //nextState = SubFinalAdjustment
 
-                case CORNER_TAPE_NOT_DETECTED: //Case tape not detected
-                    nextState = SubTapeDetected; //middle state
+                case TAPE_NOT_DETECTED: //Case tape not detected
+                    nextState = SubWhiteDetected; //middle state
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-
-                    //                    case TAPE_NOT_DETECTED: 
-                    //                    nextState = SubWhiteDetected; //middle state
-                    //                    makeTransition = TRUE;
-                    //                    ThisEvent.EventType = ES_NO_EVENT;
-                    //                    break;
-
-                    //                    case TAPE_DETECTED: 
-                    //                    nextState = SubTapeDetected;
-                    //                    makeTransition = TRUE;
-                    //                    ThisEvent.EventType = ES_NO_EVENT;
-                    //                    break;
 
                 case ES_TIMEOUT:
                     nextState = SubCollision;
@@ -325,38 +294,38 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             }
             break;
 
-        case SubFinalAdjustment:
-            switch (ThisEvent.EventType) {
-                case ES_ENTRY:
-                    rotate_clockwise();
-                    break;
+//        case SubFinalAdjustment:
+//            switch (ThisEvent.EventType) {
+//                case ES_ENTRY:
+//                    turn_left();
+//                    break;
+//
+//                case TAPE_DETECTED:
+//                    nextState = SubTapeDetected; //middle state
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
+//
+//                case BUMP_PRESSED:
+//                    nextState = SubCollision;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
+//
+//                case ES_EXIT:
+//                    stop_everything();
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//            break;
+//            //case middle state
+//            //check event
+//            //case tape detected
 
-                case CORNER_TAPE_DETECTED:
-                    nextState = SubWhiteDetected; //middle state
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
 
-                case BUMP_PRESSED:
-                    nextState = SubCollision;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
-
-                case ES_EXIT:
-                    stop_everything();
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-            //case middle state
-            //check event
-            //case tape detected
-
-
-        case SubCollision: // in the first state, replace this with correct names
+        case SubCollision: 
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     reverse();

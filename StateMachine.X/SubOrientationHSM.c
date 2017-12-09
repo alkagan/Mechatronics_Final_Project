@@ -142,15 +142,11 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             break; //break from init subOrientation state
 
         case LocateBeaconState: // in the first state, replace this with correct names
-            //            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //            LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     final_attack_low();
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
-                    //LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
                     rotate_counter_clockwise();
-                    printf("SubOrientation: Entry to locate beacon state\r\n");
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
@@ -160,9 +156,6 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case BUMP_PRESSED:
-                    break;
-
                 case ES_TIMEOUT:
                     nextState = LocateTape;
                     makeTransition = TRUE;
@@ -170,13 +163,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
                     break;
 
                 case ES_EXIT:
-                    printf("SubOrientation: EXIT to locate beacon state\r\n");
                     stop_everything();
-                    break;
-
-                    /////// is this necessary/was this accidentally included?////////
-                case TAPE_DETECTED:
-                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 default: // all unhandled events pass the event back up to the next level
@@ -186,12 +173,9 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             break; //break from LocateBeacon state
 
         case LocateTape:
-            //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     onwards_TYO();
-                    printf("SubOrientation: entry to Locate Tape\r\n");
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
@@ -203,7 +187,6 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
 
                 case ES_EXIT:
                     stop_everything();
-                    printf("SubOrientation: EXIT from locate tape state\r\n");
                     break;
 
                     //case ES_NO_EVENT:
@@ -252,33 +235,13 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
             break;
 
         case FinalizeOrientation:
-            //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //LED_SetBank(0x01, 0x0F);
             switch (ThisEvent.EventType) {
-
                 case ES_ENTRY:
                     rotate_clockwise();
-                    printf("SubOrientation: Entry to finalize orientation state\r\n");
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-
-                    //                case TAPE_NOT_DETECTED:
-                    //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-                    //LED_SetBank(0x01, 0x0F);
-                    //                    stop_everything();
-                    //                    makeTransition = TRUE;
-                    //                    
-                    //                    ES_Event NextEvent;
-                    //                    NextEvent.EventType = ORIENTATION_TO_SEARCHING;
-                    //                    PostTopLevelHSM(NextEvent);
-                    //                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
-
                 case ES_EXIT:
-                    printf("SubOrientation: EXIT to finalize orientation state\r\n");
-                    break;
-                case TAPE_DETECTED:
                     break;
                 default:
                     break;

@@ -99,9 +99,7 @@ uint8_t CheckForTrackWireEvent(void) {
 
     if (trackwire_reading > TRACKWIRE_DETECTED_THRESHOLD){
         current_track_event = TRACKWIRE_DETECTED;
-//        printf("******************************************************************************************************************************\r\n\n");
-//        printf("\n\nTrackwireEventChecker: TRACKWIRE DETECTED\r\n");
-//        printf("******************************************************************************************************************************\r\n\n");
+
     } else if (trackwire_reading < TRACKWIRE_NOT_DETECTED_THRESHOLD){
         current_track_event = TRACKWIRE_NOT_DETECTED;
     } else {
