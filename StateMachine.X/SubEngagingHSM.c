@@ -43,20 +43,33 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 typedef enum {
-    InitSubOrientationState,
-    LocateBeaconState,
-    LocateTape,
-    FinalizeOrientation,
+    InitEngagingSubState,
+    SubCollision,
+    SubCollisionPart2,
+    SubTapeDetected,
+    SubWhiteDetected,
+    SubCornerDetected,
+    SubRenDetection,
+    SubRenAllign,
+    SubRenFire,
 } SubEngagingHSMState_t;
 
 static const char *StateNames[] = {
-	"InitSubOrientationState",
-	"LocateBeaconState",
-	"LocateTape",
-	"FinalizeOrientation",
+	"InitEngagingSubState",
+	"SubCollision",
+	"SubCollisionPart2",
+	"SubTapeDetected",
+	"SubWhiteDetected",
+	"SubCornerDetected",
+	"SubRenDetection",
+	"SubRenAllign",
+	"SubRenFire",
 };
 
-#define OH_SHIT_TIMER_LENGTH 10000
+#define BUMP_TIME_VALUE             200
+#define REALIGNMENT_TIMER_LENGTH    500
+#define OH_SHIT_TIMER_LENGTH        4000
+#define SHOOTING_TIMER_LENGTH       400
 
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -70,7 +83,7 @@ static const char *StateNames[] = {
 /* You will need MyPriority and the state variable; you may need others as well.
  * The type of state variable should match that of enum in header file. */
 
-static SubEngagingHSMState_t CurrentState = InitSubOrientationState;
+static SubEngagingHSMState_t CurrentState = InitEngagingSubState;
 static uint8_t MyPriority;
 
 
@@ -91,7 +104,7 @@ static uint8_t MyPriority;
 uint8_t InitSubEngagingHSM(void) {
     ES_Event returnEvent;
 
-    CurrentState = InitSubOrientationState;
+    CurrentState = InitEngagingSubState;
     returnEvent = RunSubEngagingHSM(INIT_EVENT);
     if (returnEvent.EventType == ES_NO_EVENT) {
         return TRUE;
@@ -121,8 +134,7 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
     ES_Tattle(); // trace call stack
 
     switch (CurrentState) {
-
-        case InitSubOrientationState: // If current state is initial Psedudo State
+        case InitEngagingSubState: // If current state is initial Psedudo State
             if (ThisEvent.EventType == ES_INIT)// only respond to ES_Init
             {
                 // this is where you would put any actions associated with the
@@ -130,115 +142,281 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                 // initial state
 
                 // now put the machine into the actual initial state
-                nextState = LocateBeaconState;
+                nextState = SubWhiteDetected;
                 makeTransition = TRUE;
                 ThisEvent.EventType = ES_NO_EVENT;
             }
-            break; //break from init subOrientation state
+            break;
 
-        case LocateBeaconState: // in the first state, replace this with correct names
-            //            LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //            LED_SetBank(0x01, 0x0F);
+        case SubTapeDetected:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse();
-                    
-//                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
-//                    //LED_SetBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0);
-//                    rotate_counter_clockwise();
-//                    printf("SubOrientation: Entry to locate beacon state\r\n");
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case BEACON_DETECTED:
-//                    nextState = LocateTape;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case ES_TIMEOUT:
-//                    nextState = LocateTape;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case ES_EXIT:
-//                    printf("SubOrientation: EXIT to locate beacon state\r\n");
-//                    stop_everything();
-//                    break;
-//
-//                /////// is this necessary/was this accidentally included?////////
-                case TAPE_DETECTED:
-                    stop_everything();
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
+                    turn_right(); //turn right
+                    break;
+
+                case TAPE_NOT_DETECTED:
+                    nextState = SubWhiteDetected;
+                    makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                default: // all unhandled events pass the event back up to the next level
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    //transition into dummy state
+                    //                    if (ThisEvent.EventParam == TRACKWIRE_TIME_LENGTH) {
+                    //                        nextState = SubTrackWireDetectedState;
+                    //                        makeTransition = TRUE;
+                    //                        ThisEvent.EventType = ES_NO_EVENT;
+                    //                    } else 
+
+                    if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
+                        nextState = SubCollision;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    }
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
+                default:
                     break;
             }
+            break;
 
-            break; //break from LocateBeacon state
-
-        case LocateTape:
-            //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //LED_SetBank(0x01, 0x0F);
+        case SubWhiteDetected:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    onwards_TYO();
-                    printf("SubOrientation: entry to Locate Tape\r\n");
-                    ThisEvent.EventType = ES_NO_EVENT;
+                    turn_left(); //left turn
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     break;
 
                 case TAPE_DETECTED:
-                    nextState = FinalizeOrientation;
+                    nextState = SubTapeDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+
+                    if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
+                        nextState = SubCollision;
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
+                    }
+                    break;
+
+                case ES_EXIT:
+                    stop_everything();
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case SubCornerDetected:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
+                    break;
+
+                case TAPE_NOT_DETECTED: //Case tape not detected
+                    nextState = SubWhiteDetected; //middle state
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+
+                    break;
+
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
                     stop_everything();
-                    printf("SubOrientation: EXIT from locate tape state\r\n");
                     break;
 
-                    //case ES_NO_EVENT:
                 default:
                     break;
             }
-            break; //break from Locate Tape
+            break;
 
-        case FinalizeOrientation:
-            //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-            //LED_SetBank(0x01, 0x0F);
+        case SubCollision:
             switch (ThisEvent.EventType) {
-
                 case ES_ENTRY:
-                    rotate_clockwise();
-                    printf("SubOrientation: Entry to finalize orientation state\r\n");
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-
-                    //                case TAPE_NOT_DETECTED:
-                    //LED_SetBank(0x01 | 0x02 | 0x04, 0x00);
-                    //LED_SetBank(0x01, 0x0F);
-                    //                    stop_everything();
-                    //                    makeTransition = TRUE;
-                    //                    
-                    //                    ES_Event NextEvent;
-                    //                    NextEvent.EventType = ORIENTATION_TO_SEARCHING;
-                    //                    PostTopLevelHSM(NextEvent);
-                    //                    ThisEvent.EventType = ES_NO_EVENT;
+                case ES_TIMEOUT:
+                    nextState = SubCollisionPart2;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case ES_EXIT:
-                    printf("SubOrientation: EXIT to finalize orientation state\r\n");
+                case ES_NO_EVENT:
+                default: // all unhandled events pass the event back up to the next level
                     break;
-                case TAPE_DETECTED:
+            }
+            break;
+
+        case SubCollisionPart2:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubWhiteDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+
+/*****************************REN DETECEDTED BEHAVIOR***************************************/
+
+
+            /* I want to adjust the REN tape sensor so that it will only detect 
+              immediately before bumping. After o.2 seconds without bump (might 
+             have to go longer) we'll know that we aren't bumping into the Ren Ship 
+             and it picked up something else*/
+
+
+            /*RenAllign and RenFire are probably going to have to go in another 
+             * Top Level Sub State. Otherwise we'll have to make a RenCollision and RenCollisionPart2*/
+
+
+
+        case SubRenDetection: 
+            //If we don't bump the ship, return to normal behavior
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    turn_left();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    //If we do bump the ship go to RenAllign
+                case BUMP_PRESSED:
+                    nextState = SubRenAllign;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
                 default:
                     break;
             }
-            break; // break from Finalize Orientation 
+            break;
+
+        case SubRenAllign:
+            switch (ThisEvent.EventType) {
+                    /*COLLIDE WITH TARGET UNTIL CORNER IS DETECTED. This marks that we 
+                     will have reached the T in front of the target. Then spin to the 
+                     left so we are facing the ren ship */
+
+            /***********************************************************************/
+                    /*Need cases for collision behavior here */
+            /***********************************************************************/
+                
+                
+                case CORNER_TAPE_DETECTED:
+                    turn_left();
+                    nextState = SubRenFire;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case SubRenFire:
+            switch (ThisEvent.EventType) {
+                    /*Once the front tape detects we are off the tape, wiggle forward 
+                     * until we bump the Ren ship, raise the arm, then push forwards, 
+                     * drifting to the right */
+                
+                case TAPE_NOT_DETECTED:
+                    turn_right();
+                    ThisEvent.EventType = ES_NO_EVENT;
+
+                case TAPE_DETECTED:
+                    turn_left();
+                    ThisEvent.EventType = ES_NO_EVENT;    
+                    
+                    case BUMP_PRESSED:
+                    stop_everything();
+                    final_attack_high();
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                case ES_TIMEOUT:
+                    turn_right();
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+
+
+/***************************************************************************************/
 
         default: // all unhandled states fall into here
             break;

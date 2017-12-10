@@ -41,7 +41,7 @@
 #define TAPE_REN_PARAM          0x05
 
 // Track Wire Pin Configuration
-#define TRACK_WIRE              AD_PORTW7   //uint16_t value
+#define TRACK_WIRE              AD_PORTV6   //uint16_t value
 
 // RC Servo Pins
 #define INDEXER                 RC_PORTY06  //Servo 

@@ -87,16 +87,16 @@ static ES_Event storedEvent;
  * @author Gabriel H Elkaim, 2013.09.27 09:18
  * @modified Gabriel H Elkaim/Max Dunne, 2016.09.12 20:08 */
 uint8_t CheckRenShipTapeEvent(void){
-    static ES_EventTyp_t lastRenShipTapeEvent = CORNER_TAPE_NOT_DETECTED;
+    static ES_EventTyp_t lastRenShipTapeEvent = REN_NOT_DETECTED;
     ES_EventTyp_t curRenShipTapeEvent = lastRenShipTapeEvent;
     ES_Event thisEvent;
     uint8_t returnVal = FALSE;
-    uint16_t tape_sensor_val = AD_ReadADPin(TAPE_CORNER);
+    uint16_t tape_sensor_val = AD_ReadADPin(TAPE_REN);
 
     if (tape_sensor_val > TAPE_THRESHOLD_NOT_DETECTED) { // is battery connected?
-        curRenShipTapeEvent = CORNER_TAPE_DETECTED;
+        curRenShipTapeEvent = REN_DETECTED;
     } else if (tape_sensor_val < TAPE_THRESHOLD_DETECTED) {
-        curRenShipTapeEvent = CORNER_TAPE_NOT_DETECTED;
+        curRenShipTapeEvent = REN_NOT_DETECTED;
     } else {
         curRenShipTapeEvent = lastRenShipTapeEvent;
     }

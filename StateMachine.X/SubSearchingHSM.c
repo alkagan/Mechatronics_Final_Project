@@ -72,7 +72,6 @@ static const char *StateNames[] = {
 
 #define BUMP_TIME_VALUE             200
 #define TRACKWIRE_TIME_LENGTH       20
-#define REALIGNMENT_TIMER_LENGTH    500
 #define OH_SHIT_TIMER_LENGTH        4000
 #define SHOOTING_TIMER_LENGTH       400
 /*******************************************************************************
@@ -368,7 +367,6 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     ES_Timer_InitTimer(SHOOTING_TIMER, SHOOTING_TIMER_LENGTH);
-                    //stop_everything();
                     attack_ATM6();
                     break;
 
@@ -391,25 +389,18 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
                 case TRACKWIRE_NOT_DETECTED:
                     ping_pong_dispenser_med();
-                    printf("SubSearchingHSM: In subDummyState: trackwire count before: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
                     kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
-                    printf("SubSearchingHSM: In subDummyState: trackwire count after: %d\r\n", kill_count_BRRRRRRRRRAAAAAAPPPPPPP);
+                    
                     if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
-                        IO_PortsSetPortBits(PORTX, ALL_3_DESTROYED);
-                        //nextState = SubAllThreeDestroyed;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
-                        ES_Event NextEvent;
-                        NextEvent.EventType = ALL_ATM6s_DESTROYED;
-                        PostTopLevelHSM(NextEvent);
+                        ThisEvent.EventType = ALL_ATM6s_DESTROYED;
                         //once kill count is 3 set io port bit high
                         //checker function detects event, leaves state                        
                         //PostTopLevelHSM(ALL_ATM6s_DESTROYED);
                     } else {
-                        nextState = SubTapeDetected;
+                        nextState = SubCollision;  //This makes sure that we can readjust onto the line
+                        makeTransition = TRUE;
+                        ThisEvent.EventType = ES_NO_EVENT;
                     }
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
@@ -424,7 +415,6 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             break;
 
         case SubAllThreeDestroyed:
-            printf("SubSearchingHSM: In SubAllthreedestroyed state\r\n");
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     reverse();

@@ -59,6 +59,8 @@ typedef enum {
     TRACKWIRE_NOT_DETECTED,
     ALL_ATM6s_DESTROYED,
     ALL_ATM6s_NOT_DESTROYED,
+    REN_DETECTED,
+    REN_NOT_DETECTED,
     NUMBEROFEVENTS,
 } ES_EventTyp_t;
 
@@ -88,6 +90,8 @@ static const char *EventNames[] = {
 	"TRACKWIRE_NOT_DETECTED",
 	"ALL_ATM6s_DESTROYED",
 	"ALL_ATM6s_NOT_DESTROYED",
+	"REN_DETECTED",
+	"REN_NOT_DETECTED",
 	"NUMBEROFEVENTS",
 };
 
@@ -97,7 +101,7 @@ static const char *EventNames[] = {
 
 /****************************************************************************/
 // This is the list of event checking functions
-#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckForTrackWireEvent, CheckCornerTapeEvent, CheckTapeEvent, CheckForBumpEvent//, CheckRenShipTapeEvent, CheckKillCountEvent 
+#define EVENT_CHECK_LIST  CheckForBeaconEvent, CheckForTrackWireEvent, CheckCornerTapeEvent, CheckTapeEvent, CheckForBumpEvent, CheckRenShipTapeEvent
 
 /****************************************************************************/
 // These are the definitions for the post functions to be executed when the
@@ -122,9 +126,9 @@ static const char *EventNames[] = {
 #define TIMER15_RESP_FUNC TIMER_UNUSED
 
 /****************************************************************************/
-// Give the timer numbers symbolc names to make it easier to move them
-// to different timers if the need arises. Keep these definitons close to the
-// definitions for the response functions to make it easire to check that
+// Give the timer numbers symbolic names to make it easier to move them
+// to different timers if the need arises. Keep these definitions close to the
+// definitions for the response functions to make it easier to check that
 // the timer number matches where the timer event will be routed
 
 #define BUMPER_TIMER      0
@@ -141,7 +145,7 @@ static const char *EventNames[] = {
 #define MAX_NUM_SERVICES 8
 
 /****************************************************************************/
-// This macro determines that nuber of services that are *actually* used in
+// This macro determines that number of services that are *actually* used in
 // a particular application. It will vary in value from 1 to MAX_NUM_SERVICES
 #define NUM_SERVICES 2
 
@@ -150,19 +154,19 @@ static const char *EventNames[] = {
 // every Events and Services application must have a Service 0. Further 
 // services are added in numeric sequence (1,2,3,...) with increasing 
 // priorities
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_0_HEADER "ES_KeyboardInput.h"
 // the name of the Init function
 #define SERV_0_INIT InitKeyboardInput
 // the name of the run function
 #define SERV_0_RUN RunKeyboardInput
-// How big should this service's Queue be?
+// How big should this services Queue be?
 #define SERV_0_QUEUE_SIZE 9
 
 /****************************************************************************/
 // These are the definitions for Service 1
 #if NUM_SERVICES > 1
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_1_HEADER "TopLevelHSM.h"
 // the name of the Init function
 #define SERV_1_INIT InitTopLevelHSM
@@ -174,7 +178,7 @@ static const char *EventNames[] = {
 
 // These are the definitions for Service 2
 #if NUM_SERVICES > 2
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_2_HEADER "TapeService.h"
 // the name of the Init function
 #define SERV_2_INIT InitTapeService
@@ -189,7 +193,7 @@ static const char *EventNames[] = {
 /****************************************************************************/
 // These are the definitions for Service 3
 #if NUM_SERVICES > 3
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_3_HEADER "TestService.h"
 // the name of the Init function
 #define SERV_3_INIT TestServiceInit
@@ -202,7 +206,7 @@ static const char *EventNames[] = {
 /****************************************************************************/
 // These are the definitions for Service 4
 #if NUM_SERVICES > 4
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_4_HEADER "TestService.h"
 // the name of the Init function
 #define SERV_4_INIT TestServiceInit
@@ -215,7 +219,7 @@ static const char *EventNames[] = {
 /****************************************************************************/
 // These are the definitions for Service 5
 #if NUM_SERVICES > 5
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_5_HEADER "TestService.h"
 // the name of the Init function
 #define SERV_5_INIT TestServiceInit
@@ -228,7 +232,7 @@ static const char *EventNames[] = {
 /****************************************************************************/
 // These are the definitions for Service 6
 #if NUM_SERVICES > 6
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_6_HEADER "TestService.h"
 // the name of the Init function
 #define SERV_6_INIT TestServiceInit
@@ -241,7 +245,7 @@ static const char *EventNames[] = {
 /****************************************************************************/
 // These are the definitions for Service 7
 #if NUM_SERVICES > 7
-// the header file with the public fuction prototypes
+// the header file with the public function prototypes
 #define SERV_7_HEADER "TestService.h"
 // the name of the Init function
 #define SERV_7_INIT TestServiceInit
@@ -261,7 +265,7 @@ static const char *EventNames[] = {
 
 /****************************************************************************/
 // These are the definitions for the Distribution lists. Each definition
-// should be a comma seperated list of post functions to indicate which
+// should be a comma separated list of post functions to indicate which
 // services are on that distribution list.
 #define NUM_DIST_LISTS 0
 #if NUM_DIST_LISTS > 0 

@@ -105,13 +105,12 @@ void turn_right(void){
 
 void turn_left(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, NOT_MOVING);
-    PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
+    PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
+    PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
 }
 
 void attack_ATM6(void){
-    ping_pong_dispenser_low();
-    PWM_SetDutyCycle(LAUNCHER_MOTOR, FIRING_BALL_SPEED);
+     PWM_SetDutyCycle(LAUNCHER_MOTOR, FIRING_BALL_SPEED);
 }
 
 void stop_attack_ATM6(void){

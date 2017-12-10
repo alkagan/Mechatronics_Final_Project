@@ -147,7 +147,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
                 InitSubOrientationHSM();
                 InitSubSearchingHSM();
                 InitSubEngagingHSM();
-                //LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
 
                 // now put the machine into the actual initial state
                 nextState = OrientationState;
@@ -182,7 +181,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             // run sub-state machine for this state
             //NOTE: the SubState Machine runs and responds to events before anything in the this
             //state machine does
-            //LED_OffBank(LED_BANK1 | LED_BANK2 | LED_BANK3, 0xFF);
             ThisEvent = RunSubSearchingHSM(ThisEvent);
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
@@ -208,18 +206,6 @@ ES_Event RunTopLevelHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_NO_EVENT:
                     break;
-                case ES_ENTRY:
-                    reverse();
-                    ES_Timer_InitTimer(BUMPER_TIMER, 500);
-                    break;
-                case ES_TIMEOUT:
-                    stop_everything();
-                    break;
-
-//                case BUMP_RELEASED:
-//                    stop_everything();
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;  //orientation to searching
                     
                 default:
                     break;
