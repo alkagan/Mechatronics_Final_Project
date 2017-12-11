@@ -19,13 +19,13 @@
 #define FAST_AND_FURIOUS    1000
 #define TOKYO_DRIFT         700
 #define NORMAL_SPEED        600
-#define SNAIL_PACE          250
+#define SNAIL_PACE          175
 #define NOT_MOVING          0
 #define REVERSE             1
 #define LITTLE_MORE         675
 
 #define REVERSE_1_SECOND    1000
-#define FIRING_BALL_SPEED   800
+#define FIRING_BALL_SPEED   200
 #endif
 
 #ifdef BATTERY_ALMOST_DISCHARGED
@@ -38,7 +38,7 @@
 #define LITTLE_MORE         675
 
 #define REVERSE_1_SECOND    1000
-#define FIRING_BALL_SPEED   800
+#define FIRING_BALL_SPEED   180
 #endif
 
 /* Digital I/O is X, Y, Z Ports, will use the X port for our

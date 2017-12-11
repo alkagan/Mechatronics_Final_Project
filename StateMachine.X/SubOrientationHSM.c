@@ -144,7 +144,9 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case LocateBeaconState: // in the first state, replace this with correct names
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    stop_attack_ATM6();
                     final_attack_low();
+                    ping_pong_dispenser_med();
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     rotate_counter_clockwise();
                     ThisEvent.EventType = ES_NO_EVENT;
@@ -181,6 +183,12 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
 
                 case TAPE_DETECTED:
                     nextState = FinalizeOrientation;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+                    
+                case BUMP_PRESSED:
+                    nextState = SubCollision;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;

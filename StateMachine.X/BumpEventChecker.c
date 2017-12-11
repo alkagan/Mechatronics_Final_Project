@@ -38,7 +38,7 @@
 /*******************************************************************************
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
-//#define BUMP_PRESSED    0x7F
+#define BUMP_PRESSED_VALUE    500
 //#define BUMP_RELEASED   0x80
 
 /*******************************************************************************
@@ -49,6 +49,7 @@
 #ifdef EVENTCHECKER_TEST
 #include <stdio.h>
 #define SaveEvent(x) do {eventName=__func__; storedEvent=x;} while (0)
+#
 
 static const char *eventName;
 static ES_Event storedEvent;
@@ -65,7 +66,7 @@ static ES_Event storedEvent;
  ******************************************************************************/
 
 /* Any private module level variable that you might need for keeping track of
-   events would be placed here. Private variables should be STATIC so that they
+   events would be p0020.laced here. Private variables should be STATIC so that they
    are limited in scope to this module. */
 
 /*******************************************************************************
@@ -95,7 +96,7 @@ uint8_t CheckForBumpEvent(void) {
     uint16_t left_bumper = AD_ReadADPin(LEFT_SWITCH);
     uint16_t right_bumper = AD_ReadADPin(RIGHT_SWITCH);
 
-    if(left_bumper > 800 || right_bumper > 800){
+    if(left_bumper > BUMP_PRESSED_VALUE || right_bumper > BUMP_PRESSED_VALUE){
         current_bump_event = BUMP_PRESSED;
     } else {
         current_bump_event = BUMP_RELEASED;
@@ -105,11 +106,11 @@ uint8_t CheckForBumpEvent(void) {
         thisEvent.EventType = current_bump_event;
 
         // differentiating which parameter gets passed to service routine
-        if(left_bumper > 800 && right_bumper > 800){
+        if(left_bumper > BUMP_PRESSED_VALUE && right_bumper > BUMP_PRESSED_VALUE){
             thisEvent.EventParam = 0x02;
-        } else if(left_bumper > 800){
+        } else if(left_bumper > BUMP_PRESSED_VALUE){
             thisEvent.EventParam = 0x0;
-        } else if (right_bumper > 800){
+        } else if (right_bumper > BUMP_PRESSED_VALUE){
             thisEvent.EventParam = 0x1;
         }
 

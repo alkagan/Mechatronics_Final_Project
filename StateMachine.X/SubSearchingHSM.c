@@ -367,6 +367,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     ES_Timer_InitTimer(SHOOTING_TIMER, SHOOTING_TIMER_LENGTH);
+                    stop_everything();
                     attack_ATM6();
                     break;
 

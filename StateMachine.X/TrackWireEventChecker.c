@@ -39,7 +39,7 @@
  * MODULE #DEFINES                                                             *
  ******************************************************************************/
 
-#define TRACKWIRE_DETECTED_THRESHOLD     800
+#define TRACKWIRE_DETECTED_THRESHOLD     850
 #define TRACKWIRE_NOT_DETECTED_THRESHOLD 600
 
 
