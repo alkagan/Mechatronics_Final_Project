@@ -52,18 +52,22 @@ typedef enum {
     SubRenDetection,
     SubRenAllign,
     SubRenFire,
+    SubRenCollision,
+    SubRenCollisionPart2,
 } SubEngagingHSMState_t;
 
 static const char *StateNames[] = {
-	"InitEngagingSubState",
-	"SubCollision",
-	"SubCollisionPart2",
-	"SubTapeDetected",
-	"SubWhiteDetected",
-	"SubCornerDetected",
-	"SubRenDetection",
-	"SubRenAllign",
-	"SubRenFire",
+    "InitEngagingSubState",
+    "SubCollision",
+    "SubCollisionPart2",
+    "SubTapeDetected",
+    "SubWhiteDetected",
+    "SubCornerDetected",
+    "SubRenDetection",
+    "SubRenAllign",
+    "SubRenFire",
+    "SubRenCollision",
+    "SubRenCollisionPart2",
 };
 
 #define BUMP_TIME_VALUE             200
@@ -173,19 +177,16 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case ES_TIMEOUT:
-                    //transition into dummy state
-                    //                    if (ThisEvent.EventParam == TRACKWIRE_TIME_LENGTH) {
-                    //                        nextState = SubTrackWireDetectedState;
-                    //                        makeTransition = TRUE;
-                    //                        ThisEvent.EventType = ES_NO_EVENT;
-                    //                    } else 
+                case REN_DETECTED:
+                    nextState = SubRenDetection;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
 
-                    if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubCollision;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
-                    }
+                case ES_TIMEOUT:
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
@@ -218,6 +219,12 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
 
                 case CORNER_TAPE_DETECTED:
                     nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case REN_DETECTED:
+                    nextState = SubRenDetection;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
@@ -315,7 +322,7 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
             break;
 
 
-/*****************************REN DETECEDTED BEHAVIOR***************************************/
+            /*****************************REN DETECEDTED BEHAVIOR***************************************/
 
 
             /* I want to adjust the REN tape sensor so that it will only detect 
@@ -329,12 +336,25 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
 
 
 
-        case SubRenDetection: 
+        case SubRenDetection:
             //If we don't bump the ship, return to normal behavior
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    turn_left();
+                    turn_left_slower();
                     ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case CORNER_TAPE_DETECTED:
+                    nextState = SubCornerDetected;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                    //If we do bump the ship go to RenAllign
+                case BUMP_PRESSED:
+                    nextState = SubRenAllign;
+                    makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
@@ -344,17 +364,6 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case CORNER_TAPE_DETECTED:
-                    nextState = SubCornerDetected;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
-                    //If we do bump the ship go to RenAllign
-                case BUMP_PRESSED:
-                    nextState = SubRenAllign;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
                 default:
                     break;
             }
@@ -366,16 +375,63 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                      will have reached the T in front of the target. Then spin to the 
                      left so we are facing the ren ship */
 
-            /***********************************************************************/
+                    /***********************************************************************/
                     /*Need cases for collision behavior here */
-            /***********************************************************************/
-                
-                
+                    /***********************************************************************/
+                case BUMP_PRESSED:
+                    nextState = SubRenCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
                 case CORNER_TAPE_DETECTED:
-                    turn_left();
+                    turn_left_slower();
                     nextState = SubRenFire;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case SubRenCollision:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubRenCollisionPart2;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_NO_EVENT:
+                default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+
+        case SubRenCollisionPart2:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubRenAllign;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+                case ES_EXIT:
+                    turn_left_slower();
                     break;
 
                 default:
@@ -388,35 +444,34 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     /*Once the front tape detects we are off the tape, wiggle forward 
                      * until we bump the Ren ship, raise the arm, then push forwards, 
                      * drifting to the right */
-                
+
                 case TAPE_NOT_DETECTED:
-                    turn_right();
+                    turn_right_slower();
                     ThisEvent.EventType = ES_NO_EVENT;
 
                 case TAPE_DETECTED:
-                    turn_left();
-                    ThisEvent.EventType = ES_NO_EVENT;    
-                    
-                    case BUMP_PRESSED:
+                    turn_left_slower();
+                    ThisEvent.EventType = ES_NO_EVENT;
+
+                case BUMP_PRESSED:
                     stop_everything();
                     final_attack_high();
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 case ES_TIMEOUT:
-                    turn_right();
+                    turn_right_slower();
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                    break;
                 default:
                     break;
             }
             break;
 
 
-/***************************************************************************************/
+            /***************************************************************************************/
 
         default: // all unhandled states fall into here
             break;

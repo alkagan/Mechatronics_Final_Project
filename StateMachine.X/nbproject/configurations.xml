@@ -11,35 +11,33 @@
       <itemPath>C:/CMPE118/include/pwm.h</itemPath>
       <itemPath>C:/CMPE118/include/serial.h</itemPath>
       <itemPath>C:/CMPE118/include/timers.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Events.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_General.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_LookupTables.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Port.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PriorTables.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_ServiceHeaders.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Configure.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/pin_configuration.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeService.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RC_Servo.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/KillCountEventChecker.h</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubEngagingHSM.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Configure.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Events.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Framework.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_General.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_LookupTables.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Port.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_PostList.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_PriorTables.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Queue.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_ServiceHeaders.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Timers.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/RC_Servo.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/SubEngagingHSM.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/motor_drivers.h</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/pin_configuration.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -56,27 +54,27 @@
       <itemPath>C:/CMPE118/src/pwm.c</itemPath>
       <itemPath>C:/CMPE118/src/serial.c</itemPath>
       <itemPath>C:/CMPE118/src/timers.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/ES_Main.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RC_Servo.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/KillCountEventChecker.c</itemPath>
-      <itemPath>C:/Users/alkagan/Mechatronics_Final_Project/StateMachine.X/SubEngagingHSM.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/BeaconEventChecker.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/BumpEventChecker.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/CornerTapeEventChecker.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_CheckEvents.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Framework.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_KeyboardInput.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Main.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_PostList.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Queue.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_TattleTale.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/ES_Timers.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/RC_Servo.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/RenShipTapeEventChecker.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/SubEngagingHSM.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/SubOrientationHSM.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/SubSearchingHSM.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/TapeEventChecker.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/TopLevelHSM.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/TrackWireEventChecker.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/motor_drivers.c</itemPath>
+      <itemPath>C:/Users/Alex/Git Repos/Mechatronics_Final_Project/StateMachine.X/pin_configuration.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -87,6 +85,7 @@
   <sourceRootList>
     <Elem>C:\CMPE118</Elem>
     <Elem>C:\Users\alkagan\Mechatronics_Final_Project\StateMachine.X</Elem>
+    <Elem>C:\Users\Alex\Git Repos\Mechatronics_Final_Project\StateMachine.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -117,7 +116,7 @@
         </subordinates>
       </compileType>
       <makeCustomizationType>
-        <makeCustomizationPreStepEnabled>true</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
         <makeCustomizationPreStep>python C:\CMPE118\scripts\Enum_To_String.py</makeCustomizationPreStep>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
         <makeCustomizationPostStep></makeCustomizationPostStep>
@@ -199,6 +198,7 @@
         <property key="kseg-origin" value=""/>
         <property key="linker-symbols" value=""/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
+        <property key="no-device-startup-code" value="false"/>
         <property key="no-startup-files" value="false"/>
         <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>

@@ -54,26 +54,28 @@ typedef enum {
     SubFinalAdjustment,
     SubTrackWireDetectedState,
     SubTrackWireDetectedStatePart2,
+    SubTrackWireDetectedStatePart3,
     SubAllThreeDestroyed,
 } SubSearchingHSMState_t;
 
 static const char *StateNames[] = {
-	"InitSearchSubState",
-	"SubCollision",
-	"SubCollisionPart2",
-	"SubTapeDetected",
-	"SubWhiteDetected",
-	"SubCornerDetected",
-	"SubFinalAdjustment",
-	"SubTrackWireDetectedState",
-	"SubTrackWireDetectedStatePart2",
-	"SubAllThreeDestroyed",
+    "InitSearchSubState",
+    "SubCollision",
+    "SubCollisionPart2",
+    "SubTapeDetected",
+    "SubWhiteDetected",
+    "SubCornerDetected",
+    "SubFinalAdjustment",
+    "SubTrackWireDetectedState",
+    "SubTrackWireDetectedStatePart2",
+    "SubAllThreeDestroyed",
 };
 
 #define BUMP_TIME_VALUE             200
 #define TRACKWIRE_TIME_LENGTH       20
-#define OH_SHIT_TIMER_LENGTH        4000
+#define OH_SHIT_TIMER_LENGTH        3000
 #define SHOOTING_TIMER_LENGTH       400
+#define GO_FORWARD_MISS             133
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
  ***************************er***************************************************/
@@ -159,7 +161,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     turn_right(); //turn right
                     break;
-                    
+
                 case TAPE_NOT_DETECTED:
                     nextState = SubWhiteDetected;
                     makeTransition = TRUE;
@@ -193,11 +195,11 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     //                        ThisEvent.EventType = ES_NO_EVENT;
                     //                    } else 
 
-                    if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubCollision;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
-                    }
+
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+
                     break;
 
                 case ES_EXIT:
@@ -241,12 +243,9 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     break;
 
                 case ES_TIMEOUT:
-
-                    if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubCollision;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
-                    }
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
@@ -293,38 +292,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             }
             break;
 
-//        case SubFinalAdjustment:
-//            switch (ThisEvent.EventType) {
-//                case ES_ENTRY:
-//                    turn_left();
-//                    break;
-//
-//                case TAPE_DETECTED:
-//                    nextState = SubTapeDetected; //middle state
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case BUMP_PRESSED:
-//                    nextState = SubCollision;
-//                    makeTransition = TRUE;
-//                    ThisEvent.EventType = ES_NO_EVENT;
-//                    break;
-//
-//                case ES_EXIT:
-//                    stop_everything();
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//            break;
-//            //case middle state
-//            //check event
-//            //case tape detected
-
-
-        case SubCollision: 
+        case SubCollision:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     reverse();
@@ -385,23 +353,30 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
         case SubTrackWireDetectedStatePart2:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
                     ping_pong_dispenser_low();
                     break;
 
                 case TRACKWIRE_NOT_DETECTED:
                     ping_pong_dispenser_med();
                     kill_count_BRRRRRRRRRAAAAAAPPPPPPP++;
-                    
+
                     if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
                         ThisEvent.EventType = ALL_ATM6s_DESTROYED;
                         //once kill count is 3 set io port bit high
                         //checker function detects event, leaves state                        
                         //PostTopLevelHSM(ALL_ATM6s_DESTROYED);
                     } else {
-                        nextState = SubCollision;  //This makes sure that we can readjust onto the line
+                        nextState = SubCollision; //This makes sure that we can readjust onto the line
                         makeTransition = TRUE;
                         ThisEvent.EventType = ES_NO_EVENT;
                     }
+                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubTrackWireDetectedStatePart3;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
@@ -415,24 +390,23 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             }
             break;
 
-        case SubAllThreeDestroyed:
+        case SubTrackWireDetectedStatePart3:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse();
-                    ES_Timer_InitTimer(BUMPER_TIMER, 500);
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, GO_FORWARD_MISS);
+                    onwards();
                     break;
 
                 case ES_TIMEOUT:
-                    stop_everything();
+                    nextState = SubTrackWireDetectedState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
-
+                    
                 default:
                     break;
             }
-
             break;
-
-
 
         default: // all unhandled states fall into here
             break;

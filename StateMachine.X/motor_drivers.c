@@ -23,9 +23,10 @@
 #define NOT_MOVING          0
 #define REVERSE             1
 #define LITTLE_MORE         675
+#define JOSH_THE_TUTOR      69
 
 #define REVERSE_1_SECOND    1000
-#define FIRING_BALL_SPEED   200
+#define FIRING_BALL_SPEED   169
 #endif
 
 #ifdef BATTERY_ALMOST_DISCHARGED
@@ -103,10 +104,22 @@ void turn_right(void){
     PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
+void turn_right_slower(void){
+    IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
+    PWM_SetDutyCycle(RIGHT_MOTOR, JOSH_THE_TUTOR);
+}
+
 void turn_left(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+}
+
+void turn_left_slower(void){
+    IO_PortsWritePort(PORTX, (LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION));
+    PWM_SetDutyCycle(LEFT_MOTOR, JOSH_THE_TUTOR);
+    PWM_SetDutyCycle(RIGHT_MOTOR, SNAIL_PACE);
 }
 
 void attack_ATM6(void){
