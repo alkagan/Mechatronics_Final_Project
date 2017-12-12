@@ -51,6 +51,8 @@ typedef enum {
     SubCornerDetected,
     SubRenDetection,
     SubRenAllign,
+    SubRenAllign2,
+    SubRenAllign3,
     SubRenFire,
     SubRenCollision,
     SubRenCollisionPart2,
@@ -70,7 +72,7 @@ static const char *StateNames[] = {
     "SubRenCollisionPart2",
 };
 
-#define BUMP_TIME_VALUE             200
+#define BUMP_TIME_VALUE             500
 #define REALIGNMENT_TIMER_LENGTH    500
 #define OH_SHIT_TIMER_LENGTH        4000
 #define SHOOTING_TIMER_LENGTH       400
@@ -340,16 +342,16 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
             //If we don't bump the ship, return to normal behavior
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    turn_left_slower();
+                    onwards();
                     ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case CORNER_TAPE_DETECTED:
-                    nextState = SubCornerDetected;
-                    makeTransition = TRUE;
-                    ThisEvent.EventType = ES_NO_EVENT;
-                    break;
+                    //                case CORNER_TAPE_DETECTED:
+                    //                    nextState = SubCornerDetected;
+                    //                    makeTransition = TRUE;
+                    //                    ThisEvent.EventType = ES_NO_EVENT;
+                    //                    break;
 
                     //If we do bump the ship go to RenAllign
                 case BUMP_PRESSED:
@@ -378,19 +380,48 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     /***********************************************************************/
                     /*Need cases for collision behavior here */
                     /***********************************************************************/
+
+                case ES_ENTRY:
+                    reverse();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    break;
+
                 case BUMP_PRESSED:
                     nextState = SubRenCollision;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case CORNER_TAPE_DETECTED:
-                    turn_left_slower();
-                    nextState = SubRenFire;
+                    //                case CORNER_TAPE_DETECTED:
+                    //                    turn_left_slower();
+                    //                    nextState = SubRenFire;
+                    //                    makeTransition = TRUE;
+                    //                    ThisEvent.EventType = ES_NO_EVENT;
+                    //                    break;
+
+                case ES_TIMEOUT:
+                    nextState = SubRenAllign2;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+
+                default:
+                    break;
+            }
+            break;
+            
+        case SubRenAllign2:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_clockwise();
+                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    break;
+                
+                case ES_TIMEOUT:
+                    
+                    break;
+                
                 default:
                     break;
             }
