@@ -53,6 +53,9 @@ typedef enum {
     SubRenAllign,
     SubRenAllign2,
     SubRenAllign3,
+    SubRenAllign4,
+    SubTapeDetectedRen,
+    SubTapeDetectedWhite,
     SubRenFire,
     SubRenCollision,
     SubRenCollisionPart2,
@@ -72,7 +75,7 @@ static const char *StateNames[] = {
     "SubRenCollisionPart2",
 };
 
-#define BUMP_TIME_VALUE             500
+#define BUMP_TIME_VALUE             200
 #define REALIGNMENT_TIMER_LENGTH    500
 #define OH_SHIT_TIMER_LENGTH        4000
 #define SHOOTING_TIMER_LENGTH       400
@@ -232,12 +235,9 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     break;
 
                 case ES_TIMEOUT:
-
-                    if (ThisEvent.EventParam == OH_SHIT_TIMER_LENGTH) {
-                        nextState = SubCollision;
-                        makeTransition = TRUE;
-                        ThisEvent.EventType = ES_NO_EVENT;
-                    }
+                    nextState = SubCollision;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
                 case ES_EXIT:
@@ -266,7 +266,6 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     nextState = SubCollision;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
-
                     break;
 
                 case BUMP_PRESSED:
@@ -298,7 +297,6 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
                     break;
             }
@@ -336,22 +334,14 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
             /*RenAllign and RenFire are probably going to have to go in another 
              * Top Level Sub State. Otherwise we'll have to make a RenCollision and RenCollisionPart2*/
 
-
-
         case SubRenDetection:
             //If we don't bump the ship, return to normal behavior
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     onwards();
-                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ES_Timer_InitTimer(BUMPER_TIMER, 2000);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-
-                    //                case CORNER_TAPE_DETECTED:
-                    //                    nextState = SubCornerDetected;
-                    //                    makeTransition = TRUE;
-                    //                    ThisEvent.EventType = ES_NO_EVENT;
-                    //                    break;
 
                     //If we do bump the ship go to RenAllign
                 case BUMP_PRESSED:
@@ -383,7 +373,7 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
 
                 case ES_ENTRY:
                     reverse();
-                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ES_Timer_InitTimer(BUMPER_TIMER, 500);
                     break;
 
                 case BUMP_PRESSED:
@@ -392,57 +382,82 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                    //                case CORNER_TAPE_DETECTED:
-                    //                    turn_left_slower();
-                    //                    nextState = SubRenFire;
-                    //                    makeTransition = TRUE;
-                    //                    ThisEvent.EventType = ES_NO_EVENT;
-                    //                    break;
-
                 case ES_TIMEOUT:
+                    stop_everything();
                     nextState = SubRenAllign2;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-
                 default:
                     break;
             }
             break;
-            
+
         case SubRenAllign2:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     rotate_clockwise();
-                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ES_Timer_InitTimer(BUMPER_TIMER, 420);
                     break;
-                
+
                 case ES_TIMEOUT:
-                    
+                    //stop_everything();
+                    nextState = SubRenAllign3;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                
+
                 default:
                     break;
             }
             break;
 
-        case SubRenCollision:
+        case SubRenAllign3:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    reverse();
-                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    //onwards();
+                    turn_left_REN();
+                    ES_Timer_InitTimer(BUMPER_TIMER, 5000);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+//                case ES_TIMEOUT:
+//                    nextState = SubRenCollisionPart2;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
+                case BUMP_PRESSED:
+                    stop_everything();
+                    final_attack_high();
+                    break;
+                    
                 case ES_TIMEOUT:
-                    nextState = SubRenCollisionPart2;
+                    nextState = SubRenAllign4;
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
-                case ES_NO_EVENT:
                 default: // all unhandled events pass the event back up to the next level
+                    break;
+            }
+            break;
+
+        case SubRenAllign4:
+            switch (ThisEvent.EventType) {
+                case ES_ENTRY:
+                    rotate_counter_clockwise();
+//                    ES_Timer_InitTimer(BUMPER_TIMER, 750);
+//                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
+//                case ES_TIMEOUT:
+//                    nextState = SubRenFire;
+//                    makeTransition = TRUE;
+//                    ThisEvent.EventType = ES_NO_EVENT;
+//                    break;
+
+                default: 
                     break;
             }
             break;
@@ -475,7 +490,6 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     /*Once the front tape detects we are off the tape, wiggle forward 
                      * until we bump the Ren ship, raise the arm, then push forwards, 
                      * drifting to the right */
-
                 case TAPE_NOT_DETECTED:
                     turn_right_slower();
                     ThisEvent.EventType = ES_NO_EVENT;
@@ -492,16 +506,13 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                     break;
 
                 case ES_TIMEOUT:
-                    turn_right_slower();
-                    ThisEvent.EventType = ES_NO_EVENT;
+                    turn_left_slower();
                     break;
 
                 default:
                     break;
             }
             break;
-
-
             /***************************************************************************************/
 
         default: // all unhandled states fall into here

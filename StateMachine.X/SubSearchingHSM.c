@@ -73,8 +73,8 @@ static const char *StateNames[] = {
 
 #define BUMP_TIME_VALUE             200
 #define TRACKWIRE_TIME_LENGTH       20
-#define OH_SHIT_TIMER_LENGTH        3000
-#define SHOOTING_TIMER_LENGTH       400
+#define OH_SHIT_TIMER_LENGTH        2000
+#define SHOOTING_TIMER_LENGTH       420+69+69+69
 #define GO_FORWARD_MISS             133
 /*******************************************************************************
  * PRIVATE FUNCTION PROTOTYPES                                                 *
@@ -283,6 +283,12 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case TRACKWIRE_DETECTED:
+                    nextState = SubTrackWireDetectedState;
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
                 case ES_EXIT:
                     stop_everything();
                     break;
@@ -345,6 +351,13 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
+                case TRACKWIRE_NOT_DETECTED:
+                    nextState = SubCollision;
+                    stop_attack_ATM6();
+                    makeTransition = TRUE;
+                    ThisEvent.EventType = ES_NO_EVENT;
+                    break;
+
                 default:
                     break;
             }
@@ -363,9 +376,6 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
 
                     if (kill_count_BRRRRRRRRRAAAAAAPPPPPPP == 3) {
                         ThisEvent.EventType = ALL_ATM6s_DESTROYED;
-                        //once kill count is 3 set io port bit high
-                        //checker function detects event, leaves state                        
-                        //PostTopLevelHSM(ALL_ATM6s_DESTROYED);
                     } else {
                         nextState = SubCollision; //This makes sure that we can readjust onto the line
                         makeTransition = TRUE;
@@ -402,7 +412,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
                     makeTransition = TRUE;
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
-                    
+
                 default:
                     break;
             }

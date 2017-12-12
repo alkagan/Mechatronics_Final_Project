@@ -60,7 +60,7 @@ static const char *StateNames[] = {
 	"SubCollisionPart2",
 };
 
-#define OH_SHIT_TIMER_LENGTH 10000
+#define OH_SHIT_TIMER_LENGTH 3000
 #define BUMP_TIME_VALUE      200
 
 /*******************************************************************************
@@ -226,7 +226,7 @@ ES_Event RunSubOrientationHSM(ES_Event ThisEvent) {
         case SubCollisionPart2:
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
-                    rotate_clockwise();
+                    rotate_counter_clockwise();
                     ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;

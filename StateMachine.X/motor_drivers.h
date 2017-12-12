@@ -28,11 +28,15 @@ void rotate_clockwise(void);
 
 void rotate_counter_clockwise(void);
 
+void rotate_counter_clockwise_REN(void);
+
 void turn_right(void);
 
 void turn_right_slower(void);
 
 void turn_left(void);
+
+void turn_left_REN(void);
 
 void turn_left_slower(void);
 
