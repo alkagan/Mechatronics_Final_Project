@@ -77,7 +77,7 @@ static const char *StateNames[] = {
 
 #define BUMP_TIME_VALUE             200
 #define REALIGNMENT_TIMER_LENGTH    500
-#define OH_SHIT_TIMER_LENGTH        4000
+#define OH_SHIT_TIMER_LENGTH        2500
 #define SHOOTING_TIMER_LENGTH       400
 
 /*******************************************************************************
@@ -418,7 +418,7 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                 case ES_ENTRY:
                     //onwards();
                     turn_left_REN();
-                    ES_Timer_InitTimer(BUMPER_TIMER, 5000);
+                    ES_Timer_InitTimer(BUMPER_TIMER, 10000);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
@@ -501,7 +501,7 @@ ES_Event RunSubEngagingHSM(ES_Event ThisEvent) {
                 case BUMP_PRESSED:
                     stop_everything();
                     final_attack_high();
-                    ES_Timer_InitTimer(OH_SHIT_TIMER, OH_SHIT_TIMER_LENGTH);
+                    ES_Timer_InitTimer(OH_SHIT_TIMER, 4000);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
