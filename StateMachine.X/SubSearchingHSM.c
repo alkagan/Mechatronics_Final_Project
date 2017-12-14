@@ -322,7 +322,7 @@ ES_Event RunSubSearchingHSM(ES_Event ThisEvent) {
             switch (ThisEvent.EventType) {
                 case ES_ENTRY:
                     rotate_clockwise();
-                    ES_Timer_InitTimer(BUMPER_TIMER, BUMP_TIME_VALUE);
+                    ES_Timer_InitTimer(BUMPER_TIMER, 420);
                     ThisEvent.EventType = ES_NO_EVENT;
                     break;
 
