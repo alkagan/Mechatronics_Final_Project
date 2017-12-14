@@ -73,7 +73,7 @@ static const char *StateNames[] = {
 
 #define BUMP_TIME_VALUE             200
 #define TRACKWIRE_TIME_LENGTH       20
-#define OH_SHIT_TIMER_LENGTH        2000
+#define OH_SHIT_TIMER_LENGTH        2569
 #define SHOOTING_TIMER_LENGTH       420+69+69+69
 #define GO_FORWARD_MISS             133
 /*******************************************************************************
