@@ -92,8 +92,8 @@ void rotate_counter_clockwise(void){
 
 void rotate_counter_clockwise_REN(void){
     IO_PortsWritePort(PORTX, RIGHT_MOTOR_DIRECTION);
-    PWM_SetDutyCycle(LEFT_MOTOR, 100);
-    PWM_SetDutyCycle(RIGHT_MOTOR, 150);
+    PWM_SetDutyCycle(LEFT_MOTOR, 300);
+    PWM_SetDutyCycle(RIGHT_MOTOR, 300);
 }
 
 // Setting left direction pins to HIGH which makes left motor reverse
@@ -102,6 +102,12 @@ void rotate_clockwise(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, TOKYO_DRIFT);
     PWM_SetDutyCycle(RIGHT_MOTOR, TOKYO_DRIFT);
+}
+
+void rotate_clockwise_REN(void){
+    IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION);
+    PWM_SetDutyCycle(LEFT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
 }
 
 void turn_right(void){
@@ -131,7 +137,7 @@ void turn_left_slower(void){
 void turn_left_REN(void){
     IO_PortsWritePort(PORTX, LEFT_MOTOR_DIRECTION | RIGHT_MOTOR_DIRECTION);
     PWM_SetDutyCycle(LEFT_MOTOR, SNAIL_PACE);
-    PWM_SetDutyCycle(RIGHT_MOTOR, NORMAL_SPEED);
+    PWM_SetDutyCycle(RIGHT_MOTOR, 615);
 }
 
 void attack_ATM6(void){

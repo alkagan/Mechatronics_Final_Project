@@ -26,6 +26,8 @@ void reverse(void);
 
 void rotate_clockwise(void);
 
+void rotate_clockwise_REN(void);
+
 void rotate_counter_clockwise(void);
 
 void rotate_counter_clockwise_REN(void);
